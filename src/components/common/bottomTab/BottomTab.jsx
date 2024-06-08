@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 export default function BottomTab() {
   const [isSelected, setSelected] = useState("홈");
   return (
-    <div className="w-screen h-[7vh] flex flex-row items-center justify-around absolute bottom-0">
+    <div className="w-screen h-[7vh] flex flex-row items-center justify-around bottom-0 fixed bg-white">
       <Tab
         img={home}
         imgSelected={home_selected}

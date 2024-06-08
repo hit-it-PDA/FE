@@ -10,15 +10,15 @@ import { useNavigate } from "react-router-dom";
 export default function TopBar() {
   const navigate = useNavigate();
   return (
-    <div className="m-3 flex flex-row items-center justify-between h-[6vh]">
+    <div className="m-3 flex flex-row items-center justify-between h-[4vh] bg-white">
       <img
         src={logo}
-        className="w-[12vw] hover:cursor-pointer"
+        className="w-[10vw] max-w-10 hover:cursor-pointer"
         onClick={() => navigate("/")}
       />
       <img
         src={noti}
-        className="w-[11vw] hover:cursor-pointer"
+        className="w-[10vw] max-w-10 hover:cursor-pointer"
         onClick={() => navigate("/notification")}
       />
     </div>
