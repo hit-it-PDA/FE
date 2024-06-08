@@ -8,6 +8,7 @@ import PortfolioPage from "../routes/portfolio/PortfolioPage";
 import AssetPage from "../routes/asset/AssetPage";
 import MorePage from "../routes/more/MorePage";
 import LoginPage from "../routes/login/LoginPage";
+import SignUpPage from "../routes/signup/SignUpPage";
 import TopBar from "../components/common/topBar/TopBar";
 import NotificationPage from "../routes/notification/NotificationPage";
 
@@ -45,6 +46,10 @@ export const mainRouter = [
   {
     path: "login",
     element: <LoginPage />,
+  },
+  {
+    path: "signup",
+    element: <SignUpPage />,
   },
 ];
 
