@@ -51,7 +51,7 @@ const Tab = ({ img, imgSelected, title, setSelected, isSelected }) => {
   const navigate = useNavigate();
   const onClickFn = () => {
     const tabs = {
-      홈: "",
+      홈: "home",
       포트폴리오: "portfolio",
       자산: "asset",
       더보기: "more",
