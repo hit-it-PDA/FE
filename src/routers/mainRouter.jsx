@@ -13,6 +13,7 @@ import NotificationPage from "../routes/notification/NotificationPage";
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
 import ManageLayout from "../routes/manage/ManageLayout";
+import AssetLayout from "../routes/asset/AssetLayout";
 
 export const mainRouter = [
   {
@@ -43,8 +44,14 @@ export const mainRouter = [
       },
       {
         path: "/asset",
-        element: <AssetPage />,
-        index: true,
+        element: <AssetLayout />,
+        children: [
+          {
+            path: "",
+            element: <AssetPage />,
+            index: true,
+          },
+        ],
       },
       {
         path: "/more",
