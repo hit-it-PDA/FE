@@ -4,7 +4,7 @@ import MainLayout from "../routes/MainLayout";
 
 // pages
 import HomePage from "../routes/home/HomePage";
-import PortfolioPage from "../routes/portfolio/PortfolioPage";
+import ManagePage from "../routes/manage/ManagePage";
 import AssetPage from "../routes/asset/AssetPage";
 import MorePage from "../routes/more/MorePage";
 import LoginPage from "../routes/login/LoginPage";
@@ -12,6 +12,7 @@ import NotificationPage from "../routes/notification/NotificationPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
+import ManageLayout from "../routes/manage/ManageLayout";
 
 export const mainRouter = [
   {
@@ -30,9 +31,15 @@ export const mainRouter = [
         ],
       },
       {
-        path: "/portfolio",
-        element: <PortfolioPage />,
-        index: true,
+        path: "/manage",
+        element: <ManageLayout />,
+        children: [
+          {
+            path: "",
+            element: <ManagePage />,
+            index: true,
+          },
+        ],
       },
       {
         path: "/asset",

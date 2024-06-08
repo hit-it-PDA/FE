@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 // icons
 import asset from "../../../assets/icons/asset.svg";
-import chart from "../../../assets/icons/chart.svg";
+import manage from "../../../assets/icons/manage.svg";
 import home from "../../../assets/icons/home.svg";
 import more from "../../../assets/icons/more.svg";
 import asset_selected from "../../../assets/icons/asset_selected.svg";
-import chart_selected from "../../../assets/icons/chart_selected.svg";
+import manage_selected from "../../../assets/icons/manage_selected.svg";
 import home_selected from "../../../assets/icons/home_selected.svg";
 import more_selected from "../../../assets/icons/more_selected.svg";
 import { useNavigate } from "react-router-dom";
@@ -23,18 +23,18 @@ export default function BottomTab() {
         isSelected={isSelected === "홈"}
       />
       <Tab
-        img={chart}
-        imgSelected={chart_selected}
-        title="포트폴리오"
-        setSelected={setSelected}
-        isSelected={isSelected === "포트폴리오"}
-      />
-      <Tab
         img={asset}
         imgSelected={asset_selected}
         title="자산"
         setSelected={setSelected}
         isSelected={isSelected === "자산"}
+      />
+      <Tab
+        img={manage}
+        imgSelected={manage_selected}
+        title="노후"
+        setSelected={setSelected}
+        isSelected={isSelected === "노후"}
       />
       <Tab
         img={more}
@@ -52,7 +52,7 @@ const Tab = ({ img, imgSelected, title, setSelected, isSelected }) => {
   const onClickFn = () => {
     const tabs = {
       홈: "home",
-      포트폴리오: "portfolio",
+      노후: "manage",
       자산: "asset",
       더보기: "more",
     };
