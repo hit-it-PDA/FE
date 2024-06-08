@@ -8,6 +8,8 @@ import PortfolioPage from "../routes/portfolio/PortfolioPage";
 import AssetPage from "../routes/asset/AssetPage";
 import MorePage from "../routes/more/MorePage";
 import LoginPage from "../routes/login/LoginPage";
+import TopBar from "../components/common/topBar/TopBar";
+import NotificationPage from "../routes/notification/NotificationPage";
 
 export const mainRouter = [
   {
@@ -33,6 +35,10 @@ export const mainRouter = [
         path: "/more",
         element: <MorePage />,
         index: true,
+      },
+      {
+        path: "/notification",
+        element: <NotificationPage />,
       },
     ],
   },
