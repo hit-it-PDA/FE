@@ -4,13 +4,17 @@ import Input from "../../components/Input";
 import logo from "../../assets/logo.svg";
 import kakao from "../../assets/kakao.svg";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
 
+  const navigate = useNavigate();
+
   const LoginClick = () => {
-    alert(`${email}입니다.`);
+    if (email && pwd) alert(`${email}입니다.`);
+    else alert("이메일 또는 비밀번호 입력하세요.");
   };
   const onEmailChange = (e) => {
     e.preventDefault();
@@ -23,7 +27,7 @@ export default function LoginPage() {
     console.log(pwd);
   };
   const SignUpClick = () => {
-    alert("회원가입입니다!");
+    navigate("/signup");
   };
   const KakaoClick = () => {
     alert("카카오 로그인입니다!");
@@ -33,12 +37,14 @@ export default function LoginPage() {
       <img className="mx-auto mt-[10vh] mb-[10vh]" src={logo} alt="logo" />
       <div className="flex flex-col items-center mt-[3vh] mb-[2vh]">
         <div>
-          <p className="mb-[2vh]">이메일</p>
-          <Input type={"text"} onChange={onEmailChange} />
+          <Input type={"text"} onChange={onEmailChange}>
+            이메일
+          </Input>
         </div>
         <div>
-          <p className="mt-[1vh] mb-[2vh]">비밀번호</p>
-          <Input type={"password"} onChange={onPwdchange} />
+          <Input type={"password"} onChange={onPwdchange}>
+            비밀번호
+          </Input>
         </div>
         <Button onClick={LoginClick} className={"w-[90vw] mt-[4vh]"}>
           로그인
