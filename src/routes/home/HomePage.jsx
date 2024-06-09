@@ -9,6 +9,7 @@ export default function HomePage() {
     <div>
       <TopBar type={0} />
       <div className="flex justify-center items-center">
+        {/** 전체/개인화 탭 */}
         <div className="h-[5vh] w-11/12 bg-white flex flex-row items-center border-b">
           <Tab
             type={0}
