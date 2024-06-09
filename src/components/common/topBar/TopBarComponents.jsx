@@ -46,7 +46,7 @@ export const BackArrowWithNotification = () => {
 export const NotificationWithSetting = () => {
   const navigate = useNavigate();
   return (
-    <div className="p-3 flex flex-row items-center justify-end h-[7vh] bg-white">
+    <div className="p-3 flex flex-row items-center justify-end h-[7vh] bg-white gap-2">
       <img
         src={noti}
         className="w-[10vw] max-w-10 hover:cursor-pointer"
@@ -55,7 +55,20 @@ export const NotificationWithSetting = () => {
       <img
         src={setting}
         className="w-[10vw] max-w-10 hover:cursor-pointer"
-        onClick={() => navigate("/home")}
+        onClick={() => navigate("/setting")}
+      />
+    </div>
+  );
+};
+
+export const BackArrow = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="p-3 flex items-start h-7[vh] bg-white">
+      <img
+        src={backArrow}
+        className="w-[10vw] max-w-10 hover:cursor-pointer"
+        onClick={() => navigate(-1)}
       />
     </div>
   );
