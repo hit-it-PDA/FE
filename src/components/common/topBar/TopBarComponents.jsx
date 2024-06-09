@@ -64,10 +64,10 @@ export const NotificationWithSetting = () => {
 export const BackArrow = () => {
   const navigate = useNavigate();
   return (
-    <div className="p-3 flex items-start h-7[vh] bg-white">
+    <div className="p-3 flex items-center h-7[vh] bg-white">
       <img
         src={backArrow}
-        className="w-[10vw] max-w-10 hover:cursor-pointer"
+        className="w-[9vw] max-w-9 hover:cursor-pointer"
         onClick={() => navigate(-1)}
       />
     </div>
