@@ -9,6 +9,7 @@ import AssetPage from "../routes/asset/AssetPage";
 import MorePage from "../routes/more/MorePage";
 import LoginPage from "../routes/login/LoginPage";
 import NotificationPage from "../routes/notification/NotificationPage";
+import PortfolioDetailPage from "../routes/home/PortfolioDetailPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -27,6 +28,11 @@ export const mainRouter = [
           {
             path: "",
             element: <HomePage />,
+            index: true,
+          },
+          {
+            path: "detail",
+            element: <PortfolioDetailPage />,
             index: true,
           },
         ],
@@ -56,7 +62,6 @@ export const mainRouter = [
       {
         path: "/more",
         element: <MorePage />,
-        index: true,
       },
       {
         path: "/notification",
