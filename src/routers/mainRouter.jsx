@@ -10,11 +10,13 @@ import MorePage from "../routes/more/MorePage";
 import LoginPage from "../routes/login/LoginPage";
 import NotificationPage from "../routes/notification/NotificationPage";
 import PortfolioDetailPage from "../routes/home/PortfolioDetailPage";
+import SettingPage from "../routes/setting/SettingPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
 import ManageLayout from "../routes/manage/ManageLayout";
 import AssetLayout from "../routes/asset/AssetLayout";
+import SettingLayout from "../routes/setting/SettingLayout";
 
 export const mainRouter = [
   {
@@ -22,7 +24,7 @@ export const mainRouter = [
     element: <MainLayout />,
     children: [
       {
-        path: "/home",
+        path: "",
         element: <HomeLayout />,
         children: [
           {
@@ -62,6 +64,17 @@ export const mainRouter = [
       {
         path: "/more",
         element: <MorePage />,
+      },
+      {
+        path: "/setting",
+        element: <SettingLayout />,
+        children: [
+          {
+            path: "",
+            element: <SettingPage />,
+            index: true,
+          },
+        ],
       },
       {
         path: "/notification",
