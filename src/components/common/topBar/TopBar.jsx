@@ -1,24 +1,21 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
+  BackArrow,
   BackArrowWithNotification,
   LogoWithNotification,
   NotificationWithSetting,
 } from "./TopBarComponents";
 
-export default function TopBar() {
-  const location = useLocation();
-
-  const path = location.pathname;
-
+export default function TopBar({ type }) {
   const renderTopBar = () => {
-    switch (path) {
-      case "/home":
-      case "/asset":
-      case "/manage":
+    switch (type) {
+      case 0:
         return <LogoWithNotification />;
-      case "/more":
+      case 1:
         return <NotificationWithSetting />;
+      case 2:
+        return <BackArrow />;
       default:
         return <BackArrowWithNotification />;
     }
