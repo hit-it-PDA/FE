@@ -4,7 +4,7 @@ import BottomTab from "../components/common/bottomTab/BottomTab";
 
 export default function MainLayout() {
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen h-full mb-[10vh]">
       <Outlet />
       <BottomTab />
     </div>
