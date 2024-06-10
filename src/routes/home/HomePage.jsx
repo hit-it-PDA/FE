@@ -13,6 +13,8 @@ import RobotAnalyzing from "../../components/common/home/RobotAnalyzing";
 
 export default function HomePage() {
   const [isSelected, setSelected] = useState(0);
+  const [isLogin, setIsLogin] = useState(true);
+  const [isTestFinished, setIsTestFinished] = useState(false);
   return (
     <div>
       <TopBar type={0} />
@@ -31,6 +33,24 @@ export default function HomePage() {
           />
         </div>
         <div className="flex flex-col w-full">
+          {/** 로그인 O, 투자 성향 진단 테스트 X -> 투자 성향 진단 테스트 버튼 */}
+          {isLogin && !isTestFinished ? (
+            <div className="w-full pt-2 flex flex-row justify-center items-center">
+              <div className="w-11/12 flex gap-5 justify-center items-center">
+                <div className="text-[12px] whitespace-pre-line text-[#868686]">
+                  <span className="font-bold">
+                    투자 성향 진단 테스트를 진행
+                  </span>
+                  하면{"\n"}
+                  <span className="font-bold">초개인화 포트폴리오를 추천</span>
+                  받을 수 있어요!
+                </div>
+                <button className="bg-[#FFDE71] rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]">
+                  테스트 하러가기
+                </button>
+              </div>
+            </div>
+          ) : null}
           {/** 테마 필터링 버튼 */}
           <div className="flex flex-row justify-between items-center py-2 px-[7vw] h-[5vh] box-content">
             {isSelected ? (
@@ -49,8 +69,25 @@ export default function HomePage() {
           </div>
           {/** 포트폴리오 추천 리스트 */}
           {isSelected ? (
-            <RobotAnalyzing />
+            isLogin ? (
+              isTestFinished ? ( // 개인화 탭, 로그인 O, 투자 성향 진단 테스트 O
+                <RobotAnalyzing />
+              ) : (
+                // 개인화 탭, 로그인 O, 투자 성향 진단 테스트 X
+                <div className="flex flex-col justify-center items-center gap-5">
+                  <RecommendComponent />
+                  <RecommendComponent />
+                  <RecommendComponent />
+                  <RecommendComponent />
+                  <RecommendComponent />
+                </div>
+              )
+            ) : (
+              // 개인화 탭, 로그인 X
+              <div>로그인하고 오세요.</div>
+            )
           ) : (
+            // 전체 탭
             <div className="flex flex-col justify-center items-center gap-5">
               <RecommendComponent />
               <RecommendComponent />
