@@ -1,5 +1,4 @@
 import React from "react";
-import { useCallback } from "react";
 import { useState } from "react";
 
 // icons
@@ -13,7 +12,7 @@ import RobotAnalyzing from "../../components/common/home/RobotAnalyzing";
 
 export default function HomePage() {
   const [isSelected, setSelected] = useState(0);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [isTestFinished, setIsTestFinished] = useState(false);
   return (
     <div>
@@ -45,7 +44,7 @@ export default function HomePage() {
                   <span className="font-bold">초개인화 포트폴리오를 추천</span>
                   받을 수 있어요!
                 </div>
-                <button className="bg-[#FFDE71] rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]">
+                <button className="bg-main_yellow rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]">
                   테스트 하러가기
                 </button>
               </div>
@@ -60,7 +59,7 @@ export default function HomePage() {
             ) : (
               <>
                 <span className="font-bold">Hit it! 테마별 상품</span>
-                <div className="pl-5 pr-3 border-[3px] rounded-[20px] border-[#FFDE71] flex items-center justify-between gap-3 hover:cursor-pointer">
+                <div className="pl-5 pr-3 border-[3px] rounded-[20px] border-main_yellow flex items-center justify-between gap-3 hover:cursor-pointer">
                   테마 1
                   <img src={downArrow} />
                 </div>
@@ -70,24 +69,28 @@ export default function HomePage() {
           {/** 포트폴리오 추천 리스트 */}
           {isSelected ? (
             isLogin ? (
-              isTestFinished ? ( // 개인화 탭, 로그인 O, 투자 성향 진단 테스트 O
-                <RobotAnalyzing />
-              ) : (
-                // 개인화 탭, 로그인 O, 투자 성향 진단 테스트 X
-                <div className="flex flex-col justify-center items-center gap-5">
-                  <RecommendComponent />
-                  <RecommendComponent />
-                  <RecommendComponent />
+              <div className="flex flex-col justify-center items-center gap-5">
+                <RecommendComponent />
+                <RecommendComponent />
+                <RecommendComponent />
+                <RecommendComponent />
+                <RecommendComponent />
+              </div>
+            ) : (
+              <div className="relative">
+                <div className="flex h-full flex-col justify-center items-center gap-5 blur">
                   <RecommendComponent />
                   <RecommendComponent />
                 </div>
-              )
-            ) : (
-              // 개인화 탭, 로그인 X
-              <div>로그인하고 오세요.</div>
+                <div className="absolute inset-0 flex justify-center items-center flex-col text-[20px]">
+                  로그인 후 이용 가능합니다.
+                  <div className="bg-main_yellow px-10 py-2 rounded-[20px] mt-5 text-[15px]">
+                    로그인하기
+                  </div>
+                </div>
+              </div>
             )
           ) : (
-            // 전체 탭
             <div className="flex flex-col justify-center items-center gap-5">
               <RecommendComponent />
               <RecommendComponent />
