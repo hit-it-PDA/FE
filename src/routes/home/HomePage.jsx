@@ -77,16 +77,17 @@ export default function HomePage() {
                 <RecommendComponent />
               </div>
             ) : (
-              <div className="relative">
-                <div className="flex h-full flex-col justify-center items-center gap-5 blur">
+              <div className="relative overflow-y-hidden">
+                <div className="flex h-[70vh] flex-col justify-center items-center gap-5 blur">
+                  <RecommendComponent />
                   <RecommendComponent />
                   <RecommendComponent />
                 </div>
                 <div className="absolute inset-0 flex justify-center items-center flex-col text-[20px]">
                   로그인 후 이용 가능합니다.
-                  <div className="bg-main_yellow px-10 py-2 rounded-[20px] mt-5 text-[15px]">
-                    로그인하기
-                  </div>
+                  <button className="bg-main_yellow px-10 py-2 rounded-[20px] mt-5 text-[15px]">
+                    로그인
+                  </button>
                 </div>
               </div>
             )
