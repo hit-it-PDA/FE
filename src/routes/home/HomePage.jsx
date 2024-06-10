@@ -9,6 +9,7 @@ import downArrow from "../../assets/icons/downArrow.svg";
 import TopBar from "../../components/common/topBar/TopBar";
 import RecommendComponent from "../../components/common/home/RecommendComponent";
 import Tab from "../../components/common/home/TabComponent";
+import RobotAnalyzing from "../../components/common/home/RobotAnalyzing";
 
 export default function HomePage() {
   const [isSelected, setSelected] = useState(0);
@@ -32,7 +33,11 @@ export default function HomePage() {
         <div className="flex flex-col w-full">
           {/** 테마 필터링 버튼 */}
           <div className="flex flex-row justify-between items-center py-2 px-[7vw] h-[5vh] box-content">
-            {isSelected === 0 ? (
+            {isSelected ? (
+              <span className="font-bold">
+                Hit it! 개인화 포트폴리오 추천 상품
+              </span>
+            ) : (
               <>
                 <span className="font-bold">Hit it! 테마별 상품</span>
                 <div className="pl-5 pr-3 border-[3px] rounded-[20px] border-[#FFDE71] flex items-center justify-between gap-3 hover:cursor-pointer">
@@ -40,20 +45,20 @@ export default function HomePage() {
                   <img src={downArrow} />
                 </div>
               </>
-            ) : (
-              <span className="font-bold">
-                Hit it! 개인화 포트폴리오 추천 상품
-              </span>
             )}
           </div>
           {/** 포트폴리오 추천 리스트 */}
-          <div className="flex flex-col justify-center items-center gap-5">
-            <RecommendComponent />
-            <RecommendComponent />
-            <RecommendComponent />
-            <RecommendComponent />
-            <RecommendComponent />
-          </div>
+          {isSelected ? (
+            <RobotAnalyzing />
+          ) : (
+            <div className="flex flex-col justify-center items-center gap-5">
+              <RecommendComponent />
+              <RecommendComponent />
+              <RecommendComponent />
+              <RecommendComponent />
+              <RecommendComponent />
+            </div>
+          )}
         </div>
       </div>
     </div>
