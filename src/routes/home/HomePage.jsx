@@ -26,12 +26,15 @@ export default function HomePage() {
           />
         </div>
         <div className="flex flex-col w-full">
-          <div className="flex flex-row justify-between py-3 px-7">
+          {/** 테마 필터링 버튼 */}
+          <div className="flex flex-row justify-between items-center py-2 px-[7vw] h-[5vh] box-content">
             <span className="font-bold">Hit it! 테마별 상품</span>
-            <div className="pl-5 pr-3 border-[3px] rounded-[20px] border-[#FFDE71] flex items-center justify-between gap-3 hover:cursor-pointer">
-              테마 1
-              <img src={downArrow} />
-            </div>
+            {isSelected === 0 ? (
+              <div className="pl-5 pr-3 border-[3px] rounded-[20px] border-[#FFDE71] flex items-center justify-between gap-3 hover:cursor-pointer">
+                테마 1
+                <img src={downArrow} />
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
