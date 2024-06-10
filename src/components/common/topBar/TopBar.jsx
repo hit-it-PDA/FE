@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 import {
   BackArrow,
   BackArrowWithNotification,
@@ -7,8 +7,8 @@ import {
   NotificationWithSetting,
 } from "./TopBarComponents";
 
-export default function TopBar({ type }) {
-  const renderTopBar = () => {
+function TopBarComponent({ type }) {
+  const renderTopBar = useCallback(() => {
     switch (type) {
       case 0:
         return <LogoWithNotification />;
@@ -19,6 +19,14 @@ export default function TopBar({ type }) {
       default:
         return <BackArrowWithNotification />;
     }
-  };
+  }, [type]);
+
   return <>{renderTopBar()}</>;
 }
+
+const TopBar = React.memo(
+  TopBarComponent,
+  (prevProps, nextProps) => prevProps.type === nextProps.type
+);
+
+export default TopBar;
