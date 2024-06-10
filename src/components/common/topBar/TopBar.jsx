@@ -1,26 +1,32 @@
 import React from "react";
+import { useCallback } from "react";
+import {
+  BackArrow,
+  BackArrowWithNotification,
+  LogoWithNotification,
+  NotificationWithSetting,
+} from "./TopBarComponents";
 
-// logo
-import logo from "../../../assets/logo.svg";
+function TopBarComponent({ type }) {
+  const renderTopBar = useCallback(() => {
+    switch (type) {
+      case 0:
+        return <LogoWithNotification />;
+      case 1:
+        return <NotificationWithSetting />;
+      case 2:
+        return <BackArrow />;
+      default:
+        return <BackArrowWithNotification />;
+    }
+  }, [type]);
 
-// icons
-import noti from "../../../assets/icons/notification.svg";
-import { useNavigate } from "react-router-dom";
-
-export default function TopBar() {
-  const navigate = useNavigate();
-  return (
-    <div className="m-3 flex flex-row items-center justify-between h-[6vh]">
-      <img
-        src={logo}
-        className="w-[12vw] hover:cursor-pointer"
-        onClick={() => navigate("/")}
-      />
-      <img
-        src={noti}
-        className="w-[11vw] hover:cursor-pointer"
-        onClick={() => navigate("/notification")}
-      />
-    </div>
-  );
+  return <>{renderTopBar()}</>;
 }
+
+const TopBar = React.memo(
+  TopBarComponent,
+  (prevProps, nextProps) => prevProps.type === nextProps.type
+);
+
+export default TopBar;
