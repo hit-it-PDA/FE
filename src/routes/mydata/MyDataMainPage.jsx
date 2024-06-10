@@ -24,7 +24,10 @@ export default function MyDataMainPage() {
         <button className="text-gray-400 underline">
           [필수]마이데이터 이용약관
         </button>
-        <Button className={"w-[90vw] mt-[1.5vh]"} onClick={() => navigate("1")}>
+        <Button
+          className={"w-[90vw] mt-[1.5vh]"}
+          onClick={() => navigate("start")}
+        >
           마이데이터 연동하기
         </Button>
       </div>
