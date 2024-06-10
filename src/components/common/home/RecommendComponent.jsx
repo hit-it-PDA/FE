@@ -15,11 +15,11 @@ const PortfolioRecommendComponent = () => {
         <div className="text-[13px]">Hit It! 자산배분(국내상장ETF)</div>
       </div>
       <div className="flex-1 flex flex-col gap-1">
-        <div className="bg-white text-[15px] flex justify-between items-center">
+        <div className="text-[15px] flex justify-between items-center">
           <span>최소 가입 비용</span>
           <span>100만원</span>
         </div>
-        <div className="bg-white text-[15px] flex justify-between items-center">
+        <div className="text-[15px] flex justify-between items-center">
           <span>수익률</span>
           <div className="flex items-baseline gap-1.5">
             <span className="text-[10px] text-[#616161]">3개월</span>
@@ -28,10 +28,10 @@ const PortfolioRecommendComponent = () => {
         </div>
       </div>
       <div className="flex-1 flex justify-around items-center">
-        <div className="bg-[#FFDE71] w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer">
+        <div className="bg-main_yellow w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer">
           선택하기
         </div>
-        <div className="bg-[#FFDE71] w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer">
+        <div className="bg-main_yellow w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer">
           자세히 보기
         </div>
       </div>
