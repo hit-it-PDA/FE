@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../Button";
+import Button from "../../Button";
 export default function MyDataAgree({ handleButtonClick }) {
   const [isChecked, setIsChecked] = useState(false);
 

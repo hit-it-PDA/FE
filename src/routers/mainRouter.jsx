@@ -15,6 +15,9 @@ import MyDataMainPage from "../routes/mydata/MyDataMainPage";
 import MyDataEndPage from "../routes/mydata/MyDataEndPage";
 import PortfolioDetailPage from "../routes/home/PortfolioDetailPage";
 import SettingPage from "../routes/setting/SettingPage";
+import InvestTestMainPage from "../routes/investTest/InvestTestMainPage";
+import InvestTestPage from "../routes/investTest/InvestTestPage";
+import InvestTestResultPage from "../routes/investTest/InvestTestResultPage";
 import RebalancingListPage from "../routes/rebalancing/RebalancingListPage";
 
 // layouts
@@ -110,6 +113,23 @@ export const mainRouter = [
       {
         path: "end",
         element: <MyDataEndPage />,
+      },
+    ],
+  },
+  {
+    path: "invest-test",
+    children: [
+      {
+        path: "",
+        element: <InvestTestMainPage />,
+      },
+      {
+        path: "start",
+        element: <InvestTestPage />,
+      },
+      {
+        path: "result",
+        element: <InvestTestResultPage />,
       },
     ],
   },

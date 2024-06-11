@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import Button from "../Button";
+import Button from "../../Button";
 
 export default function MyDataPhone({ handleButtonClick }) {
   const [first, setFirst] = useState("");
