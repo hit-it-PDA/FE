@@ -9,6 +9,7 @@ module.exports = {
         main_yellow: "#FFDE71",
         input_color: "#D9D9D9",
         progress_color: "#F3F3F3",
+        invest_text: "#FF9900",
       },
     },
   },
