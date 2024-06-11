@@ -81,10 +81,6 @@ export const mainRouter = [
           },
         ],
       },
-      {
-        path: "/notification",
-        element: <NotificationPage />,
-      },
     ],
   },
   {
@@ -108,9 +104,13 @@ export const mainRouter = [
       },
       {
         path: "end",
-        element: <MyDataEndPage />
-      }
+        element: <MyDataEndPage />,
+      },
     ],
+  },
+  {
+    path: "notification",
+    element: <NotificationPage />,
   },
 ];
 
