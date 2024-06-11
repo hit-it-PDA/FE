@@ -1,10 +1,10 @@
 import React from "react";
 
 // components
-import PortfolioRatioComponent from "../../components/common/home/PortfolioRatioComponent";
-import RecommendComponent from "../../components/common/home/RecommendComponent";
+import PortfolioRatioComponent from "../../components/home/PortfolioRatioComponent";
+import RecommendComponent from "../../components/home/RecommendComponent";
 import TopBar from "../../components/common/topBar/TopBar";
-import PortfolioCompositionComponent from "../../components/common/home/PortfolioCompositionComponent";
+import PortfolioCompositionComponent from "../../components/home/PortfolioCompositionComponent";
 
 export default function PortfolioDetailPage() {
   return (
