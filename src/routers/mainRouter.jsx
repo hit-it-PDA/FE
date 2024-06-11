@@ -16,6 +16,9 @@ import MyDataMainPage from "../routes/mydata/MyDataMainPage";
 import MyDataEndPage from "../routes/mydata/MyDataEndPage";
 import PortfolioDetailPage from "../routes/home/PortfolioDetailPage";
 import SettingPage from "../routes/setting/SettingPage";
+import InvestTestMainPage from "../routes/investTest/InvestTestMainPage";
+import InvestTestPage from "../routes/investTest/InvestTestPage";
+import InvestTestResultPage from "../routes/investTest/InvestTestResultPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -108,8 +111,25 @@ export const mainRouter = [
       },
       {
         path: "end",
-        element: <MyDataEndPage />
-      }
+        element: <MyDataEndPage />,
+      },
+    ],
+  },
+  {
+    path: "invest-test",
+    children: [
+      {
+        path: "",
+        element: <InvestTestMainPage />,
+      },
+      {
+        path: "start",
+        element: <InvestTestPage />,
+      },
+      {
+        path: "result",
+        element: <InvestTestResultPage />,
+      },
     ],
   },
 ];
