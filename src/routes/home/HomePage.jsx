@@ -6,9 +6,9 @@ import downArrow from "../../assets/icons/downArrow.svg";
 
 // components
 import TopBar from "../../components/common/topBar/TopBar";
-import RecommendComponent from "../../components/common/home/RecommendComponent";
-import Tab from "../../components/common/home/TabComponent";
-import RobotAnalyzing from "../../components/common/home/RobotAnalyzing";
+import RecommendComponent from "../../components/home/RecommendComponent";
+import Tab from "../../components/home/TabComponent";
+import RobotAnalyzing from "../../components/home/RobotAnalyzing";
 
 export default function HomePage() {
   const [isSelected, setSelected] = useState(0);
@@ -70,18 +70,18 @@ export default function HomePage() {
           {isSelected ? (
             isLogin ? (
               <div className="flex flex-col justify-center items-center gap-5">
-                <RecommendComponent />
-                <RecommendComponent />
-                <RecommendComponent />
-                <RecommendComponent />
-                <RecommendComponent />
+                <RecommendComponent type={0} />
+                <RecommendComponent type={0} />
+                <RecommendComponent type={0} />
+                <RecommendComponent type={0} />
+                <RecommendComponent type={0} />
               </div>
             ) : (
               <div className="relative overflow-y-hidden">
                 <div className="flex h-[70vh] flex-col justify-center items-center gap-5 blur">
-                  <RecommendComponent />
-                  <RecommendComponent />
-                  <RecommendComponent />
+                  <RecommendComponent type={0} />
+                  <RecommendComponent type={0} />
+                  <RecommendComponent type={0} />
                 </div>
                 <div className="absolute inset-0 flex justify-center items-center flex-col text-[20px]">
                   로그인 후 이용 가능합니다.
@@ -93,11 +93,11 @@ export default function HomePage() {
             )
           ) : (
             <div className="flex flex-col justify-center items-center gap-5">
-              <RecommendComponent />
-              <RecommendComponent />
-              <RecommendComponent />
-              <RecommendComponent />
-              <RecommendComponent />
+              <RecommendComponent type={0} />
+              <RecommendComponent type={0} />
+              <RecommendComponent type={0} />
+              <RecommendComponent type={0} />
+              <RecommendComponent type={0} />
             </div>
           )}
         </div>

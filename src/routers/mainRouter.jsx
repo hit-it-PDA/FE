@@ -9,7 +9,6 @@ import AssetPage from "../routes/asset/AssetPage";
 import MorePage from "../routes/more/MorePage";
 import LoginPage from "../routes/login/LoginPage";
 import SignUpPage from "../routes/signup/SignUpPage";
-import TopBar from "../components/common/topBar/TopBar";
 import NotificationPage from "../routes/notification/NotificationPage";
 import MyDataPage from "../routes/mydata/MyDataPage";
 import MyDataMainPage from "../routes/mydata/MyDataMainPage";
@@ -19,6 +18,7 @@ import SettingPage from "../routes/setting/SettingPage";
 import InvestTestMainPage from "../routes/investTest/InvestTestMainPage";
 import InvestTestPage from "../routes/investTest/InvestTestPage";
 import InvestTestResultPage from "../routes/investTest/InvestTestResultPage";
+import RebalancingListPage from "../routes/rebalancing/RebalancingListPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -82,11 +82,12 @@ export const mainRouter = [
             element: <SettingPage />,
             index: true,
           },
+          {
+            path: "rebalancingList",
+            element: <RebalancingListPage />,
+            index: true,
+          },
         ],
-      },
-      {
-        path: "/notification",
-        element: <NotificationPage />,
       },
     ],
   },
@@ -131,6 +132,10 @@ export const mainRouter = [
         element: <InvestTestResultPage />,
       },
     ],
+  },
+  {
+    path: "notification",
+    element: <NotificationPage />,
   },
 ];
 
