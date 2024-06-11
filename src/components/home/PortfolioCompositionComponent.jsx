@@ -1,7 +1,7 @@
 import React from "react";
 
 // components
-import DoughnutChartComponent from "../chart/DoughnutChartComponent";
+import DoughnutChartComponent from "../common/chart/DoughnutChartComponent";
 
 export default function PortfolioCompositionComponent({
   title,

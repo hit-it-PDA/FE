@@ -9,13 +9,13 @@ import AssetPage from "../routes/asset/AssetPage";
 import MorePage from "../routes/more/MorePage";
 import LoginPage from "../routes/login/LoginPage";
 import SignUpPage from "../routes/signup/SignUpPage";
-import TopBar from "../components/common/topBar/TopBar";
 import NotificationPage from "../routes/notification/NotificationPage";
 import MyDataPage from "../routes/mydata/MyDataPage";
 import MyDataMainPage from "../routes/mydata/MyDataMainPage";
 import MyDataEndPage from "../routes/mydata/MyDataEndPage";
 import PortfolioDetailPage from "../routes/home/PortfolioDetailPage";
 import SettingPage from "../routes/setting/SettingPage";
+import RebalancingListPage from "../routes/rebalancing/RebalancingListPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -77,6 +77,11 @@ export const mainRouter = [
           {
             path: "",
             element: <SettingPage />,
+            index: true,
+          },
+          {
+            path: "rebalancingList",
+            element: <RebalancingListPage />,
             index: true,
           },
         ],

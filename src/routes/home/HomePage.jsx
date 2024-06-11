@@ -6,9 +6,9 @@ import downArrow from "../../assets/icons/downArrow.svg";
 
 // components
 import TopBar from "../../components/common/topBar/TopBar";
-import RecommendComponent from "../../components/common/home/RecommendComponent";
-import Tab from "../../components/common/home/TabComponent";
-import RobotAnalyzing from "../../components/common/home/RobotAnalyzing";
+import RecommendComponent from "../../components/home/RecommendComponent";
+import Tab from "../../components/home/TabComponent";
+import RobotAnalyzing from "../../components/home/RobotAnalyzing";
 
 export default function HomePage() {
   const [isSelected, setSelected] = useState(0);
