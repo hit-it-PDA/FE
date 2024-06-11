@@ -2,24 +2,24 @@ import React, { useState } from "react";
 import InvestButton from "../../InvestButton";
 import { useNavigate } from "react-router-dom";
 
-export default function InvestTestEight({
-  testDatas,
-  saveData,
-  score,
-}) {
+export default function InvestTestEight({ testDatas, saveData, score }) {
   const navigate = useNavigate();
   const [localScore, setLocalScore] = useState(score);
+  const [localData, setLocalData] = useState(testDatas);
 
-  const handleNavigate = (newScore) => {
+  const handleNavigate = (newData, newScore) => {
     navigate("/invest-test/result", {
-      state: { testDatas: testDatas, score: newScore },
+      state: { testDatas: newData, score: newScore },
     });
   };
   const handleClick = (e, points) => {
     const newScore = localScore + points;
+    const newData = [...testDatas, e.target.textContent];
     setLocalScore(newScore);
-    saveData(e.target.textContent);
-    handleNavigate(newScore);
+    setLocalData(newData);
+    console.log(e);
+    saveData(e.target.innerText);
+    handleNavigate(newData, newScore);
   };
   console.log(score);
   return (
