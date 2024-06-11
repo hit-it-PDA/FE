@@ -17,7 +17,6 @@ export default function InvestTestEight({ testDatas, saveData, score }) {
     const newData = [...testDatas, e.target.textContent];
     setLocalScore(newScore);
     setLocalData(newData);
-    console.log(e);
     saveData(e.target.innerText);
     handleNavigate(newData, newScore);
   };
