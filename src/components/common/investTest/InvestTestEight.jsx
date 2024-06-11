@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import InvestButton from "../../InvestButton";
-import Button from "../../Button";
 import { useNavigate } from "react-router-dom";
 
 export default function InvestTestEight({
   testDatas,
   saveData,
-  addScore,
   score,
 }) {
   const navigate = useNavigate();
+  const [localScore, setLocalScore] = useState(score);
 
-  const handleNavigate = () => {
+  const handleNavigate = (newScore) => {
     navigate("/invest-test/result", {
-      state: { testDatas: testDatas, score: score },
+      state: { testDatas: testDatas, score: newScore },
     });
   };
+  const handleClick = (e, points) => {
+    const newScore = localScore + points;
+    setLocalScore(newScore);
+    saveData(e.target.textContent);
+    handleNavigate(newScore);
+  };
+  console.log(score);
   return (
     <div className="flex flex-col w-[88vw]">
       <p className="text-2xl font-bold mt-[8vh]">
@@ -27,9 +33,7 @@ export default function InvestTestEight({
         <InvestButton
           className="w-[70vw] h-[7vh]"
           onClick={(e) => {
-            saveData(e.target.textContent);
-            addScore(0);
-            handleNavigate();
+            handleClick(e, 0);
           }}
         >
           60% 확률로 연 6% 수익 <br />
@@ -38,9 +42,7 @@ export default function InvestTestEight({
         <InvestButton
           className="w-[70vw] h-[7vh]"
           onClick={(e) => {
-            saveData(e.target.textContent);
-            addScore(20);
-            handleNavigate();
+            handleClick(e, 20);
           }}
         >
           60% 확률로 연 11% 수익 <br />
@@ -49,9 +51,7 @@ export default function InvestTestEight({
         <InvestButton
           className="w-[70vw] h-[7vh]"
           onClick={(e) => {
-            saveData(e.target.textContent);
-            addScore(40);
-            handleNavigate();
+            handleClick(e, 40);
           }}
         >
           60% 확률로 연 16% 수익 <br />
@@ -60,9 +60,7 @@ export default function InvestTestEight({
         <InvestButton
           className="w-[70vw] h-[7vh]"
           onClick={(e) => {
-            saveData(e.target.textContent);
-            addScore(60);
-            handleNavigate();
+            handleClick(e, 60);
           }}
         >
           60% 확률로 연 21% 수익 <br />
@@ -71,9 +69,7 @@ export default function InvestTestEight({
         <InvestButton
           className="w-[70vw] h-[7vh]"
           onClick={(e) => {
-            saveData(e.target.textContent);
-            addScore(80);
-            handleNavigate();
+            handleClick(e, 80);
           }}
         >
           60% 확률로 연 26% 수익 <br />
