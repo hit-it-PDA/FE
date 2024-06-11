@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import ProgressBar from "../../components/common/ProgressBar";
-import MyDataAgree from "../../components/mydata/MyDataAgree";
-import MyDataChoose from "../../components/mydata/MyDataChoose";
-import MyDataPhone from "../../components/mydata/MyDataPhone";
-import MyDataNumber from "../../components/mydata/MyDataNumber";
+import ProgressBar from "../../components/ProgressBar";
+import MyDataAgree from "../../components/common/mydata/MyDataAgree";
+import MyDataChoose from "../../components/common/mydata/MyDataChoose";
+import MyDataPhone from "../../components/common/mydata/MyDataPhone";
+import MyDataNumber from "../../components/common/mydata/MyDataNumber";
 
 export default function MyDataPage() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [page, setPage] = useState(1);
-  const [isSecondPage, setIsSecondPage] = useState(false);
   const totalPages = 5;
-  const progress = (page / totalPages) * 100;
 
   const handleNextPage = () => {
     setPage(page + 1);
