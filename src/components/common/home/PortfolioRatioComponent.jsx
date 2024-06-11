@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PortfolioRatioComponent({ stockRatio, bondRatio }) {
   return (
-    <div className="h-15vh px-5 py-4 flex flex-col justify-center">
+    <div className="h-15vh py-4 flex flex-col justify-center">
       <span className="text-[20px] font-bold mb-5">📌 상품 비중</span>
       <div className="flex flex-col gap-3">
         <div className="flex justify-center items-center">
