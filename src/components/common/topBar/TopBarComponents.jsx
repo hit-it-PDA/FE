@@ -14,7 +14,7 @@ export const LogoWithNotification = () => {
       <img
         src={logo}
         className="w-[10vw] max-w-10 hover:cursor-pointer"
-        onClick={() => navigate("/home")}
+        onClick={() => navigate("/")}
       />
       <img
         src={noti}
