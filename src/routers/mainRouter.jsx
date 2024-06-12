@@ -95,7 +95,7 @@ export const mainRouter = [
             index: true,
           },
           {
-            path: "rebalancingList",
+            path: "rebalancing-list",
             element: <RebalancingListPage />,
             index: true,
           },
