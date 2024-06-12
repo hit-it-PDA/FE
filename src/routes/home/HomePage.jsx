@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // icons
 import downArrow from "../../assets/icons/downArrow.svg";
@@ -11,6 +12,7 @@ import Tab from "../../components/home/TabComponent";
 import RobotAnalyzing from "../../components/home/RobotAnalyzing";
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const [isSelected, setSelected] = useState(0);
   const [isLogin, setIsLogin] = useState(false);
   const [isTestFinished, setIsTestFinished] = useState(false);
@@ -44,7 +46,10 @@ export default function HomePage() {
                   <span className="font-bold">초개인화 포트폴리오를 추천</span>
                   받을 수 있어요!
                 </div>
-                <button className="bg-main_yellow rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]">
+                <button
+                  className="bg-main_yellow rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]"
+                  onClick={() => navigate("/invest-test")}
+                >
                   테스트 하러가기
                 </button>
               </div>
@@ -85,7 +90,10 @@ export default function HomePage() {
                 </div>
                 <div className="absolute inset-0 flex justify-center items-center flex-col text-[20px]">
                   로그인 후 이용 가능합니다.
-                  <button className="bg-main_yellow px-10 py-2 rounded-[20px] mt-5 text-[15px]">
+                  <button
+                    className="bg-main_yellow px-10 py-2 rounded-[20px] mt-5 text-[15px]"
+                    onClick={() => navigate("/login")}
+                  >
                     로그인
                   </button>
                 </div>

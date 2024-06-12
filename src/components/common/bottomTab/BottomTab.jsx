@@ -70,7 +70,6 @@ const Tab = ({ img, imgSelected, title, setSelected, isSelected }) => {
   }, [location.pathname, setSelected]);
 
   const onClickFn = () => {
-    if (isSelected) return;
     navigate(`/${tabs[title]}`);
   };
   return (
