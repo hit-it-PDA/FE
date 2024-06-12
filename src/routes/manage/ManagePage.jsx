@@ -1,12 +1,16 @@
 import React from "react";
+import LineChartComponent from "../../components/common/chart/LineChartComponent";
 import TopBar from "../../components/common/topBar/TopBar";
 
 export default function ManagePage() {
   return (
     <div>
       <TopBar type={0} />
-      <div className="h-full w-full p-5">
+      <div className="h-full w-full p-5 flex flex-col gap-10">
         <ManageTitle stockReturns="1,000" />
+        <LineChartComponent
+          returnsData={[200, 100, 382, 423, 12, 452, 322, 85, 33, 77, 23, 199]}
+        />
       </div>
     </div>
   );
