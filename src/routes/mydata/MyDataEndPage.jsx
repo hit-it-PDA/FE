@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/check-circle.svg";
+import logo from "../../assets/logos/check-circle.svg";
 import Button from "../../components/Button";
 
 export default function MyDataEndPage() {

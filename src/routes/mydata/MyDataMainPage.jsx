@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/mydata_logo.svg";
+import logo from "../../assets/logos/mydata_logo.svg";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 
