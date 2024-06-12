@@ -7,7 +7,7 @@ export default function DiagnosisFirst() {
   const [sex, setSex] = useState(0);
   return (
     <div>
-      <span className="text-[20px] font-bold">기본 사항</span>
+      <span className="text-[25px] font-bold">기본 사항</span>
       <div className="mt-5 gap-3 flex flex-col">
         <Input placeholder={"ex) 만 26세"}>만 나이를 입력하세요.</Input>
         <div>

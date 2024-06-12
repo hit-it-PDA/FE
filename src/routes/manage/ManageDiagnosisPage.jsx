@@ -10,7 +10,7 @@ export default function ManageDiagnosisPage() {
     <div>
       <TopBar type={2} />
       <div className="w-full h-[80vh] px-5">
-        <div className="flex flex-col w-full h-full justify-between">
+        <div className="flex flex-col w-full h-full justify-between items-center mt-3">
           {renderDiagnosis(seq)}
           <button
             className="w-[30vw] self-end bg-main_yellow px-5 py-3 rounded-[10px]"
