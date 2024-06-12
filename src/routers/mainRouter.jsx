@@ -19,6 +19,8 @@ import InvestTestMainPage from "../routes/investTest/InvestTestMainPage";
 import InvestTestPage from "../routes/investTest/InvestTestPage";
 import InvestTestResultPage from "../routes/investTest/InvestTestResultPage";
 import RebalancingListPage from "../routes/rebalancing/RebalancingListPage";
+import AccountMainPage from "../routes/account/AccountMainPage";
+import AccountEndPage from "../routes/account/AccountEndPage";
 import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
 import ManageUnclaimedPensionPage from "../routes/manage/ManageUnclaimedPensionPage";
 
@@ -148,6 +150,19 @@ export const mainRouter = [
   {
     path: "notification",
     element: <NotificationPage />,
+  },
+  {
+    path: "account-create",
+    children: [
+      {
+        path: "",
+        element: <AccountMainPage />,
+      },
+      {
+        path: "end",
+        element: <AccountEndPage />,
+      },
+    ],
   },
 ];
 
