@@ -19,6 +19,8 @@ import InvestTestMainPage from "../routes/investTest/InvestTestMainPage";
 import InvestTestPage from "../routes/investTest/InvestTestPage";
 import InvestTestResultPage from "../routes/investTest/InvestTestResultPage";
 import RebalancingListPage from "../routes/rebalancing/RebalancingListPage";
+import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
+import ManageUnclaimedPensionPage from "../routes/manage/ManageUnclaimedPensionPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -54,6 +56,16 @@ export const mainRouter = [
           {
             path: "",
             element: <ManagePage />,
+            index: true,
+          },
+          {
+            path: "diagnosis",
+            element: <ManageDiagnosisPage />,
+            index: true,
+          },
+          {
+            path: "pension",
+            element: <ManageUnclaimedPensionPage />,
             index: true,
           },
         ],
