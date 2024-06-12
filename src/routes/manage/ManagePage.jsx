@@ -1,32 +1,36 @@
 import React from "react";
+
+// components
 import LineChartComponent from "../../components/common/chart/LineChartComponent";
 import TopBar from "../../components/common/topBar/TopBar";
+import ManageTitleComponent from "../../components/manage/ManageTitleComponent";
+import MoreServiceComponent from "../../components/manage/MoreServiceComponent";
 
 export default function ManagePage() {
   return (
     <div>
       <TopBar type={0} />
       <div className="h-full w-full p-5 flex flex-col gap-10">
-        <ManageTitle stockReturns="1,000" />
+        <ManageTitleComponent stockReturns="1,000" />
         <LineChartComponent
           returnsData={[200, 100, 382, 423, 12, 452, 322, 85, 33, 77, 23, 199]}
         />
+        <div className="w-full h-[30vh] flex flex-col">
+          <span className="text-[20px] font-bold">📌 부가 서비스</span>
+          <div className="flex flex-1 flex-col justify-around mt-2">
+            <MoreServiceComponent
+              title="노후준비종합진단"
+              detail={`나는 노후를 잘 준비하고 있을까?
+              내 자산으로는 노후에 생활비를 얼마나 쓸 수 있을까?`}
+            />
+            <MoreServiceComponent
+              title="미청구 퇴직연금 조회"
+              detail={`퇴사 후, 청구하지 못한 퇴직연금이 있다면
+              히릿이 찾아드려요!`}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-
-const ManageTitle = ({ stockReturns }) => {
-  return (
-    <div className="w-full h-[12vh] flex flex-col">
-      <span className="text-[20px] font-bold">📌 현재 수익률</span>
-      <div className="flex-1 text-center whitespace-pre-line mt-2">
-        히릿 로보 어드바이저가 기존 퇴직연금 금액보다{"\n"}
-        <span className="text-main_yellow font-bold text-[24px]">
-          {stockReturns}만원
-        </span>
-        을 더 모았어요!
-      </div>
-    </div>
-  );
-};
