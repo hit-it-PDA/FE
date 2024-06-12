@@ -42,7 +42,10 @@ export default function LineChartComponent({ returnsData }) {
         label: "2024 수익률",
         data: returnsData,
         backgroundColor: ["#FFDE71"],
-        borderWidth: 1,
+        borderWidth: 2,
+        spanGaps: true,
+        tension: 0.6,
+        pointHoverBorderWidth: 15,
       },
     ],
   };
@@ -50,6 +53,18 @@ export default function LineChartComponent({ returnsData }) {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    scales: {
+      y: {
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+      x: {
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+    },
     plugins: {
       legend: {
         labels: {
@@ -64,7 +79,7 @@ export default function LineChartComponent({ returnsData }) {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-[30vh]">
       <Line data={data} options={options} />
     </div>
   );
