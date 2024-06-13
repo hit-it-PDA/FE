@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // components
 import TopBar from "../../components/common/topBar/TopBar";
 import DiagnosisFirst from "../../components/manage/diagnosis/DiagnosisFirst";
+import DiagnosisSecond from "../../components/manage/diagnosis/DiagnosisSecond";
 
 export default function ManageDiagnosisPage() {
   const [seq, setSeq] = useState(0);
@@ -28,7 +29,8 @@ const renderDiagnosis = (seq) => {
   switch (seq) {
     case 0:
       return <DiagnosisFirst />;
-
+    case 1:
+      return <DiagnosisSecond />;
     default:
       break;
   }
