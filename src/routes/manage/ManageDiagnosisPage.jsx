@@ -13,12 +13,14 @@ export default function ManageDiagnosisPage() {
       <div className="w-full h-[80vh] px-5">
         <div className="flex flex-col w-full h-full justify-between items-center mt-3">
           {renderDiagnosis(seq)}
-          <button
-            className="w-[30vw] self-end bg-main_yellow px-5 py-3 rounded-[10px]"
-            onClick={() => setSeq((prev) => prev + 1)}
-          >
-            다음
-          </button>
+          <div className="w-[90vw] flex justify-end">
+            <button
+              className="w-[30vw] bg-main_yellow px-5 py-3 rounded-[10px]"
+              onClick={() => setSeq((prev) => prev + 1)}
+            >
+              다음
+            </button>
+          </div>
         </div>
       </div>
     </div>
