@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import TopBar from "../../components/common/topBar/TopBar";
 import DiagnosisFirst from "../../components/manage/diagnosis/DiagnosisFirst";
 import DiagnosisSecond from "../../components/manage/diagnosis/DiagnosisSecond";
+import DiagnosisThird from "../../components/manage/diagnosis/DiagnosisThird";
 
 export default function ManageDiagnosisPage() {
   const [seq, setSeq] = useState(0);
@@ -11,7 +12,7 @@ export default function ManageDiagnosisPage() {
     <div>
       <TopBar type={2} />
       <div className="w-full h-[80vh] px-5">
-        <div className="flex flex-col w-full h-full justify-between items-center mt-3">
+        <div className="flex flex-col w-full h-full justify-between items-center">
           {renderDiagnosis(seq)}
           <div className="w-[90vw] flex justify-end">
             <button
@@ -33,6 +34,8 @@ const renderDiagnosis = (seq) => {
       return <DiagnosisFirst />;
     case 1:
       return <DiagnosisSecond />;
+    case 2:
+      return <DiagnosisThird />;
     default:
       break;
   }
