@@ -1,7 +1,16 @@
 import React from "react";
 import Input from "../../Input";
 
-export default function DiagnosisSecond() {
+export default function DiagnosisSecond({
+  incomeAmount,
+  setIncomeAmount,
+  returnExp,
+  setReturnExp,
+  livingExpenses,
+  setLivingExpenses,
+  manageScore,
+  setManageScore,
+}) {
   return (
     <div>
       <span className="text-[25px] font-bold">기본 사항</span>

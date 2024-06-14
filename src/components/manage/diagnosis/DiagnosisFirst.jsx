@@ -3,8 +3,16 @@ import React, { useState } from "react";
 // components
 import Input from "../../Input";
 
-export default function DiagnosisFirst() {
-  const [sex, setSex] = useState(0);
+export default function DiagnosisFirst({
+  age,
+  setAge,
+  retirementAge,
+  setRetirementAge,
+  sex,
+  setSex,
+  pensionExpAmount,
+  setPensionExpAmount,
+}) {
   return (
     <div className="w-[90vw]">
       <span className="text-[25px] font-bold">기본 사항</span>
