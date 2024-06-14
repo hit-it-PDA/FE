@@ -5,14 +5,20 @@ import { useState } from "react";
 import SelectComponent from "./SelectComponent";
 import ButtonComponent from "./ButtonComponent";
 
-export default function DiagnosisThird() {
-  const [progress, setProgress] = useState(0);
-  const [hasIncome, setHasIncome] = useState(0);
-  const [isYoung, setIsYoung] = useState(0);
-  const [isCalculate, setIsCalculate] = useState(0);
-  const [manageAsset, setManageAsset] = useState("");
-  const [pensionAmount, setPensionAmount] = useState("");
-  const [estateAmount, setEstateAmount] = useState("");
+export default function DiagnosisThird({
+  hasIncome,
+  setHasIncome,
+  isYoung,
+  setIsYoung,
+  isCalculate,
+  setIsCalculate,
+  manageAsset,
+  setManageAsset,
+  pensionAmount,
+  setPensionAmount,
+  estateAmount,
+  setEstateAmount,
+}) {
   const manageAssetOptions = [
     { value: "10000000", label: "1000만원" },
     { value: "5000000", label: "500만원" },
