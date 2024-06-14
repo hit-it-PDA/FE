@@ -9,9 +9,9 @@ export default function DiagnosisFirst() {
     <div className="w-[90vw]">
       <span className="text-[25px] font-bold">기본 사항</span>
       <div className="mt-5 gap-3 flex flex-col">
-        <Input placeholder={"ex) 만 26세"}>만 나이를 입력하세요.</Input>
+        <Input placeholder={"ex) 만 26세"}>만 나이를 입력해주세요.</Input>
         <div>
-          <p className="mb-[1vh]">성별을 입력하세요.</p>
+          <p className="mb-[1vh]">성별을 선택해주세요.</p>
           <div className="flex justify-between items-center">
             <Button
               className={`w-[43vw] bg-${
@@ -31,13 +31,12 @@ export default function DiagnosisFirst() {
             </Button>
           </div>
         </div>
-        <Input placeholder={"ex) 55세"}>희망 퇴직 나이를 입력하세요.</Input>
+        <Input placeholder={"ex) 55세"}>희망 퇴직 나이를 입력해주세요.</Input>
         <Input placeholder={"ex) 103만원"}>
-          국민연금 예상 수령액을 입력하세요.
+          국민연금 예상 수령액을 입력해주세요.
         </Input>
         <span className="text-[13px] text-[#505050] whitespace-pre-line">
-          {`(국민연금공단, 2023년 1월 기준) 
-            국민연금 20년 이상 가입자의 월 평균 수령액은 103만원입니다.
+          {`국민연금 20년 이상 가입자의 월 평균 수령액은 103만원입니다. (국민연금공단, 2023년 1월 기준) 
             본인이 확인한 예상 수령 금액을 입력해주세요.`}
         </span>
       </div>
