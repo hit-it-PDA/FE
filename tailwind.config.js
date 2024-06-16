@@ -10,6 +10,8 @@ module.exports = {
         input_color: "#D9D9D9",
         progress_color: "#F3F3F3",
         invest_text: "#FF9900",
+        main: "#375AFF",
+        sub: "#E8ECFF",
       },
     },
   },
