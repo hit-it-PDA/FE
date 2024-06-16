@@ -14,26 +14,30 @@ const PortfolioRecommendComponent = ({ type }) => {
       <div className={`flex-1 ${type ? null : "mb-2"}`}>
         <div className="flex items-baseline justify-between">
           <span
-            className={`text-[${
-              type ? "24px" : "20px"
-            }] text-[#3B3B3B] font-bold`}
+            className={`${
+              type ? "text-[24px] text-white" : "text-[20px] text-[#3B3B3B]"
+            }  font-bold`}
           >
             스마트세이버
           </span>
           <span
-            className={`text-[${
-              type ? "16px" : "13px"
-            }] text-[#FF9900] font-bold`}
+            className={`${
+              type ? "text-[16px] " : "text-[13px]"
+            } text-[#FF9900] font-bold`}
           >
             안정추구형
           </span>
         </div>
-        <div className={`${type ? "text-[15px] mt-1" : "text-[13px]"}`}>
+        <div
+          className={`${type ? "text-[15px] mt-1 text-white" : "text-[13px]"}`}
+        >
           Hit It! 자산배분(국내상장ETF)
         </div>
       </div>
       <div
-        className={`flex-1 flex flex-col gap-1 ${type ? "justify-end" : null}`}
+        className={`flex-1 flex flex-col gap-1 ${
+          type ? "justify-end text-white" : null
+        }`}
       >
         <div className="text-[15px] flex justify-between items-center">
           <span>최소 가입 비용</span>
@@ -42,7 +46,11 @@ const PortfolioRecommendComponent = ({ type }) => {
         <div className="text-[15px] flex justify-between items-center">
           <span>수익률</span>
           <div className="flex items-baseline gap-1.5">
-            <span className={`text-[${type ? "13px" : "10px"}] text-[#616161]`}>
+            <span
+              className={`${
+                type ? "text-[13px] text-white" : "text-[10px] text-[#616161]"
+              } `}
+            >
               3개월
             </span>
             <span className="text-[18px] font-bold text-[#FF3D00]">31.72%</span>
