@@ -66,7 +66,7 @@ export default function ManageDiagnosisPage() {
     <div>
       <TopBar type={2} />
       <div className="w-full h-[80vh] px-5">
-        <div className="flex flex-col w-full h-full justify-between items-center">
+        <div className="flex flex-col items-center justify-between w-full h-full">
           {renderDiagnosis(
             seq,
             firstPageStatesAndSetters,
@@ -75,7 +75,7 @@ export default function ManageDiagnosisPage() {
           )}
           <div className="w-[90vw] flex justify-end">
             <button
-              className="w-[30vw] bg-main_yellow px-5 py-3 rounded-[10px]"
+              className="w-[30vw] bg-main px-5 py-3 rounded-[10px] text-white font-bold"
               onClick={() => nextButtonHandler()}
             >
               다음

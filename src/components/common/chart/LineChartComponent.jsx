@@ -41,7 +41,7 @@ export default function LineChartComponent({ returnsData }) {
       {
         label: "2024 수익률",
         data: returnsData,
-        backgroundColor: ["#FFDE71"],
+        backgroundColor: ["#375AFF"],
         borderWidth: 2,
         spanGaps: true,
         tension: 0.6,

@@ -5,12 +5,12 @@ export default function NotificationListComponent({ date, content }) {
   return (
     <div
       className={`${
-        isRead ? "bg-white" : "bg-[#FFF9E6]"
+        isRead ? "bg-white" : "bg-sub"
       } border-b px-[8vw] py-3 h-[8vh] w-full flex items-center justify-around hover:cursor-pointer`}
       onClick={() => setIsRead(true)}
     >
       <span>{date}</span>
-      <span className="flex-1 flex justify-center">{content}</span>
+      <span className="flex justify-center flex-1">{content}</span>
     </div>
   );
 }

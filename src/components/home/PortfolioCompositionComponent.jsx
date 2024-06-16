@@ -12,7 +12,7 @@ export default function PortfolioCompositionComponent({
   return (
     <div
       className={`${
-        type === "stock" ? "bg-[#FFF9E6]" : "bg-[#FFDFD5]"
+        type === "stock" ? "bg-sub" : "bg-[#FFDFD5]"
       } flex items-center justify-between rounded-[25px] w-full h-[13vh] px-5 py-3`}
     >
       <div className="flex flex-col">

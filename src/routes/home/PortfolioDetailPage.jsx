@@ -17,7 +17,7 @@ export default function PortfolioDetailPage() {
           <span className="text-[20px] font-bold">📌 종목 구성</span>
           <div className="flex flex-col gap-3 mx-3 my-5">
             <div className="flex items-center gap-2">
-              <div className="bg-main_yellow w-[24px] h-[24px]" />
+              <div className="bg-[#6D87FF] w-[24px] h-[24px]" />
               <span className="font-bold">주식</span>
             </div>
             <PortfolioCompositionComponent

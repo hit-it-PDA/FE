@@ -24,7 +24,7 @@ export default function MyDataAgree({ handleButtonClick }) {
               checked={isChecked}
               onChange={handleCheckboxChange}
             />
-            <span className="flex items-center justify-center w-6 h-6 bg-white border-2 border-gray-300 rounded-full custom-checkbox peer-checked:bg-main_yellow peer-checked:border-main_yellow">
+            <span className="flex items-center justify-center w-6 h-6 bg-white border-2 border-gray-300 rounded-full custom-checkbox peer-checked:bg-main peer-checked:border-main">
               <svg
                 className="w-4 h-4 text-gray-400 peer-checked:text-black"
                 fill="none"
