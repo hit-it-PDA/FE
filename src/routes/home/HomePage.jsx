@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <div>
       <TopBar type={0} />
-      <div className="flex flex-col justify-center items-center w-screen">
+      <div className="flex flex-col items-center justify-center w-screen">
         {/** 전체/개인화 탭 */}
         <div className="h-[5vh] w-11/12 bg-white flex flex-row items-center border-b">
           <Tab
@@ -36,8 +36,8 @@ export default function HomePage() {
         <div className="flex flex-col w-full">
           {/** 로그인 O, 투자 성향 진단 테스트 X -> 투자 성향 진단 테스트 버튼 */}
           {isLogin && !isTestFinished ? (
-            <div className="w-full pt-2 flex flex-row justify-center items-center">
-              <div className="w-11/12 flex gap-5 justify-center items-center">
+            <div className="flex flex-row items-center justify-center w-full pt-2">
+              <div className="flex items-center justify-center w-11/12 gap-5">
                 <div className="text-[12px] whitespace-pre-line text-[#868686]">
                   <span className="font-bold">
                     투자 성향 진단 테스트를 진행
@@ -47,7 +47,7 @@ export default function HomePage() {
                   받을 수 있어요!
                 </div>
                 <button
-                  className="bg-main_yellow rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]"
+                  className="bg-main rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]"
                   onClick={() => navigate("/invest-test")}
                 >
                   테스트 하러가기
@@ -64,7 +64,7 @@ export default function HomePage() {
             ) : (
               <>
                 <span className="font-bold">Hit it! 테마별 상품</span>
-                <div className="pl-5 pr-3 border-[3px] rounded-[20px] border-main_yellow flex items-center justify-between gap-3 hover:cursor-pointer">
+                <div className="pl-5 pr-3 border-[3px] rounded-[20px] border-main flex items-center justify-between gap-3 hover:cursor-pointer">
                   테마 1
                   <img src={downArrow} />
                 </div>
@@ -74,7 +74,7 @@ export default function HomePage() {
           {/** 포트폴리오 추천 리스트 */}
           {isSelected ? (
             isLogin ? (
-              <div className="flex flex-col justify-center items-center gap-5">
+              <div className="flex flex-col items-center justify-center gap-5">
                 <RecommendComponent type={0} />
                 <RecommendComponent type={0} />
                 <RecommendComponent type={0} />
@@ -88,10 +88,10 @@ export default function HomePage() {
                   <RecommendComponent type={0} />
                   <RecommendComponent type={0} />
                 </div>
-                <div className="absolute inset-0 flex justify-center items-center flex-col text-[20px]">
+                <div className="absolute inset-0 flex justify-center items-center flex-col text-[20px] font-bold">
                   로그인 후 이용 가능합니다.
                   <button
-                    className="bg-main_yellow px-10 py-2 rounded-[20px] mt-5 text-[15px]"
+                    className="bg-main px-10 py-2 rounded-[20px] mt-5 text-[15px] text-white font-bold"
                     onClick={() => navigate("/login")}
                   >
                     로그인
@@ -100,7 +100,7 @@ export default function HomePage() {
               </div>
             )
           ) : (
-            <div className="flex flex-col justify-center items-center gap-5">
+            <div className="flex flex-col items-center justify-center gap-5">
               <RecommendComponent type={0} />
               <RecommendComponent type={0} />
               <RecommendComponent type={0} />

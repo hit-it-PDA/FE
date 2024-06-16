@@ -16,14 +16,14 @@ export default function DiagnosisFirst({
   return (
     <div className="w-[90vw]">
       <span className="text-[25px] font-bold">기본 사항</span>
-      <div className="mt-5 gap-3 flex flex-col">
+      <div className="flex flex-col gap-3 mt-5">
         <Input placeholder={"ex) 만 26세"}>만 나이를 입력해주세요.</Input>
         <div>
           <p className="mb-[1vh]">성별을 선택해주세요.</p>
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <Button
               className={`w-[43vw] bg-${
-                sex === 1 ? "main_yellow" : "[#f6f6f6]"
+                sex === 1 ? "main text-white" : "[#f6f6f6]"
               }`}
               setSex={setSex}
             >
@@ -31,7 +31,7 @@ export default function DiagnosisFirst({
             </Button>
             <Button
               className={`w-[43vw] bg-${
-                sex === 2 ? "main_yellow" : "[#f6f6f6]"
+                sex === 2 ? "main text-white" : "[#f6f6f6]"
               }`}
               setSex={setSex}
             >

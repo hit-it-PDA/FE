@@ -7,12 +7,12 @@ const PortfolioRecommendComponent = ({ type }) => {
     <div
       className={`${
         type
-          ? "bg-main_yellow flex flex-col h-[20vh] box-content p-7"
+          ? "bg-main flex flex-col h-[20vh] box-content p-7"
           : "flex flex-col w-[70vw] h-[20vh] rounded-[10px] p-4 box-content shadow-lg"
       }`}
     >
       <div className={`flex-1 ${type ? null : "mb-2"}`}>
-        <div className="flex justify-between items-baseline">
+        <div className="flex items-baseline justify-between">
           <span
             className={`text-[${
               type ? "24px" : "20px"
@@ -50,12 +50,12 @@ const PortfolioRecommendComponent = ({ type }) => {
         </div>
       </div>
       {type ? null : (
-        <div className="flex-1 flex justify-around items-center">
-          <div className="bg-main_yellow w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer">
+        <div className="flex items-center justify-around flex-1">
+          <div className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer">
             선택하기
           </div>
           <div
-            className="bg-main_yellow w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
+            className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
             onClick={() => navigate("/detail")}
           >
             자세히 보기

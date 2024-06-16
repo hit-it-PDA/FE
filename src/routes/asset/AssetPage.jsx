@@ -31,7 +31,7 @@ export default function AssetPage() {
           </div>
           <div className="flex justify-center">
             <div className="flex justify-center w-[30vw] gap-3">
-              <div className="bg-main_yellow w-[24px] h-[24px]" />
+              <div className="bg-[#6D87FF] w-[24px] h-[24px]" />
               <span className="font-bold">국내 주식</span>
             </div>
             <div className="flex justify-center w-[30vw] gap-3">

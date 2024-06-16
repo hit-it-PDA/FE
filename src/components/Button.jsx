@@ -16,9 +16,9 @@ const Button = ({ children, onClick, className }) => {
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`bg-main_yellow ${
-        isHovered ? "bg-yellow-400" : ""
-      } text-black font-bold py-[1.8vh] rounded-[1vh] ${className}`}
+      className={`bg-main text-white font-bold${
+        isHovered ? "bg-blue-400" : ""
+      } text-white font-bold py-[1.8vh] rounded-[1vh] ${className}`}
     >
       {children}
     </button>

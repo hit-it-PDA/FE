@@ -4,15 +4,15 @@ export default function ButtonComponent({ question, state, func, className }) {
   return (
     <div className={className}>
       <p className="mb-[1vh]">{question}</p>
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <Button
-          className={`bg-${state === 1 ? "main_yellow" : "[#f6f6f6]"}`}
+          className={`bg-${state === 1 ? "main" : "[#f6f6f6]"}`}
           func={func}
         >
           예
         </Button>
         <Button
-          className={`bg-${state === 2 ? "main_yellow" : "[#f6f6f6]"}`}
+          className={`bg-${state === 2 ? "main" : "[#f6f6f6]"}`}
           func={func}
         >
           아니오
