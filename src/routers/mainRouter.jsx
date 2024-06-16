@@ -23,6 +23,8 @@ import AccountMainPage from "../routes/account/AccountMainPage";
 import AccountEndPage from "../routes/account/AccountEndPage";
 import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
 import ManageUnclaimedPensionPage from "../routes/manage/ManageUnclaimedPensionPage";
+import AssetAllPage from "../routes/asset/AssetAllPage";
+import AssetPortfolio from "../routes/asset/AssetPortfolio";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -79,6 +81,16 @@ export const mainRouter = [
           {
             path: "",
             element: <AssetPage />,
+            index: true,
+          },
+          {
+            path: "all",
+            element: <AssetAllPage />,
+            index: true,
+          },
+          {
+            path: "portfolio",
+            element: <AssetPortfolio />,
             index: true,
           },
         ],
