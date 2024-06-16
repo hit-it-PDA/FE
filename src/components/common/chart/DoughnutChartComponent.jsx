@@ -20,12 +20,12 @@ export default function DoughnutChartComponent({ type, ratio, className }) {
             ? [
                 type === "stock"
                   ? "#6D87FF"
-                  : "rgba(255, 170, 143, 1)",
+                  : "#FF8F8F",
                 "rgba(206, 206, 206, 0.7)",
               ]
             : [
                 "#6D87FF",
-                "rgba(255, 170, 143, 1)",
+                "#FF8F8F",
                 "rgba(206, 206, 206, 0.7)",
               ],
         borderWidth: 0.8,
