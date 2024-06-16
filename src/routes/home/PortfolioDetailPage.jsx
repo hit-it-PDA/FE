@@ -29,7 +29,7 @@ export default function PortfolioDetailPage() {
           </div>
           <div className="flex flex-col gap-3 mx-3 my-5">
             <div className="flex items-center gap-2">
-              <div className="bg-[#FF9371] w-[24px] h-[24px]" />
+              <div className="bg-[#FF8F8F] w-[24px] h-[24px]" />
               <span className="font-bold">채권</span>
             </div>
             <PortfolioCompositionComponent
