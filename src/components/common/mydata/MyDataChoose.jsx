@@ -56,7 +56,6 @@ export default function MyDataChoose({
       ],
     },
     { name: "펀드", content: ["신한펀드", "농협펀드", "하나펀드"] },
-    { name: "보험", content: ["신한라이프", "교보생명", "KB손해보험"] },
     { name: "대출", content: ["신한대출", "농협대출", "하나대출"] },
     {
       name: "퇴직연금",
@@ -133,7 +132,7 @@ export default function MyDataChoose({
         {tabs.map((tab) => (
           <button
             key={tab.name}
-            className={`tab px-[0.5vw] py-2 ${
+            className={`tab px-[2vw] py-2 ${
               selectedTab === tab.name
                 ? "border-b-[0.2vh] border-main_yellow font-bold"
                 : ""
