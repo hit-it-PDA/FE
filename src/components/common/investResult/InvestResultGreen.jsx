@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../../Button";
-import logo from "../../../assets/green_logo.png";
+import logo from "../../../assets/logos/green_logo.png";
 import { useNavigate } from "react-router-dom";
 
 export default function InvestResultGreen({ testDatas }) {

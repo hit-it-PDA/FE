@@ -13,7 +13,7 @@ export default function PortfolioDetailPage() {
       <RecommendComponent type={1} />
       <div className="px-5">
         <PortfolioRatioComponent stockRatio={17} bondRatio={56} />
-        <div className="py-4 flex flex-col justify-center">
+        <div className="flex flex-col justify-center">
           <span className="text-[20px] font-bold">📌 종목 구성</span>
           <div className="flex flex-col gap-3 mx-3 my-5">
             <div className="flex items-center gap-2">
@@ -24,7 +24,7 @@ export default function PortfolioDetailPage() {
               title="어쩌구저쩌구"
               price="1,000,000"
               type="stock"
-              ratio={82}
+              ratio={[82]}
             />
           </div>
           <div className="flex flex-col gap-3 mx-3 my-5">
@@ -36,7 +36,7 @@ export default function PortfolioDetailPage() {
               title="어쩌구저쩌구z"
               price="900,000"
               type="bond"
-              ratio={24}
+              ratio={[24]}
             />
           </div>
         </div>
