@@ -25,6 +25,7 @@ import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
 import ManageUnclaimedPensionPage from "../routes/manage/ManageUnclaimedPensionPage";
 import AssetAllPage from "../routes/asset/AssetAllPage";
 import AssetPortfolio from "../routes/asset/AssetPortfolio";
+import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -65,6 +66,11 @@ export const mainRouter = [
           {
             path: "diagnosis",
             element: <ManageDiagnosisPage />,
+            index: true,
+          },
+          {
+            path: "diagnosis-result",
+            element: <DiagnosisResultPage />,
             index: true,
           },
           {

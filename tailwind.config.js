@@ -4,6 +4,15 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      keyframes: {
+        slideDown: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        "slide-down": "slideDown 1s ease-in-out",
+      },
       width: {},
       colors: {
         main_yellow: "#FFDE71",
