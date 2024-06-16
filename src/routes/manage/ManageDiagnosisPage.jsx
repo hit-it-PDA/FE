@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // components
 import TopBar from "../../components/common/topBar/TopBar";
@@ -7,6 +8,7 @@ import DiagnosisSecond from "../../components/manage/diagnosis/DiagnosisSecond";
 import DiagnosisThird from "../../components/manage/diagnosis/DiagnosisThird";
 
 export default function ManageDiagnosisPage() {
+  const navigate = useNavigate();
   const [seq, setSeq] = useState(0);
   const [age, setAge] = useState(0);
   const [sex, setSex] = useState(0);
@@ -22,6 +24,10 @@ export default function ManageDiagnosisPage() {
   const [manageAsset, setManageAsset] = useState("");
   const [pensionAmount, setPensionAmount] = useState("");
   const [estateAmount, setEstateAmount] = useState("");
+  const nextButtonHandler = () => {
+    if (seq < 2) setSeq(seq + 1);
+    else navigate("../diagnosis-result");
+  };
   const firstPageStatesAndSetters = {
     age,
     setAge,
@@ -70,7 +76,7 @@ export default function ManageDiagnosisPage() {
           <div className="w-[90vw] flex justify-end">
             <button
               className="w-[30vw] bg-main_yellow px-5 py-3 rounded-[10px]"
-              onClick={() => setSeq((prev) => prev + 1)}
+              onClick={() => nextButtonHandler()}
             >
               다음
             </button>
@@ -94,7 +100,5 @@ const renderDiagnosis = (
       return <DiagnosisSecond {...secondPageStatesAndSetters} />;
     case 2:
       return <DiagnosisThird {...thirdPageStatesAndSetters} />;
-    default:
-      break;
   }
 };
