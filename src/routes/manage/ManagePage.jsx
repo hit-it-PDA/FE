@@ -21,7 +21,7 @@ export default function ManagePage() {
             <MoreServiceComponent
               title="노후준비종합진단"
               detail={`나는 노후를 잘 준비하고 있을까?
-              내 자산으로는 노후에 생활비를 얼마나 쓸 수 있을까?`}
+              노후에 생활비를 얼마나 쓸 수 있을까?`}
             />
             <MoreServiceComponent
               title="미청구 퇴직연금 조회"

@@ -23,6 +23,7 @@ import AccountMainPage from "../routes/account/AccountMainPage";
 import AccountEndPage from "../routes/account/AccountEndPage";
 import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
 import ManageUnclaimedPensionPage from "../routes/manage/ManageUnclaimedPensionPage";
+import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -63,6 +64,11 @@ export const mainRouter = [
           {
             path: "diagnosis",
             element: <ManageDiagnosisPage />,
+            index: true,
+          },
+          {
+            path: "diagnosis-result",
+            element: <DiagnosisResultPage />,
             index: true,
           },
           {
