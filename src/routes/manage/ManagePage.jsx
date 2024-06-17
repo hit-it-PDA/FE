@@ -10,14 +10,14 @@ export default function ManagePage() {
   return (
     <div>
       <TopBar type={0} />
-      <div className="h-full w-full p-5 flex flex-col gap-10">
+      <div className="flex flex-col w-full h-full gap-10 p-5">
         <ManageTitleComponent stockReturns="1,000" />
         <LineChartComponent
           returnsData={[200, 100, 382, 423, 12, 452, 322, 85, 33, 77, 23, 199]}
         />
         <div className="w-full h-[30vh] flex flex-col">
-          <span className="text-[20px] font-bold">📌 부가 서비스</span>
-          <div className="flex flex-1 flex-col justify-around mt-2">
+          <span className="text-[23px] font-bold">📌 부가 서비스</span>
+          <div className="flex flex-col justify-around flex-1 mt-2">
             <MoreServiceComponent
               title="노후준비종합진단"
               detail={`나는 노후를 잘 준비하고 있을까?

@@ -56,7 +56,7 @@ export default function AccountInformation({
             <button
               className={`${
                 isChecked === 0
-                  ? "w-[40vw] h-[5vh] rounded-[1vh] bg-main_yellow"
+                  ? "w-[40vw] h-[5vh] rounded-[1vh] bg-main text-white font-bold"
                   : "w-[40vw] h-[5vh] rounded-[1vh] border border-gray-300"
               } : `}
               onClick={() => {
@@ -69,7 +69,7 @@ export default function AccountInformation({
             <button
               className={`${
                 isChecked === 1
-                  ? "w-[40vw] h-[5vh] rounded-[1vh] bg-main_yellow"
+                  ? "w-[40vw] h-[5vh] rounded-[1vh] bg-main text-white font-bold"
                   : "w-[40vw] h-[5vh] rounded-[1vh] border border-gray-300"
               } : `}
               onClick={() => {

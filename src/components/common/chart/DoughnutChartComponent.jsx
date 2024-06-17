@@ -5,19 +5,29 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Legend);
 
-export default function DoughnutChartComponent({ type, ratio }) {
+export default function DoughnutChartComponent({ type, ratio, className }) {
   const data = {
     labels: ["주식", "채권"],
     datasets: [
       {
         label: "test",
-        data: [ratio, 100 - ratio],
-        backgroundColor: [
-          type === "stock"
-            ? "rgba(255, 222, 113, 1)"
-            : "rgba(255, 170, 143, 1)",
-          "rgba(206, 206, 206, 0.7)",
-        ],
+        data:
+          ratio.length === 1
+            ? [ratio, 100 - ratio]
+            : [ratio[0], ratio[1], 100 - ratio[0] - ratio[1]],
+        backgroundColor:
+          ratio.length === 1
+            ? [
+                type === "stock"
+                  ? "#6D87FF"
+                  : "#FF8F8F",
+                "rgba(206, 206, 206, 0.7)",
+              ]
+            : [
+                "#6D87FF",
+                "#FF8F8F",
+                "rgba(206, 206, 206, 0.7)",
+              ],
         borderWidth: 0.8,
       },
     ],
@@ -70,8 +80,16 @@ export default function DoughnutChartComponent({ type, ratio }) {
   };
 
   return (
-    <div className="w-[30vw] h-full">
-      <Doughnut data={data} options={options} />
-    </div>
+    <>
+      {className ? (
+        <div className={`${className}`}>
+          <Doughnut data={data} options={options} />
+        </div>
+      ) : (
+        <div className="w-[30vw] h-full">
+          <Doughnut data={data} options={options} />
+        </div>
+      )}
+    </>
   );
 }

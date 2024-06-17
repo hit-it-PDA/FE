@@ -23,6 +23,8 @@ import AccountMainPage from "../routes/account/AccountMainPage";
 import AccountEndPage from "../routes/account/AccountEndPage";
 import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
 import ManageUnclaimedPensionPage from "../routes/manage/unclaimedPension/ManageUnclaimedPensionPage";
+import AssetAllPage from "../routes/asset/AssetAllPage";
+import AssetPortfolio from "../routes/asset/AssetPortfolio";
 import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
 import PensionAccountListPage from "../routes/manage/unclaimedPension/PensionAccountListPage";
 import PensionApplyInfoPage from "../routes/manage/unclaimedPension/PensionApplyInfoPage";
@@ -104,6 +106,16 @@ export const mainRouter = [
           {
             path: "",
             element: <AssetPage />,
+            index: true,
+          },
+          {
+            path: "all",
+            element: <AssetAllPage />,
+            index: true,
+          },
+          {
+            path: "portfolio",
+            element: <AssetPortfolio />,
             index: true,
           },
         ],

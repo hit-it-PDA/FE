@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 // logo
-import logo from "../../../assets/logo.svg";
+import logo from "../../../assets/logos/logo.svg";
 import noti from "../../../assets/icons/notification.svg";
 import backArrow from "../../../assets/icons/backArrow.svg";
 import setting from "../../../assets/icons/setting.svg";

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import ProgressBar from "../../components/ProgressBar";
 
 // logo
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logos/logo.svg";
 
 export default function DiagnosisResultPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,7 @@ export default function DiagnosisResultPage() {
     }, 1500);
   }, []);
   return (
-    <div className="flex flex-col px-5 py-5 items-center">
+    <div className="flex flex-col items-center px-5 py-5">
       {isLoading ? (
         <div className="w-full h-[80vh] flex flex-col items-center justify-center">
           <img src={logo} className="animate-bounce" />
@@ -26,7 +26,7 @@ export default function DiagnosisResultPage() {
         </div>
       ) : (
         <div className="w-[90vw]">
-          <div className="border-b pt-2 pb-4 mb-4">
+          <div className="pt-2 pb-4 mb-4 border-b">
             <span className="text-[25px] font-bold ml-2">재무 진단 결과</span>
           </div>
           <div className="flex flex-col items-center gap-2">
@@ -35,13 +35,13 @@ export default function DiagnosisResultPage() {
               detail={`준비된 소득이 필요 생활비를 충당할 수 있고,
               사적 자산 비율이 50% 이상인 유형이에요.`}
             />
-            <div className="w-full flex flex-col">
+            <div className="flex flex-col w-full">
               <AssetAgeAnalysisComponent
                 age={64}
                 detail={`자산 수명 61세는 평균수명(90.7세)보다 14년 짧아요.
               월 생활비를 204만원으로 낮추면 자산수명과 기대수명이 일치해요.`}
               />
-              <div className="w-full flex flex-col gap-2 mt-5">
+              <div className="flex flex-col w-full gap-2 mt-5">
                 <AssetAnalysisComponent
                   category="예상 노후생활비"
                   detail="177만원보다 23만원 많음"
@@ -104,7 +104,7 @@ const AssetAgeAnalysisComponent = ({ age, detail }) => {
   return (
     <>
       <span className="text-[18px] font-bold">📌 자산 수명 분석 </span>
-      <div className="w-full flex ml-2">
+      <div className="flex w-full ml-2">
         <div
           style={{ width: `${(64 / 90.7) * 100}%` }}
           className="h-full flex justify-end text-[12px] font-bold"
@@ -123,7 +123,7 @@ const AssetAgeAnalysisComponent = ({ age, detail }) => {
 
 const AssetAnalysisComponent = ({ category, detail, state }) => {
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="flex items-center justify-between w-full">
       <span className="text-[#ADB3B7] w-4/12 font-bold">{category}</span>
       <span className="text-[13px]">{detail}</span>
       <span

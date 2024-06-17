@@ -1,4 +1,4 @@
-import logo from "../../../assets/app_logo.jpg";
+import logo from "../../../assets/logos/app_logo.jpg";
 import React, { useState, useEffect } from "react";
 import Button from "../../Button";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +56,6 @@ export default function MyDataChoose({
       ],
     },
     { name: "펀드", content: ["신한펀드", "농협펀드", "하나펀드"] },
-    { name: "보험", content: ["신한라이프", "교보생명", "KB손해보험"] },
     { name: "대출", content: ["신한대출", "농협대출", "하나대출"] },
     {
       name: "퇴직연금",
@@ -133,9 +132,9 @@ export default function MyDataChoose({
         {tabs.map((tab) => (
           <button
             key={tab.name}
-            className={`tab px-[0.5vw] py-2 ${
+            className={`tab px-[2vw] py-2 ${
               selectedTab === tab.name
-                ? "border-b-[0.2vh] border-main_yellow font-bold"
+                ? "border-b-[0.2vh] border-main font-bold"
                 : ""
             }`}
             onClick={() => setSelectedTab(tab.name)}
@@ -154,7 +153,7 @@ export default function MyDataChoose({
               checked={allSelected[selectedTab]}
               onChange={handleSelectAll}
             />
-            <span className="flex items-center justify-center w-6 h-6 bg-white border-2 border-gray-300 rounded-full custom-checkbox peer-checked:bg-main_yellow peer-checked:border-main_yellow">
+            <span className="flex items-center justify-center w-6 h-6 bg-white border-2 border-gray-300 rounded-full custom-checkbox peer-checked:bg-main peer-checked:border-main">
               <svg
                 className="w-4 h-4 text-gray-400 peer-checked:text-black"
                 fill="none"
@@ -192,7 +191,7 @@ export default function MyDataChoose({
                   checked={selectedItems.includes(item)}
                   onChange={() => handleCheckboxChange(item)}
                 />
-                <span className="flex items-center justify-center w-6 h-6 bg-white border-2 border-gray-300 rounded-full custom-checkbox peer-checked:bg-main_yellow peer-checked:border-main_yellow">
+                <span className="flex items-center justify-center w-6 h-6 bg-white border-2 border-gray-300 rounded-full custom-checkbox peer-checked:bg-main peer-checked:border-main">
                   <svg
                     className="w-4 h-4 text-gray-400 peer-checked:text-black"
                     fill="none"

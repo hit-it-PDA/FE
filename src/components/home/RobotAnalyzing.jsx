@@ -1,10 +1,10 @@
 import React from "react";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logos/logo.svg";
 
 export default function RobotAnalyzing() {
   return (
     <div className="flex flex-col items-center justify-center h-[60vh] text-center text-[18px]">
-      <img src={logo} className="animate-bounce mb-5" />
+      <img src={logo} className="mb-5 animate-bounce" />
       <div className="whitespace-nowrap">
         <span className="font-bold">히릿 로보 어드바이저가 분석 중</span>이에요!
       </div>
