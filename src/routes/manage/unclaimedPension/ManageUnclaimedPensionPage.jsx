@@ -116,7 +116,7 @@ export default function ManageUnclaimedPensionPage() {
         </div>
         <Button
           className={"fixed bottom-[10vh] w-[90vw] self-center"}
-          onClick={() => navigate("pension-list")}
+          onClick={() => navigate("list")}
         >
           조회하기
         </Button>

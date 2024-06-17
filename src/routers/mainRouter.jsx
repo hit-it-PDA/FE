@@ -83,7 +83,7 @@ export const mainRouter = [
                 index: true,
               },
               {
-                path: "pension-list",
+                path: "list",
                 element: <PensionAccountListPage />,
                 index: true,
               },
