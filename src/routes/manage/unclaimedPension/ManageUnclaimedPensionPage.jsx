@@ -1,9 +1,9 @@
 import React from "react";
-import TopBar from "../../components/common/topBar/TopBar";
+import TopBar from "../../../components/common/topBar/TopBar";
 
 // icons
-import warning from "../../assets/icons/warning.svg";
-import Button from "../../components/Button";
+import warning from "../../../assets/icons/warning.svg";
+import Button from "../../../components/Button";
 
 export default function ManageUnclaimedPensionPage() {
   return (

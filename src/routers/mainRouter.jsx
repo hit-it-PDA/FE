@@ -22,7 +22,7 @@ import RebalancingListPage from "../routes/rebalancing/RebalancingListPage";
 import AccountMainPage from "../routes/account/AccountMainPage";
 import AccountEndPage from "../routes/account/AccountEndPage";
 import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
-import ManageUnclaimedPensionPage from "../routes/manage/ManageUnclaimedPensionPage";
+import ManageUnclaimedPensionPage from "../routes/manage/unclaimedPension/ManageUnclaimedPensionPage";
 import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
 
 // layouts
@@ -30,6 +30,7 @@ import HomeLayout from "../routes/home/HomeLayout";
 import ManageLayout from "../routes/manage/ManageLayout";
 import AssetLayout from "../routes/asset/AssetLayout";
 import SettingLayout from "../routes/setting/SettingLayout";
+import UnclaimedPensionLayout from "../routes/manage/unclaimedPension/unclaimedPensionLayout";
 
 export const mainRouter = [
   {
@@ -73,8 +74,14 @@ export const mainRouter = [
           },
           {
             path: "pension",
-            element: <ManageUnclaimedPensionPage />,
-            index: true,
+            element: <UnclaimedPensionLayout />,
+            children: [
+              {
+                path: "",
+                element: <ManageUnclaimedPensionPage />,
+                index: true,
+              },
+            ],
           },
         ],
       },
