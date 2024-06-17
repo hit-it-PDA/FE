@@ -6,6 +6,7 @@ import kakao from "../../assets/logos/kakao.svg";
 import useInput from "../../hooks/useInput";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../lib/apis/userApi";
+import useUserStore from "../../store/userStore";
 
 export default function LoginPage() {
   const [email, onChangeEmail] = useInput("");
@@ -15,31 +16,25 @@ export default function LoginPage() {
   const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
   const navigate = useNavigate();
-  const link = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
+
+  const setUser = useUserStore((state) => state.setUser);
+
   const LoginClick = async (e) => {
     const reqBody = {
       email,
       password: pwd,
     };
     const response = await login(reqBody);
+    const userInfo = response.data.response.userInfo;
     const status_code = response.status;
-    console.log(status_code);
+    setUser(userInfo);
     if (status_code === 400) {
       window.alert("이메일 혹은 비밀번호를 확인하세요.");
     } else if (status_code === 200) {
       navigate("/");
     }
   };
-  // const onEmailChange = (e) => {
-  //   e.preventDefault();
-  //   setEmail(e.target.value);
-  //   console.log(email);
-  // };
-  // const onPwdchange = (e) => {
-  //   e.preventDefault();
-  //   setPwd(e.target.value);
-  //   console.log(pwd);
-  // };
+  const user = useUserStore((state) => state.user);
   const SignUpClick = () => {
     navigate("/signup");
   };
