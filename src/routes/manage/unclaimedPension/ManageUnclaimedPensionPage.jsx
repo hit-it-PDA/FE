@@ -4,8 +4,10 @@ import TopBar from "../../../components/common/topBar/TopBar";
 // icons
 import warning from "../../../assets/icons/warning.svg";
 import Button from "../../../components/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function ManageUnclaimedPensionPage() {
+  const navigate = useNavigate();
   return (
     <div>
       <TopBar type={2} />
@@ -112,7 +114,10 @@ export default function ManageUnclaimedPensionPage() {
             </div>
           </div>
         </div>
-        <Button className={"fixed bottom-[10vh] w-[90vw] self-center"}>
+        <Button
+          className={"fixed bottom-[10vh] w-[90vw] self-center"}
+          onClick={() => navigate("pension-list")}
+        >
           조회하기
         </Button>
       </div>
