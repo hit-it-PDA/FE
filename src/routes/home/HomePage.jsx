@@ -60,19 +60,16 @@ export default function HomePage() {
               </div>
             </div>
           ) : null}
-          {/** 테마 필터링 버튼 */}
           <div className="flex flex-row justify-between items-center py-2 px-[7vw] h-[5vh] box-content">
             {isSelected ? (
-              <span className="font-bold">
-                Hit it! 개인화 포트폴리오 추천 상품
+              <span className="font-bold text-[20px]">
+                📌 Hit it! 개인화 포트폴리오 추천 상품
               </span>
             ) : (
               <>
-                <span className="font-bold">Hit it! 테마별 상품</span>
-                <div className="pl-5 pr-3 border-[3px] rounded-[20px] border-main flex items-center justify-between gap-3 hover:cursor-pointer">
-                  테마 1
-                  <img src={downArrow} />
-                </div>
+                <span className="font-bold text-[20px]">
+                  📌 Hit it! 테마별 상품
+                </span>
               </>
             )}
           </div>
