@@ -32,7 +32,7 @@ import HomeLayout from "../routes/home/HomeLayout";
 import ManageLayout from "../routes/manage/ManageLayout";
 import AssetLayout from "../routes/asset/AssetLayout";
 import SettingLayout from "../routes/setting/SettingLayout";
-import UnclaimedPensionLayout from "../routes/manage/unclaimedPension/unclaimedPensionLayout";
+import UnclaimedPensionLayout from "../routes/manage/unclaimedPension/UnclaimedPensionLayout";
 
 export const mainRouter = [
   {
