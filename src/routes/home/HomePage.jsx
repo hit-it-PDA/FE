@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,11 @@ export default function HomePage() {
   const [isSelected, setSelected] = useState(0);
   const [isLogin, setIsLogin] = useState(false);
   const [isTestFinished, setIsTestFinished] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) setIsLogin(true);
+  }, []);
+
   return (
     <div>
       <TopBar type={0} />
