@@ -1,10 +1,10 @@
 import React from "react";
 import TopBar from "../../../components/common/topBar/TopBar";
+import { useNavigate } from "react-router-dom";
 
 // icons
 import warning from "../../../assets/icons/warning.svg";
 import Button from "../../../components/Button";
-import { useNavigate } from "react-router-dom";
 
 export default function ManageUnclaimedPensionPage() {
   const navigate = useNavigate();

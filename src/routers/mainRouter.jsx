@@ -25,6 +25,7 @@ import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
 import ManageUnclaimedPensionPage from "../routes/manage/unclaimedPension/ManageUnclaimedPensionPage";
 import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
 import PensionAccountListPage from "../routes/manage/unclaimedPension/PensionAccountListPage";
+import PensionApplyInfoPage from "../routes/manage/unclaimedPension/PensionApplyInfoPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -85,6 +86,11 @@ export const mainRouter = [
               {
                 path: "list",
                 element: <PensionAccountListPage />,
+                index: true,
+              },
+              {
+                path: "apply-info",
+                element: <PensionApplyInfoPage />,
                 index: true,
               },
             ],
