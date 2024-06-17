@@ -22,16 +22,19 @@ import RebalancingListPage from "../routes/rebalancing/RebalancingListPage";
 import AccountMainPage from "../routes/account/AccountMainPage";
 import AccountEndPage from "../routes/account/AccountEndPage";
 import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
-import ManageUnclaimedPensionPage from "../routes/manage/ManageUnclaimedPensionPage";
+import ManageUnclaimedPensionPage from "../routes/manage/unclaimedPension/ManageUnclaimedPensionPage";
 import AssetAllPage from "../routes/asset/AssetAllPage";
 import AssetPortfolio from "../routes/asset/AssetPortfolio";
 import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
+import PensionAccountListPage from "../routes/manage/unclaimedPension/PensionAccountListPage";
+import PensionApplyInfoPage from "../routes/manage/unclaimedPension/PensionApplyInfoPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
 import ManageLayout from "../routes/manage/ManageLayout";
 import AssetLayout from "../routes/asset/AssetLayout";
 import SettingLayout from "../routes/setting/SettingLayout";
+import UnclaimedPensionLayout from "../routes/manage/unclaimedPension/UnclaimedPensionLayout";
 
 export const mainRouter = [
   {
@@ -75,8 +78,24 @@ export const mainRouter = [
           },
           {
             path: "pension",
-            element: <ManageUnclaimedPensionPage />,
-            index: true,
+            element: <UnclaimedPensionLayout />,
+            children: [
+              {
+                path: "",
+                element: <ManageUnclaimedPensionPage />,
+                index: true,
+              },
+              {
+                path: "list",
+                element: <PensionAccountListPage />,
+                index: true,
+              },
+              {
+                path: "apply-info",
+                element: <PensionApplyInfoPage />,
+                index: true,
+              },
+            ],
           },
         ],
       },
