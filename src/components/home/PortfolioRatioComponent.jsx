@@ -19,7 +19,7 @@ export default function PortfolioRatioComponent({ stockRatio, bondRatio }) {
           <div className="w-[15vw] flex justify-center font-bold">채권</div>
           <div className="w-[50vw] h-[2.5vh] bg-[#F0F0F0] mx-[5vw]">
             <div
-              className="h-full bg-[#FF9371]"
+              className="h-full bg-[#FF8F8F]"
               style={{ width: `${bondRatio}%` }}
             />
           </div>
