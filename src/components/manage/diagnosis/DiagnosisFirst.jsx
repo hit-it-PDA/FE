@@ -22,16 +22,16 @@ export default function DiagnosisFirst({
           <p className="mb-[1vh]">성별을 선택해주세요.</p>
           <div className="flex items-center justify-between">
             <Button
-              className={`w-[43vw] bg-${
-                sex === 1 ? "main text-white" : "[#f6f6f6]"
+              className={`w-[43vw] ${
+                sex === 1 ? "bg-main text-white" : "bg-[#f6f6f6]"
               }`}
               setSex={setSex}
             >
               남성
             </Button>
             <Button
-              className={`w-[43vw] bg-${
-                sex === 2 ? "main text-white" : "[#f6f6f6]"
+              className={`w-[43vw] ${
+                sex === 2 ? "bg-main text-white" : "bg-[#f6f6f6]"
               }`}
               setSex={setSex}
             >
