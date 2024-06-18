@@ -14,12 +14,9 @@ export default function InvestResultOrange({ testDatas }) {
       </p>
 
       <img src={logo} alt="logo" className="w-[50vw] h-[38vw] mt-[1vh]" />
-      <p className="font-bold text-gray-400 mt-[1vh]">
-        이 성향은 높은 투자 수익에 따른 투자 위험이 있음을 충분히
-        <br />
-        인식해요. 예금, 적금보다 높은 수익을 낼 수 있다면, 손실 위
-        <br />
-        험을 감수해요.
+      <p className="font-bold text-gray-400 mt-[1vh] px-5">
+        이 성향은 높은 투자 수익에 따른 투자 위험이 있음을 충분히 인식해요.
+        예금, 적금보다 높은 수익을 낼 수 있다면, 손실 위 험을 감수해요.
       </p>
       <div className="flex flex-row justify-between mt-[4vh] w-[90vw] gap-4 bg-[#F8F9FB] py-[2vh] rounded-[2vh]">
         <div className="flex flex-col w-[40vw] gap-2 ml-[1vh] text-gray-400 font-bold">
