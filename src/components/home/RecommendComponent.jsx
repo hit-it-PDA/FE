@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const PortfolioRecommendComponent = ({ type }) => {
+const PortfolioRecommendComponent = ({ type, data }) => {
   const navigate = useNavigate();
   return (
     <div
@@ -18,20 +18,20 @@ const PortfolioRecommendComponent = ({ type }) => {
               type ? "text-[24px] text-white" : "text-[20px] text-[#3B3B3B]"
             }  font-bold`}
           >
-            스마트세이버
+            {data.name}
           </span>
           <span
             className={`${
               type ? "text-[16px] " : "text-[13px]"
             } text-[#FF9900] font-bold`}
           >
-            안정추구형
+            {data.investmentType}
           </span>
         </div>
         <div
           className={`${type ? "text-[15px] mt-1 text-white" : "text-[13px]"}`}
         >
-          Hit It! 자산배분(국내상장ETF)
+          {data.summary}
         </div>
       </div>
       <div
@@ -41,7 +41,7 @@ const PortfolioRecommendComponent = ({ type }) => {
       >
         <div className="text-[15px] flex justify-between items-center">
           <span>최소 가입 비용</span>
-          <span>100만원</span>
+          <span>{data.minimumSubscriptionFee}만원</span>
         </div>
         <div className="text-[15px] flex justify-between items-center">
           <span>수익률</span>

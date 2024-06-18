@@ -10,8 +10,12 @@ import RecommendComponent from "../../components/home/RecommendComponent";
 import Tab from "../../components/home/TabComponent";
 import RobotAnalyzing from "../../components/home/RobotAnalyzing";
 
+// apis
+import { getAllPortfolio } from "../../lib/apis/portfolioApi";
+
 export default function HomePage() {
   const navigate = useNavigate();
+  const [portfolioData, setPortfolioData] = useState([]);
   const [isSelected, setSelected] = useState(0);
   const [isLogin, setIsLogin] = useState(false);
   const [isTestFinished, setIsTestFinished] = useState(false);
@@ -22,9 +26,13 @@ export default function HomePage() {
     localStorage.removeItem("accessToken"); // localStorage에서 accessToken 제거
   };
 
+  const getPortfolioData = async () => {
+    const data = await getAllPortfolio();
+    setPortfolioData(data.response);
+  };
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    console.log(token);
+    getPortfolioData();
     if (token) setIsLogin(true);
   }, []);
 
@@ -85,18 +93,16 @@ export default function HomePage() {
           {isSelected ? (
             isLogin ? (
               <div className="flex flex-col items-center justify-center gap-5">
-                <RecommendComponent type={0} />
-                <RecommendComponent type={0} />
-                <RecommendComponent type={0} />
-                <RecommendComponent type={0} />
-                <RecommendComponent type={0} />
+                {portfolioData.map((elem, index) => (
+                  <RecommendComponent key={index} type={0} data={elem} />
+                ))}
               </div>
             ) : (
               <div className="relative overflow-y-hidden">
                 <div className="flex h-[70vh] flex-col justify-center items-center gap-5 blur">
-                  <RecommendComponent type={0} />
-                  <RecommendComponent type={0} />
-                  <RecommendComponent type={0} />
+                  {portfolioData.map((elem, index) => (
+                    <RecommendComponent key={index} type={0} data={elem} />
+                  ))}
                 </div>
                 <div className="absolute inset-0 flex justify-center items-center flex-col text-[20px] font-bold">
                   로그인 후 이용 가능합니다.
@@ -111,11 +117,9 @@ export default function HomePage() {
             )
           ) : (
             <div className="flex flex-col items-center justify-center gap-5">
-              <RecommendComponent type={0} />
-              <RecommendComponent type={0} />
-              <RecommendComponent type={0} />
-              <RecommendComponent type={0} />
-              <RecommendComponent type={0} />
+              {portfolioData.map((elem, index) => (
+                <RecommendComponent key={index} type={0} data={elem} />
+              ))}
             </div>
           )}
         </div>
