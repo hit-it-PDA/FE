@@ -6,7 +6,7 @@ const useUserStore = create(
     (set) => ({
       user: { name: "방문자", type: "미정" },
       setUser: (user) => set({ user }),
-      clearUser: () => set({ user: null }),
+      clearUser: () => set({ user: { name: "방문자", type: "미정" } }),
     }),
     {
       name: "user-storage",
