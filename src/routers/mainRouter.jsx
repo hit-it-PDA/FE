@@ -29,6 +29,7 @@ import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
 import PensionAccountListPage from "../routes/manage/unclaimedPension/PensionAccountListPage";
 import PensionApplyInfoPage from "../routes/manage/unclaimedPension/PensionApplyInfoPage";
 import KaKaoLoginPage from "../routes/login/KaKaoLoginPage";
+import FundDetailPage from "../routes/home/FundDetailPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -54,6 +55,11 @@ export const mainRouter = [
           {
             path: "detail",
             element: <PortfolioDetailPage />,
+            index: true,
+          },
+          {
+            path: "detail/fund",
+            element: <FundDetailPage />,
             index: true,
           },
         ],
