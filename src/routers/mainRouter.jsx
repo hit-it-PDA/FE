@@ -28,6 +28,7 @@ import AssetPortfolio from "../routes/asset/AssetPortfolio";
 import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
 import PensionAccountListPage from "../routes/manage/unclaimedPension/PensionAccountListPage";
 import PensionApplyInfoPage from "../routes/manage/unclaimedPension/PensionApplyInfoPage";
+import KaKaoLoginPage from "../routes/login/KaKaoLoginPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -145,6 +146,10 @@ export const mainRouter = [
   {
     path: "login",
     element: <LoginPage />,
+  },
+  {
+    path: "login/kakao",
+    element: <KaKaoLoginPage />,
   },
   {
     path: "signup",
