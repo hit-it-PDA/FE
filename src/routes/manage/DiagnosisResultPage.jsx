@@ -29,19 +29,19 @@ export default function DiagnosisResultPage() {
           <div className="pt-2 pb-4 mb-4 border-b">
             <span className="text-[25px] font-bold ml-2">재무 진단 결과</span>
           </div>
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-3">
             <ManageTypeComponent
               type="노후 준비가 충분한 사적 자산형"
               detail={`준비된 소득이 필요 생활비를 충당할 수 있고,
               사적 자산 비율이 50% 이상인 유형이에요.`}
             />
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col w-full mt-[2vh]">
               <AssetAgeAnalysisComponent
                 age={64}
                 detail={`자산 수명 61세는 평균수명(90.7세)보다 14년 짧아요.
               월 생활비를 204만원으로 낮추면 자산수명과 기대수명이 일치해요.`}
               />
-              <div className="flex flex-col w-full gap-2 mt-5">
+              <div className="flex flex-col w-full gap-2 mt-[5vh]">
                 <AssetAnalysisComponent
                   category="예상 노후생활비"
                   detail="177만원보다 23만원 많음"

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import TopBar from "../../components/common/topBar/TopBar";
@@ -48,40 +48,48 @@ export default function SignUpPage() {
       <div className="flex flex-col items-center gap-3">
         <Input
           type={"email"}
-          placeholder={"ex) jcjin1998@gmail.com"}
+          value={email}
+          placeholder={"ex. gildong@gmail.com"}
           onChange={onChangeEmail}
         >
           이메일을 입력하세요
         </Input>
-        <Input type={"text"} placeholder={"ex) 정찬진"} onChange={onChangeName}>
+        <Input
+          type={"text"}
+          value={name}
+          placeholder={"ex. 홍길동"}
+          onChange={onChangeName}
+        >
           이름을 입력하세요
         </Input>
         <Input type={"password"} onChange={onChangePwd}>
           비밀번호를 입력하세요
         </Input>
-        {/* <div className="flex items-start ml-[5vw] self-start"> */}
         <div className="flex flex-col w-[90vw]">
           <p className="mb-[1vh]">주민번호를 입력하세요</p>
           <div className="flex flex-row items-center">
             <input
               className={`bg-white w-[30vw] h-[4vh] rounded-[1vh] border border-gray-300 px-[3vw] py-[2.5vh]`}
               onChange={onChangeSsn}
-              placeholder="ex) 980629"
+              placeholder="ex. 980629"
               type="number"
+              value={ssn}
             ></input>
             <p>&ensp;&ensp;-&ensp;&ensp;</p>
             <input
               className={`bg-white w-[9vw] h-[4vh] rounded-[1vh] border border-gray-300 px-[3vw] py-[2.5vh]`}
               onChange={onChangeSex}
               type="number"
+              value={sex}
             ></input>
             <p className="text-lg tracking-wider text-gray-400">&nbsp;XXXXXX</p>
           </div>
         </div>
         <Input
           type={"text"}
-          placeholder={"ex) 010-4737-5407"}
+          placeholder={"ex) 010-0000-0000"}
           onChange={onChangeNumber}
+          value={number}
         >
           전화번호를 입력하세요
         </Input>

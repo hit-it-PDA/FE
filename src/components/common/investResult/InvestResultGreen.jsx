@@ -14,10 +14,9 @@ export default function InvestResultGreen({ testDatas }) {
       </p>
 
       <img src={logo} alt="logo" className="w-[50vw] h-[38vw] mt-[1vh]" />
-      <p className="font-bold text-gray-400 mt-[1vh]">
-        이 성향은 작은 원금 손실도 감내하기 어려운 경우에요. 예
-        <br />
-        금, 적금 수준의 수익을 기대해요.
+      <p className="font-bold text-gray-400 mt-[1vh] px-5">
+        이 성향은 작은 원금 손실도 감내하기 어려운 경우에요. 예금, 적금 수준의
+        수익을 기대해요.
       </p>
       <div className="flex flex-row justify-between mt-[4vh] w-[90vw] gap-4 bg-[#F8F9FB] py-[2vh] rounded-[2vh]">
         <div className="flex flex-col w-[40vw] gap-2 ml-[1vh] text-gray-400 font-bold">

@@ -40,7 +40,7 @@ export default function MyDataPage() {
   };
 
   return (
-    <div className="flex flex-col items-center mt-[3vh]">
+    <div className="flex flex-col items-center mt-[3vh] mb-[10vh]">
       <ProgressBar page={page} totalPages={totalPages} className={` h-full`} />
       {renderPage()}
     </div>

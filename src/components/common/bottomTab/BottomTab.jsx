@@ -74,13 +74,14 @@ const Tab = ({ img, imgSelected, title, setSelected, isSelected }) => {
   };
   return (
     <div
-      className="flex flex-col items-center w-fit hover:cursor-pointer"
+      className="flex flex-col items-center w-fit hover:cursor-pointer relative"
       onClick={() => onClickFn()}
     >
       <img src={isSelected ? imgSelected : img} className="flex-1 h-full" />
       <span
-        className="text-base font-semibold"
-        style={{ color: isSelected ? "#FF9900" : "black" }}
+        className={`text-base font-semibold ${
+          isSelected ? "text-[#3F51B5]" : "black"
+        }`}
       >
         {title}
       </span>
