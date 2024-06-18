@@ -4,9 +4,12 @@ import DoughnutChartComponent from "../../components/common/chart/DoughnutChartC
 import logo from "../../assets/logos/green_logo.png";
 import go from "../../assets/icons/cheveron-right.svg";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../../store/userStore";
 
 export default function AssetPage() {
   const navigate = useNavigate();
+  const user = useUserStore((state) => state.user);
+  console.log(user);
   return (
     <>
       <TopBar type={0} />
@@ -49,7 +52,7 @@ export default function AssetPage() {
           >
             <div className="flex flex-col justify-center w-[75vw]">
               <div className="flex flex-row justify-between">
-                <p className="font-semibold">정찬진님의 총 자산</p>
+                <p className="font-semibold">{user.name}님의 총 자산</p>
                 <img src={go} alt="go" />
               </div>
               <p className="text-2xl font-bold">8,000,000원</p>
@@ -62,7 +65,8 @@ export default function AssetPage() {
             <img src={logo} alt="logo" className="w-[100px] h-[78px]" />
             <div className="flex flex-col w-[60vw] items-center gap-3">
               <p className="text-xl">
-                정찬진님은 <span className="font-bold text-main">안정형</span>
+                {user.name}님은
+                <span className="font-bold text-main">{user.type}</span>
                 입니다.
               </p>
               <button className="bg-sub w-[40vw] h-[4vh] rounded-[2vh] font-semibold">

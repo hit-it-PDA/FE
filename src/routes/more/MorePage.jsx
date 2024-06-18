@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import TopBar from "../../components/common/topBar/TopBar";
 import { useNavigate } from "react-router-dom";
+import { useRouteError } from "react-router-dom";
+import useUserStore from "../../store/userStore";
 
 export default function MorePage() {
   const [isChecked, setIsChecked] = useState(true);
   const navigate = useNavigate();
+  const user = useUserStore((state) => state.user);
+  
   return (
     <div>
       <TopBar type={1} />
       <div className="flex flex-col w-[88vw] mx-auto">
-        <span className="text-[27px] font-bold">정찬진님</span>
+        <span className="text-[27px] font-bold">{user.name}님</span>
         <div className="flex flex-col">
           <div className="text-[18px] border-b-[1px] mt-[10px] pb-[6px] mb-[10px] border-gray-300 font-bold">
             나의 계좌

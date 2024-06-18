@@ -8,6 +8,7 @@ async function signUp(reqBody) {
     return error.response;
   }
 }
+
 async function login(reqBody) {
   try {
     const response = await instance.post(`/users/login`, reqBody);
@@ -17,8 +18,20 @@ async function login(reqBody) {
     }
     return response;
   } catch (error) {
-    console.log(error);
     return error.response;
   }
 }
-export { signUp, login };
+
+async function kakaoLogin(code) {
+  try {
+    const params = { code: code };
+    const response = await instance.get(`/users/login/kakao`, { params });
+    const token = response.data.response.token;
+    localStorage.setItem("accessToken", token);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+export { signUp, login, kakaoLogin };

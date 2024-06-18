@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import useUserStore from "../../store/userStore";
 // icons
 import downArrow from "../../assets/icons/downArrow.svg";
 
@@ -16,14 +15,23 @@ export default function HomePage() {
   const [isSelected, setSelected] = useState(0);
   const [isLogin, setIsLogin] = useState(false);
   const [isTestFinished, setIsTestFinished] = useState(false);
+  const { clearUser } = useUserStore();
+
+  const handleLogout = () => {
+    clearUser(); // 유저 정보 초기화
+    localStorage.removeItem("accessToken"); // localStorage에서 accessToken 제거
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+    console.log(token);
     if (token) setIsLogin(true);
   }, []);
 
   return (
     <div>
       <TopBar type={0} />
+      <button onClick={handleLogout}>로그아웃</button>
       <div className="flex flex-col items-center justify-center w-screen">
         {/** 전체/개인화 탭 */}
         <div className="h-[5vh] w-11/12 bg-white flex flex-row items-center border-b">
@@ -52,7 +60,7 @@ export default function HomePage() {
                   받을 수 있어요!
                 </div>
                 <button
-                  className="bg-main rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]"
+                  className="bg-main text-white font-bold rounded-[20px] box-content px-5 py-1 ml-2 text-[10px]"
                   onClick={() => navigate("/invest-test")}
                 >
                   테스트 하러가기
