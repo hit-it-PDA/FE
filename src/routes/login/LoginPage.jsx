@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import logo from "../../assets/logos/logo.svg";
@@ -11,11 +11,10 @@ import useUserStore from "../../store/userStore";
 export default function LoginPage() {
   const [email, onChangeEmail] = useInput("");
   const [pwd, onChangePwd] = useInput("");
+  const navigate = useNavigate();
 
   const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
   const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
-
-  const navigate = useNavigate();
 
   const setUser = useUserStore((state) => state.setUser);
 
@@ -38,11 +37,7 @@ export default function LoginPage() {
   const SignUpClick = () => {
     navigate("/signup");
   };
-  const KakaoClick = (e) => {
-    e.preventDefault();
-    window.location.href = link;
-    console.log(KAKAO_CLIENT_ID);
-  };
+
   return (
     <div>
       <img className="mx-auto mt-[10vh] mb-[10vh]" src={logo} alt="logo" />
