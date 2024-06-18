@@ -12,13 +12,14 @@ const token = persistedString?.includes("accessToken")
 /**
  * axios instance with Authorization header
  */
-const authInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL || "http://localhost:8081/api",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: token !== "" ? `Bearer ${token}` : "",
-  },
-});
+const authInstance = (port) =>
+  axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL || `http://localhost:${port}/api`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token !== "" ? `Bearer ${token}` : "",
+    },
+  });
 
 export default instance;
 export { authInstance };
