@@ -53,7 +53,9 @@ const PortfolioRecommendComponent = ({ type, data }) => {
             >
               3개월
             </span>
-            <span className="text-[18px] font-bold text-[#FF3D00]">31.72%</span>
+            <span className="text-[18px] font-bold text-[#FF3D00]">
+              {data.return3m}%
+            </span>
           </div>
         </div>
       </div>
