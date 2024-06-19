@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TopBar from "../../components/common/topBar/TopBar";
 import DoughnutChartComponent from "../../components/common/chart/DoughnutChartComponent";
 import logo from "../../assets/logos/green_logo.png";
@@ -8,8 +8,16 @@ import useUserStore from "../../store/userStore";
 
 export default function AssetPage() {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState("");
+  const token = localStorage.getItem("accessToken");
   const user = useUserStore((state) => state.user);
   console.log(user);
+  console.log(token);
+  console.log(isLogin);
+
+  useEffect(() => {
+    token ? setIsLogin(token) : setIsLogin("");
+  }, [token]);
   return (
     <>
       <TopBar type={0} />
@@ -27,11 +35,19 @@ export default function AssetPage() {
             </p>
           </div>
           <div className="flex flex-row justify-center my-10 w-[88vw] h-[30vh]">
-            <DoughnutChartComponent
-              type="stock"
-              ratio={[70, 30]}
-              className={"w-[60vw] h-[30vh]"}
-            />
+            {isLogin ? (
+              <DoughnutChartComponent
+                type="stock"
+                ratio={[70, 30]}
+                className={"w-[60vw] h-[30vh]"}
+              />
+            ) : (
+              <DoughnutChartComponent
+                type="stock"
+                ratio={[50, 50]}
+                className={"w-[60vw] h-[30vh]"}
+              />
+            )}
           </div>
           <div className="flex justify-center">
             <div className="flex justify-center w-[30vw] gap-3">
@@ -63,9 +79,9 @@ export default function AssetPage() {
           <span className="text-[23px] font-bold">✅ 나의 투자 성향</span>
           <div className=" flex flex-row justify-between items-center w-[88vw] h-[10vh] rounded-[3vh]">
             <img src={logo} alt="logo" className="w-[100px] h-[78px]" />
-            <div className="flex flex-col w-[60vw] items-center gap-3">
+            <div className="flex flex-col w-[63vw] items-center gap-3">
               <p className="text-xl">
-                {user.name}님은
+                {user.name}님은&nbsp;
                 <span className="font-bold text-main">{user.type}</span>
                 입니다.
               </p>

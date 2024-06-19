@@ -2,15 +2,16 @@ import React from "react";
 import Button from "../../Button";
 import logo from "../../../assets/logos/green_logo.png";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../../../store/userStore";
 
 export default function InvestResultGreen({ testDatas }) {
   const navigate = useNavigate();
+  const user = useUserStore((state) => state.user);
+
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mb-7">
       <p className="text-2xl font-bold text-center mt-[8vh]">
-        정찬진님은
-        <br />
-        <span className="text-[#32CC80]">안정형</span>입니다.
+        <span className="text-[#32CC80]">{user.type}</span>
       </p>
 
       <img src={logo} alt="logo" className="w-[50vw] h-[38vw] mt-[1vh]" />
@@ -19,20 +20,13 @@ export default function InvestResultGreen({ testDatas }) {
         수익을 기대해요.
       </p>
       <div className="flex flex-row justify-between mt-[4vh] w-[90vw] gap-4 bg-[#F8F9FB] py-[2vh] rounded-[2vh]">
-        <div className="flex flex-col w-[40vw] gap-2 ml-[1vh] text-gray-400 font-bold">
-          <div>연령</div>
-          <div>위험 감내 정도</div>
-          <div>연간 소득</div>
-          <div>금융 투자 경험</div>
-          <div>금융 이해 정도</div>
-          <div>투자 목적</div>
-          <div>선호 주식</div>
-          <div>선호 상품</div>
-        </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 ml-3">
+          <span className="font-bold text-main text-[20px]">
+            {user.name}님은
+          </span>
           {testDatas.map((testData, idx) => {
             return (
-              <div className="text-[#454454] font-bold text-center" key={idx}>
+              <div className="text-[#454454] font-bold" key={idx}>
                 {testData}
               </div>
             );

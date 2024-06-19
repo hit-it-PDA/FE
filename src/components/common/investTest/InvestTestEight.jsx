@@ -1,79 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InvestButton from "../../InvestButton";
-import { useNavigate } from "react-router-dom";
+import { getQuestion } from "../../../lib/apis/testApi";
 
-export default function InvestTestEight({ testDatas, saveData, score }) {
-  const navigate = useNavigate();
-  const [localScore, setLocalScore] = useState(score);
-  const [localData, setLocalData] = useState(testDatas);
+export default function InvestTestEight({
+  saveData,
+  handleButtonClick,
+  addScore,
+  saveResultData,
+}) {
+  const [question, setQuestion] = useState("");
+  const [answers, setAnswers] = useState([]);
+  const fetchQuestion = async () => {
+    try {
+      const response = await getQuestion(8);
+      setQuestion(response.data.response.question);
+      setAnswers(response.data.response.answers);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchQuestion();
+  }, []);
 
-  const handleNavigate = (newData, newScore) => {
-    navigate("/invest-test/result", {
-      state: { testDatas: newData, score: newScore },
-    });
-  };
-  const handleClick = (e, points) => {
-    const newScore = localScore + points;
-    const newData = [...testDatas, e.target.textContent];
-    setLocalScore(newScore);
-    setLocalData(newData);
-    saveData(e.target.innerText);
-    handleNavigate(newData, newScore);
-  };
-  console.log(score);
   return (
     <div className="flex flex-col w-[88vw]">
       <p className="text-2xl font-bold mt-[8vh]">
-        다음 중 어떤 상품에
+        {question.slice(0, 9)}
         <br />
-        투자하시겠어요?
+        {question.slice(9, -1)}
       </p>
       <div className="mt-[7vh] flex flex-col gap-6">
-        <InvestButton
-          className="w-[70vw] h-[7vh]"
-          onClick={(e) => {
-            handleClick(e, 0);
-          }}
-        >
-          60% 확률로 연 6% 수익 <br />
-          또는 40% 확률로 -2% 손실의 상품
-        </InvestButton>
-        <InvestButton
-          className="w-[70vw] h-[7vh]"
-          onClick={(e) => {
-            handleClick(e, 20);
-          }}
-        >
-          60% 확률로 연 11% 수익 <br />
-          또는 40% 확률로 -5% 손실의 상품
-        </InvestButton>
-        <InvestButton
-          className="w-[70vw] h-[7vh]"
-          onClick={(e) => {
-            handleClick(e, 40);
-          }}
-        >
-          60% 확률로 연 16% 수익 <br />
-          또는 40% 확률로 -8% 손실의 상품
-        </InvestButton>
-        <InvestButton
-          className="w-[70vw] h-[7vh]"
-          onClick={(e) => {
-            handleClick(e, 60);
-          }}
-        >
-          60% 확률로 연 21% 수익 <br />
-          또는 40% 확률로 -11% 손실의 상품
-        </InvestButton>
-        <InvestButton
-          className="w-[70vw] h-[7vh]"
-          onClick={(e) => {
-            handleClick(e, 80);
-          }}
-        >
-          60% 확률로 연 26% 수익 <br />
-          또는 40% 확률로 -14% 손실의 상품
-        </InvestButton>
+        {answers.map((answer) => (
+          <InvestButton
+            key={answer.id}
+            className="w-[55vw] h-[10vh]"
+            onClick={() => {
+              const tempData = {
+                question: answer.questionNo,
+                answer: answer.no,
+              };
+              saveData(tempData);
+              saveResultData(answer.content);
+              addScore(answer.score);
+              handleButtonClick();
+            }}
+          >
+            {answer.content}
+          </InvestButton>
+        ))}
       </div>
     </div>
   );
