@@ -1,63 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InvestButton from "../../InvestButton";
+import { getQuestion } from "../../../lib/apis/testApi";
 
 export default function InvestTestOne({
   saveData,
   handleButtonClick,
+  addScore,
+  saveResultData,
 }) {
+  const [question, setQuestion] = useState("");
+  const [answers, setAnswers] = useState([]);
+  const fetchQuestion = async () => {
+    try {
+      const response = await getQuestion(1);
+      setQuestion(response.data.response.question);
+      setAnswers(response.data.response.answers);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchQuestion();
+  }, []);
+
   return (
     <div className="flex flex-col w-[88vw]">
       <p className="text-2xl font-bold mt-[8vh]">
-        고객님의 연령대를
+        {question.slice(0, 9)}
         <br />
-        선택해주세요.
+        {question.slice(9, -1)}
       </p>
       <div className="mt-[7vh] flex flex-col gap-6">
-        <InvestButton
-          className="w-[30vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-          }}
-        >
-          20대
-        </InvestButton>
-        <InvestButton
-          className="w-[30vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-          }}
-        >
-          30대
-        </InvestButton>
-        <InvestButton
-          className="w-[30vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-          }}
-        >
-          40대
-        </InvestButton>
-        <InvestButton
-          className="w-[30vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-          }}
-        >
-          50대
-        </InvestButton>
-        <InvestButton
-          className="w-[30vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-          }}
-        >
-          60대 이상
-        </InvestButton>
+        {answers.map((answer) => (
+          <InvestButton
+            key={answer.id}
+            className="w-[35vw]"
+            onClick={() => {
+              const tempData = {
+                question: answer.questionNo,
+                answer: answer.no,
+              };
+              saveData(tempData);
+              saveResultData(answer.content);
+              addScore(answer.score);
+              handleButtonClick();
+            }}
+          >
+            {answer.content}
+          </InvestButton>
+        ))}
       </div>
     </div>
   );

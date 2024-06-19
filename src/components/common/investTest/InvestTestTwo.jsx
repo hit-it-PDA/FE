@@ -1,69 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import InvestButton from "../../InvestButton";
+import { getQuestion } from "../../../lib/apis/testApi";
 
 export default function InvestTestTwo({
   saveData,
   handleButtonClick,
   addScore,
+  saveResultData
 }) {
+  const [question, setQuestion] = useState("");
+  const [answers, setAnswers] = useState([]);
+  const fetchQuestion = async () => {
+    try {
+      const response = await getQuestion(2);
+      setQuestion(response.data.response.question);
+      setAnswers(response.data.response.answers);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchQuestion();
+  }, []);
+
   return (
     <div className="flex flex-col w-[88vw]">
       <p className="text-2xl font-bold mt-[8vh]">
-        투자 시 발생하는 손실을
+        {question.slice(0, 18)}
         <br />
-        어느 정도 견딜 수 있나요?
+        {question.slice(18, -1)}
       </p>
       <div className="mt-[7vh] flex flex-col gap-6">
-        <InvestButton
-          className="w-[50vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-            addScore(0);
-          }}
-        >
-          손실은 못 견뎌요
-        </InvestButton>
-        <InvestButton
-          className="w-[50vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-            addScore(20);
-          }}
-        >
-          낮은 손실은 괜찮아요
-        </InvestButton>
-        <InvestButton
-          className="w-[50vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-            addScore(40);
-          }}
-        >
-          5%까진 괜찮아요
-        </InvestButton>
-        <InvestButton
-          className="w-[50vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-            addScore(60);
-          }}
-        >
-          10%까진 괜찮아요
-        </InvestButton>
-        <InvestButton
-          className="w-[50vw]"
-          onClick={(e) => {
-            saveData(e.target.textContent);
-            handleButtonClick();
-            addScore(80);
-          }}
-        >
-          높은 손실도 괜찮아요
-        </InvestButton>
+        {answers.map((answer) => (
+          <InvestButton
+            key={answer.id}
+            className="w-[35vw]"
+            onClick={() => {
+              const tempData = {
+                question: answer.questionNo,
+                answer: answer.no,
+              };
+              saveData(tempData);
+              saveResultData(answer.content);
+              addScore(answer.score);
+              handleButtonClick();
+            }}
+          >
+            {answer.content}
+          </InvestButton>
+        ))}
       </div>
     </div>
   );
