@@ -6,6 +6,13 @@ const useUserStore = create(
     (set) => ({
       user: { name: "방문자", type: "미정" },
       setUser: (user) => set({ user }),
+      modifyType: (newType) =>
+        set((state) => ({
+          user: {
+            ...state.user,
+            type: newType,
+          },
+        })),
       clearUser: () => set({ user: { name: "방문자", type: "미정" } }),
     }),
     {
