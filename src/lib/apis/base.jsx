@@ -4,10 +4,11 @@ const instance = axios.create({
   baseURL: "http://localhost:8081/api",
 });
 
-const persistedString = localStorage.getItem("persist:user");
-const token = persistedString?.includes("accessToken")
-  ? JSON.parse(JSON.parse(persistedString).userInfo).accessToken
-  : "";
+// const persistedString = localStorage.getItem("persist:user");
+// const token = persistedString?.includes("accessToken")
+//   ? JSON.parse(JSON.parse(persistedString).userInfo).accessToken
+//   : "";
+const token = localStorage.getItem("accessToken");
 
 /**
  * axios instance with Authorization header
