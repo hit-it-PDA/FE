@@ -2,9 +2,7 @@ import instance, { authInstance } from "./base";
 
 async function getQuestion(num) {
   try {
-    const response = await authInstance(8081).get(
-      `/investment_tests/questions/${num}`
-    );
+    const response = await instance.get(`/investment_tests/questions/${num}`);
     return response;
   } catch (error) {
     console.log(error);
@@ -12,9 +10,10 @@ async function getQuestion(num) {
   }
 }
 
+const token = localStorage.getItem("accessToken");
+
 async function postTestResult(result) {
   try {
-    console.log(result);
     const response = await authInstance(8081).post(
       `/investment_tests/results`,
       result
