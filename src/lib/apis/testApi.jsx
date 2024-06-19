@@ -12,4 +12,17 @@ async function getQuestion(num) {
   }
 }
 
-export { getQuestion };
+async function postTestResult(result) {
+  try {
+    console.log(result);
+    const response = await authInstance(8081).post(
+      `/investment_tests/results`,
+      result
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error.response;
+  }
+}
+export { getQuestion, postTestResult };
