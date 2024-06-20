@@ -131,6 +131,7 @@ export const mainRouter = [
       {
         path: "/more",
         element: <MorePage />,
+        index: true,
       },
       {
         path: "/setting",
@@ -153,14 +154,17 @@ export const mainRouter = [
   {
     path: "login",
     element: <LoginPage />,
+    index: true,
   },
   {
     path: "login/kakao",
     element: <KaKaoLoginPage />,
+    index: true,
   },
   {
     path: "signup",
     element: <SignUpPage />,
+    index: true,
   },
   {
     path: "mydata",
@@ -168,14 +172,17 @@ export const mainRouter = [
       {
         path: "",
         element: <MyDataMainPage />,
+        index: true,
       },
       {
         path: "start",
         element: <MyDataPage />,
+        index: true,
       },
       {
         path: "end",
         element: <MyDataEndPage />,
+        index: true,
       },
     ],
   },
@@ -185,24 +192,29 @@ export const mainRouter = [
       {
         path: "",
         element: <InvestTestMainPage />,
+        index: true,
       },
       {
         path: "start",
         element: <InvestTestPage />,
+        index: true,
       },
       {
         path: "result",
         element: <InvestTestResultPage />,
+        index: true,
       },
       {
         path: "user-result",
         element: <InvestTestUserResultPage />,
+        index: true,
       },
     ],
   },
   {
     path: "notification",
     element: <NotificationPage />,
+    index: true,
   },
   {
     path: "account-create",
@@ -210,10 +222,12 @@ export const mainRouter = [
       {
         path: "",
         element: <AccountMainPage />,
+        index: true,
       },
       {
         path: "end",
         element: <AccountEndPage />,
+        index: true,
       },
     ],
   },
