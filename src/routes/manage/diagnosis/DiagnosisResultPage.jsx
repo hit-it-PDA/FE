@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import ProgressBar from "../../components/ProgressBar";
+import ProgressBar from "../../../components/ProgressBar";
 
 // logo
-import logo from "../../assets/logos/logo.svg";
+import logo from "../../../assets/logos/logo.svg";
 
 export default function DiagnosisResultPage() {
   const [isLoading, setIsLoading] = useState(true);

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // components
-import TopBar from "../../components/common/topBar/TopBar";
-import DiagnosisFirst from "../../components/manage/diagnosis/DiagnosisFirst";
-import DiagnosisSecond from "../../components/manage/diagnosis/DiagnosisSecond";
-import DiagnosisThird from "../../components/manage/diagnosis/DiagnosisThird";
+import TopBar from "../../../components/common/topBar/TopBar";
+import DiagnosisFirst from "../../../components/manage/diagnosis/DiagnosisFirst";
+import DiagnosisSecond from "../../../components/manage/diagnosis/DiagnosisSecond";
+import DiagnosisThird from "../../../components/manage/diagnosis/DiagnosisThird";
 
 export default function ManageDiagnosisPage() {
   const navigate = useNavigate();
