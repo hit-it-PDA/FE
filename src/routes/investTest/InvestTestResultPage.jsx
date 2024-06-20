@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useLocation } from "react-router-dom";
+// components
 import InvestResultBlue from "../../components/common/investResult/InvestResultBlue";
 import InvestResultGreen from "../../components/common/investResult/InvestResultGreen";
 import InvestResultOrange from "../../components/common/investResult/InvestResultOrange";
 import InvestResultRed from "../../components/common/investResult/InvestResultRed";
 import InvestResultYellow from "../../components/common/investResult/InvestResultYellow";
-import Button from "../../components/Button";
-import { useEffect } from "react";
 import RobotAnalyzing from "../../components/home/RobotAnalyzing";
+// apis
 import { postTestResult, getTestResult } from "../../lib/apis/testApi";
+// store
 import useUserStore from "../../store/userStore";
 
 export default function InvestTestResultPage() {

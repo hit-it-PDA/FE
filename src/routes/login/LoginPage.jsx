@@ -1,11 +1,16 @@
-import React, { useEffect } from "react";
-import Button from "../../components/Button";
-import Input from "../../components/Input";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+// assets
 import logo from "../../assets/logos/logo.svg";
 import kakao from "../../assets/logos/kakao.svg";
+// components
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+// hooks
 import useInput from "../../hooks/useInput";
-import { useNavigate } from "react-router-dom";
+//apis
 import { login } from "../../lib/apis/userApi";
+// store
 import useUserStore from "../../store/userStore";
 
 export default function LoginPage() {

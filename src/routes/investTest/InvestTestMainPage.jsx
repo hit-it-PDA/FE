@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+// assets
 import logo from "../../assets/logos/invest_logo.jpg";
+//components
 import Button from "../../components/Button";
 import TopBar from "../../components/common/topBar/TopBar";
-import { useNavigate } from "react-router-dom";
 
 export default function InvestTestMainPage() {
   const navigate = useNavigate();
