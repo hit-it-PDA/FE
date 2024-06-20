@@ -12,3 +12,25 @@ export async function getAllPortfolio() {
     return error.response;
   }
 }
+
+export async function getFundList(id) {
+  try {
+    const response = await axios.get(
+      `http://localhost:8084/api/portfolios/hitit/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+export async function getFundDetail(portfolioId, fundId) {
+  try {
+    const response = await axios.get(
+      `http://localhost:8084/api/portfolios/hitit/${portfolioId}/${fundId}`
+    );
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+}

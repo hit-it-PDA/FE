@@ -15,6 +15,7 @@ import { getAllPortfolio } from "../../lib/apis/portfolioApi";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
   const [portfolioData, setPortfolioData] = useState([]);
   const [isSelected, setSelected] = useState(0);
   const [isLogin, setIsLogin] = useState(false);
@@ -29,6 +30,7 @@ export default function HomePage() {
   const getPortfolioData = async () => {
     const data = await getAllPortfolio();
     setPortfolioData(data.response);
+    if (data) setIsLoading(false);
   };
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -115,6 +117,12 @@ export default function HomePage() {
                 </div>
               </div>
             )
+          ) : isLoading ? (
+            <div className="absolute flex w-full h-full bg-gray-200 opacity-90">
+              <div className="w-full h-[80vh] flex items-center justify-center">
+                <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+              </div>
+            </div>
           ) : (
             <div className="flex flex-col items-center justify-center gap-5">
               {portfolioData.map((elem, index) => (
