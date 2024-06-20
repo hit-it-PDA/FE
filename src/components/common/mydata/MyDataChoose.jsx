@@ -4,9 +4,9 @@ import Button from "../../Button";
 import { useNavigate } from "react-router-dom";
 
 export default function MyDataChoose({
-  selectedItems,
-  setSelectedItems,
   handleButtonClick,
+  setSelectedItemsByType,
+  selectedItemsByType,
 }) {
   const navigate = useNavigate();
   const tabs = [
@@ -14,112 +14,127 @@ export default function MyDataChoose({
       name: "은행",
       content: [
         "신한은행",
-        "농협은행",
+        "NH농협은행",
         "하나은행",
-        "우리은행",
-        "기업은행",
-        "국민은행",
-        "SC제일은행",
-        "광주은행",
-        "전북은행",
-        "대구은행",
-        "토스뱅크",
+        "IBK기업은행",
         "카카오뱅크",
+        "KB국민은행",
+        "DGB대구은행",
+        "우리은행",
       ],
+      type: "bank_accounts",
     },
     {
       name: "증권",
       content: [
         "신한투자증권",
-        "미래에셋증권",
         "하나증권",
-        "키움증권",
         "한국투자증권",
-        "NH투자증권",
+        "키움증권",
+        "미래에셋대우",
         "KB증권",
-        "현대차증권",
-        "교보증권",
-        "한화투자증권",
       ],
+      type: "security_accounts",
     },
     {
       name: "카드",
-      content: [
-        "신한카드",
-        "국민카드",
-        "비씨카드",
-        "우리카드",
-        "현대카드",
-        "하나카드",
-        "롯데카드",
-        "삼성카드",
-      ],
+      content: ["신한카드", "KB국민카드", "BC카드", "하나카드", "롯데카드"],
+      type: "cards",
     },
-    { name: "펀드", content: ["신한펀드", "농협펀드", "하나펀드"] },
-    { name: "대출", content: ["신한대출", "농협대출", "하나대출"] },
     {
-      name: "퇴직연금",
-      content: ["신한퇴직연금", "농협퇴직연금", "하나퇴직연금"],
+      name: "대출",
+      content: ["신한은행", "NH농협은행", "하나은행", "우리은행", "KB국민은행"],
+      type: "loans",
+    },
+    {
+      name: "연금",
+      content: ["신한은행", "NH농협은행", "하나은행", "우리은행", "KB국민은행"],
+      type: "pensions",
     },
   ];
 
   const [selectedTab, setSelectedTab] = useState("은행");
   const [allSelected, setAllSelected] = useState({});
+  const [selectedItemsByTab, setSelectedItemsByTab] = useState({});
 
   useEffect(() => {
-    // 각 탭의 전체선택 상태 초기화
     const initialAllSelected = {};
+    const initialSelectedItemsByTab = {};
     tabs.forEach((tab) => {
       initialAllSelected[tab.name] = false;
+      initialSelectedItemsByTab[tab.name] = [];
     });
     setAllSelected(initialAllSelected);
+    setSelectedItemsByTab(initialSelectedItemsByTab);
   }, []);
 
   const handleCheckboxChange = (item) => {
-    setSelectedItems((prevItems) => {
-      const newSelectedItems = prevItems.includes(item)
-        ? prevItems.filter((prevItem) => prevItem !== item)
-        : [...prevItems, item];
-      console.log(selectedItems);
+    const currentTab = tabs.find((tab) => tab.name === selectedTab);
+    const itemType = currentTab.type;
+    setSelectedItemsByTab((prevSelectedItemsByTab) => {
+      const newSelectedItems = prevSelectedItemsByTab[selectedTab].includes(
+        item
+      )
+        ? prevSelectedItemsByTab[selectedTab].filter(
+            (prevItem) => prevItem !== item
+          )
+        : [...prevSelectedItemsByTab[selectedTab], item];
 
-      // 현재 탭의 모든 항목이 선택되었는지 확인
-      const currentTabContent = tabs.find(
-        (tab) => tab.name === selectedTab
-      ).content;
-      const allItemsSelected = currentTabContent.every((tabItem) =>
+      const allItemsSelected = currentTab.content.every((tabItem) =>
         newSelectedItems.includes(tabItem)
       );
 
-      // 전체 선택 상태 업데이트
       setAllSelected((prevAllSelected) => ({
         ...prevAllSelected,
         [selectedTab]: allItemsSelected,
       }));
-      return newSelectedItems;
+
+      setSelectedItemsByType((prevSelectedItemsByType) => ({
+        ...prevSelectedItemsByType,
+        [itemType]: newSelectedItems,
+      }));
+
+      return {
+        ...prevSelectedItemsByTab,
+        [selectedTab]: newSelectedItems,
+      };
     });
   };
 
   const handleSelectAll = () => {
-    const currentTabContent = tabs.find(
-      (tab) => tab.name === selectedTab
-    ).content;
+    const currentTab = tabs.find((tab) => tab.name === selectedTab);
+    const currentTabContent = currentTab.content;
+    const itemType = currentTab.type;
+
     if (allSelected[selectedTab]) {
-      // 전체 해제
-      setSelectedItems((prevItems) =>
-        prevItems.filter((item) => !currentTabContent.includes(item))
-      );
+      setSelectedItemsByTab((prevSelectedItemsByTab) => ({
+        ...prevSelectedItemsByTab,
+        [selectedTab]: [],
+      }));
+      setSelectedItemsByType((prevSelectedItemsByType) => ({
+        ...prevSelectedItemsByType,
+        [itemType]: [],
+      }));
     } else {
-      // 전체 선택
-      setSelectedItems((prevItems) => [
-        ...new Set([...prevItems, ...currentTabContent]),
-      ]);
+      setSelectedItemsByTab((prevSelectedItemsByTab) => ({
+        ...prevSelectedItemsByTab,
+        [selectedTab]: currentTabContent,
+      }));
+      setSelectedItemsByType((prevSelectedItemsByType) => ({
+        ...prevSelectedItemsByType,
+        [itemType]: currentTabContent,
+      }));
     }
+
     setAllSelected((prevAllSelected) => ({
       ...prevAllSelected,
       [selectedTab]: !allSelected[selectedTab],
     }));
-    console.log(selectedItems);
   };
+  const handleButtonClickWrapper = () => {
+    handleButtonClick(selectedItemsByType);
+  };
+
   return (
     <>
       <div className="w-[88vw] mt-[3vh]">
@@ -132,7 +147,7 @@ export default function MyDataChoose({
         {tabs.map((tab) => (
           <button
             key={tab.name}
-            className={`tab px-[2vw] py-2 ${
+            className={`tab px-[4vw] py-2 ${
               selectedTab === tab.name
                 ? "border-b-[0.2vh] border-main font-bold"
                 : ""
@@ -188,7 +203,9 @@ export default function MyDataChoose({
                 <input
                   type="checkbox"
                   className="absolute opacity-0 hidden-checkbox peer"
-                  checked={selectedItems.includes(item)}
+                  checked={
+                    selectedItemsByTab[selectedTab]?.includes(item) || false
+                  }
                   onChange={() => handleCheckboxChange(item)}
                 />
                 <span className="flex items-center justify-center w-6 h-6 bg-white border-2 border-gray-300 rounded-full custom-checkbox peer-checked:bg-main peer-checked:border-main">
@@ -213,7 +230,7 @@ export default function MyDataChoose({
       </div>
       <Button
         className={"w-[90vw] mt-[4vh] fixed bottom-5"}
-        onClick={handleButtonClick}
+        onClick={handleButtonClickWrapper}
       >
         선택완료
       </Button>
