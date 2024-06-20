@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Button";
 
-export default function MyDataNumber() {
+export default function MyDataNumber({ sendMydata }) {
   const navigate = useNavigate();
 
   const [first, setFirst] = useState("");
@@ -77,6 +77,7 @@ export default function MyDataNumber() {
           className={"w-[90vw] mt-[4vh] "}
           onClick={() => {
             numberSave();
+            sendMydata();
             navigate("/mydata/end");
           }}
         >
