@@ -66,7 +66,7 @@ const PortfolioRecommendComponent = ({ type, data }) => {
           </div>
           <div
             className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
-            onClick={() => navigate("/detail")}
+            onClick={() => navigate(`/detail/${data.id}`)}
           >
             자세히 보기
           </div>

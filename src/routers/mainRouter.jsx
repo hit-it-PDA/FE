@@ -53,7 +53,7 @@ export const mainRouter = [
             index: true,
           },
           {
-            path: "detail",
+            path: "detail/:id",
             element: <PortfolioDetailPage />,
             index: true,
           },
