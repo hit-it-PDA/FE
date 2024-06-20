@@ -12,7 +12,7 @@ export default function InvestResultRed({ testDatas }) {
   return (
     <div className="flex flex-col items-center mb-7">
       <p className="text-2xl font-bold text-center mt-[8vh]">
-        정찬진님은
+        {user.name}님은
         <br />
         <span className="text-[#F4253F]">공격투자형</span>입니다.
       </p>
