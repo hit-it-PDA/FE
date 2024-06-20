@@ -24,4 +24,13 @@ async function postTestResult(result) {
     return error.response;
   }
 }
-export { getQuestion, postTestResult };
+
+async function getTestResult() {
+  try {
+    const response = await authInstance(8081).get(`/investment_tests/results`);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+export { getQuestion, postTestResult, getTestResult };
