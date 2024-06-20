@@ -9,8 +9,10 @@ export default function InvestResultBlue({ testDatas }) {
   const user = useUserStore((state) => state.user);
 
   return (
-    <div className="flex flex-col items-center mb-10">
-      <p className="text-2xl font-bold text-center mt-[8vh]">
+    <div className="flex flex-col items-center">
+      <p className="text-2xl font-bold text-center mt-[3vh]">
+        {user.name}님은
+        <br />
         <span className="text-[#4DBBFB]">{user.type}</span>입니다.
       </p>
 

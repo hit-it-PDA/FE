@@ -30,6 +30,7 @@ import PensionAccountListPage from "../routes/manage/unclaimedPension/PensionAcc
 import PensionApplyInfoPage from "../routes/manage/unclaimedPension/PensionApplyInfoPage";
 import KaKaoLoginPage from "../routes/login/KaKaoLoginPage";
 import FundDetailPage from "../routes/home/FundDetailPage";
+import InvestTestUserResultPage from "../routes/investTest/InvestTestUserResultPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -192,6 +193,10 @@ export const mainRouter = [
       {
         path: "result",
         element: <InvestTestResultPage />,
+      },
+      {
+        path: "user-result",
+        element: <InvestTestUserResultPage />,
       },
     ],
   },

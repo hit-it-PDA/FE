@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import InvestButton from "../../InvestButton";
 import { getQuestion } from "../../../lib/apis/testApi";
 
-export default function InvestTestOne({
-  saveData,
-  handleButtonClick,
-  addScore,
-  saveResultData,
-}) {
+export default function InvestTestOne({ saveData, handleButtonClick }) {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
   const fetchQuestion = async () => {
@@ -41,8 +36,6 @@ export default function InvestTestOne({
                 answer: answer.no,
               };
               saveData(tempData);
-              saveResultData(answer.content);
-              addScore(answer.score);
               handleButtonClick();
             }}
           >

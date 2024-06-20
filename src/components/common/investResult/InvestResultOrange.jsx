@@ -10,7 +10,9 @@ export default function InvestResultOrange({ testDatas }) {
 
   return (
     <div className="flex flex-col items-center mb-7">
-      <p className="text-2xl font-bold text-center mt-[8vh]">
+      <p className="text-2xl font-bold text-center mt-[3vh]">
+        {user.name}님은
+        <br />
         <span className="text-[#F85624]">{user.type}</span>입니다.
       </p>
 
