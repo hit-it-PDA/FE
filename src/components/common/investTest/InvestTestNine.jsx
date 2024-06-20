@@ -3,16 +3,9 @@ import InvestButton from "../../InvestButton";
 import { getQuestion } from "../../../lib/apis/testApi";
 import { useNavigate } from "react-router-dom";
 
-export default function InvestTestNine({
-  testDatas,
-  saveData,
-  score,
-  resultDatas,
-}) {
+export default function InvestTestNine({ testDatas }) {
   const navigate = useNavigate();
-  const [localScore, setLocalScore] = useState(score);
   const [localData, setLocalData] = useState(testDatas);
-  const [localResultData, setLocalResultData] = useState(resultDatas);
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
 
@@ -29,24 +22,20 @@ export default function InvestTestNine({
     fetchQuestion();
   }, []);
 
-  const handleNavigate = (newData, newScore, newResultData) => {
+  const handleNavigate = (newData) => {
     navigate("/invest-test/result", {
       state: {
         testDatas: newData,
-        score: newScore,
-        resultDatas: newResultData,
       },
     });
   };
-  const handleClick = (tempData, answerScore, answerContent) => {
-    const newScore = localScore + answerScore;
+  const handleClick = (tempData) => {
     const newData = [...testDatas, tempData];
-    const newResultData = [...resultDatas, answerContent];
-    setLocalScore(newScore);
+    // const newResultData = [...resultDatas, answerContent];
     setLocalData(newData);
-    setLocalResultData(newResultData);
+    // setLocalResultData(newResultData);
     // saveData();
-    handleNavigate(newData, newScore, newResultData);
+    handleNavigate(newData);
   };
   return (
     <div className="flex flex-col w-[88vw]">
@@ -64,7 +53,7 @@ export default function InvestTestNine({
               // saveData(tempData);
               // addScore(answer.score);
               // handleButtonClick();
-              handleClick(tempData, answer.score, answer.content);
+              handleClick(tempData);
             }}
           >
             {answer.content.slice(0, 21)}

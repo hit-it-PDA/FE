@@ -5,8 +5,6 @@ import { getQuestion } from "../../../lib/apis/testApi";
 export default function InvestTestFour({
   saveData,
   handleButtonClick,
-  addScore,
-  saveResultData,
 }) {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
@@ -37,8 +35,6 @@ export default function InvestTestFour({
                 answer: answer.no,
               };
               saveData(tempData);
-              saveResultData(answer.content);
-              addScore(answer.score);
               handleButtonClick();
             }}
           >
