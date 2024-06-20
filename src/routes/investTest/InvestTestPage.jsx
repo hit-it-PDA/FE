@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// components
 import ProgressBar from "../../components/ProgressBar";
 import InvestTestOne from "../../components/common/investTest/InvestTestOne";
 import InvestTestTwo from "../../components/common/investTest/InvestTestTwo";
