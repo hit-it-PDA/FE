@@ -12,26 +12,26 @@ const PortfolioRecommendComponent = ({ type, data }) => {
       }`}
     >
       <div className={`flex-1 ${type ? null : "mb-2"}`}>
+        <span
+          className={`${
+            type ? "text-[16px] " : "text-[13px]"
+          } text-[#FF9900] font-bold`}
+        >
+          {data.investmentType || data.fundTypeDetail}
+        </span>
         <div className="flex items-baseline justify-between">
           <span
-            className={`${
+            className={`flex-1 ${
               type ? "text-[24px] text-white" : "text-[20px] text-[#3B3B3B]"
             }  font-bold`}
           >
-            {data.name}
-          </span>
-          <span
-            className={`${
-              type ? "text-[16px] " : "text-[13px]"
-            } text-[#FF9900] font-bold`}
-          >
-            {data.investmentType}
+            {data.name || data.fundName}
           </span>
         </div>
         <div
           className={`${type ? "text-[15px] mt-1 text-white" : "text-[13px]"}`}
         >
-          {data.summary}
+          {data.summary || data.companyName}
         </div>
       </div>
       <div
@@ -39,10 +39,13 @@ const PortfolioRecommendComponent = ({ type, data }) => {
           type ? "justify-end text-white" : null
         }`}
       >
-        <div className="text-[15px] flex justify-between items-center">
-          <span>최소 가입 비용</span>
-          <span>{data.minimumSubscriptionFee}만원</span>
-        </div>
+        {type ? null : (
+          <div className="text-[15px] flex justify-between items-center">
+            <span>최소 가입 비용</span>
+            <span>{data.minimumSubscriptionFee}만원</span>
+          </div>
+        )}
+
         <div className="text-[15px] flex justify-between items-center">
           <span>수익률</span>
           <div className="flex items-baseline gap-1.5">
@@ -54,7 +57,7 @@ const PortfolioRecommendComponent = ({ type, data }) => {
               3개월
             </span>
             <span className="text-[18px] font-bold text-[#FF3D00]">
-              {data.return3m}%
+              {data.return3m?.toFixed(2)}%
             </span>
           </div>
         </div>
