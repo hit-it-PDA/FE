@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopBar from "../../components/common/topBar/TopBar";
 import { useNavigate } from "react-router-dom";
 import { useRouteError } from "react-router-dom";
@@ -6,9 +6,14 @@ import useUserStore from "../../store/userStore";
 
 export default function MorePage() {
   const [isChecked, setIsChecked] = useState(true);
+  const [isLogin, setIsLogin] = useState("");
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
-  
+  const token = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    setIsLogin(token);
+  }, []);
   return (
     <div>
       <TopBar type={1} />
