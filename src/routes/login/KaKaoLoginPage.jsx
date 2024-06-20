@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { kakaoLogin } from "../../lib/apis/userApi";
 import { useNavigate } from "react-router-dom";
+// apis
+import { kakaoLogin } from "../../lib/apis/userApi";
+// store
 import useUserStore from "../../store/userStore";
 
 export default function KaKaoLoginPage() {
