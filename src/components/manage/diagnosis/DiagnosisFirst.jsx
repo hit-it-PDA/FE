@@ -2,10 +2,17 @@ import React, { useState } from "react";
 
 // components
 import Input from "../../Input";
-import SelectComponent from "./SelectComponent";
 
-export default function DiagnosisFirst() {
-  const [isSelected, setIsSelected] = useState(-1);
+export default function DiagnosisFirst({
+  age,
+  setAge,
+  effort,
+  setEffort,
+  livingExpenses,
+  setLivingExpenses,
+  handleChange,
+  handleBlur,
+}) {
   const options = [
     "필요성이 없어 별다른 노력을 하고 있지 않다.",
     "필요성이 있다고 생각하지만 별다른 노력을 하고 있지 않다.",
@@ -17,7 +24,14 @@ export default function DiagnosisFirst() {
     <div className="w-[90vw]">
       <span className="text-[25px] font-bold">재무준비 여건 및 인식</span>
       <div className="flex flex-col gap-3 mt-5">
-        <Input placeholder={"ex) 55세"}>희망 퇴직 나이를 입력해주세요.</Input>
+        <Input
+          placeholder={"20~99 이내의 숫자를 입력해주세요."}
+          onChange={(e) => handleChange(e, setAge)}
+          onBlur={() => handleBlur(20, 99, age, setAge)}
+          value={age}
+        >
+          희망 퇴직 나이를 입력해주세요.
+        </Input>
         {/* <SelectComponent
           question={`현재의 소득활동을 지속하거나 다른 소득활동을 위해 
             직업능력 향상을 위한 노력을 하고 계신가요?`}
@@ -34,14 +48,19 @@ export default function DiagnosisFirst() {
             <SelectOption
               key={index}
               content={elem}
-              isSelected={isSelected === index}
-              setIsSelected={setIsSelected}
+              effort={effort === index}
+              setEffort={setEffort}
               index={index}
             />
           ))}
         </div>
-        <Input placeholder={"ex) 103만원"}>
-          은퇴 이후에 필요할 것으로 예상하는 생활비는 얼마인가요?
+        <Input
+          placeholder={"50~9999 이내의 숫자를 입력해주세요."}
+          onChange={(e) => handleChange(e, setLivingExpenses)}
+          onBlur={() => handleBlur(50, 9999, livingExpenses, setLivingExpenses)}
+          value={livingExpenses}
+        >
+          은퇴 이후에 필요할 것으로 예상하는 생활비는 얼마인가요? (단위: 만원)
         </Input>
         {/* <Input placeholder={"ex) 103만원"}>
           국민연금 예상 수령액을 입력해주세요.
@@ -55,17 +74,17 @@ export default function DiagnosisFirst() {
   );
 }
 
-const SelectOption = ({ index, isSelected, setIsSelected, content }) => {
+const SelectOption = ({ index, effort, setEffort, content }) => {
   return (
     <div className="flex items-center h-full">
       <div className="flex items-center justify-center h-full">
         <div
           className={`w-5 h-5 flex items-center justify-center ${
-            isSelected ? "bg-main" : "border-2"
+            effort ? "bg-main" : "border-2"
           }  rounded-[35px]`}
-          onClick={() => setIsSelected(index)}
+          onClick={() => setEffort(index)}
         >
-          {isSelected ? (
+          {effort ? (
             <svg
               className="w-4 h-4 text-white peer-checked:text-black"
               fill="none"
