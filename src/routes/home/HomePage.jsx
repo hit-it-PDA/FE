@@ -113,6 +113,8 @@ export default function HomePage() {
                     type={0}
                     data={elem}
                     isLogin={isLogin}
+                    setOpenModal={setOpenModal}
+                    setSelectedPortfolio={setSelectedPortfolio}
                   />
                 ))}
               </div>
@@ -125,6 +127,8 @@ export default function HomePage() {
                       type={0}
                       data={elem}
                       isLogin={isLogin}
+                      setOpenModal={setOpenModal}
+                      setSelectedPortfolio={setSelectedPortfolio}
                     />
                   ))}
                 </div>
