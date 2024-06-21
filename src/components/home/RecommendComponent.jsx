@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../../store/userStore";
 
-const PortfolioRecommendComponent = ({ type, data }) => {
+const PortfolioRecommendComponent = ({
+  type,
+  data,
+  isLogin,
+  setOpenModal,
+  setSelectedPortfolio,
+}) => {
   const navigate = useNavigate();
+  const userPortfolio = useUserStore((state) => state.user.portfolio);
   return (
     <div
       className={`${
@@ -35,17 +43,10 @@ const PortfolioRecommendComponent = ({ type, data }) => {
         </div>
       </div>
       <div
-        className={`flex-1 flex flex-col gap-1 ${
+        className={`flex-1 justify-center flex flex-col gap-1 ${
           type ? "justify-end text-white" : null
         }`}
       >
-        {type ? null : (
-          <div className="text-[15px] flex justify-between items-center">
-            <span>최소 가입 비용</span>
-            <span>{data.minimumSubscriptionFee}만원</span>
-          </div>
-        )}
-
         <div className="text-[15px] flex justify-between items-center">
           <span>수익률</span>
           <div className="flex items-baseline gap-1.5">
@@ -64,11 +65,21 @@ const PortfolioRecommendComponent = ({ type, data }) => {
       </div>
       {type ? null : (
         <div className="flex items-center justify-around flex-1">
-          <div className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer">
-            선택하기
-          </div>
+          {isLogin ? (
+            <div
+              className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
+              onClick={() => {
+                setOpenModal(true);
+                setSelectedPortfolio(data.name);
+              }}
+            >
+              선택하기
+            </div>
+          ) : null}
           <div
-            className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
+            className={`bg-main text-white font-bold ${
+              isLogin ? "w-5/12" : "w-full"
+            } py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer`}
             onClick={() => navigate(`/detail/${data.id}`)}
           >
             자세히 보기
