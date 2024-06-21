@@ -6,6 +6,7 @@ import TopBar from "../../../components/common/topBar/TopBar";
 import DiagnosisFirst from "../../../components/manage/diagnosis/DiagnosisFirst";
 import DiagnosisSecond from "../../../components/manage/diagnosis/DiagnosisSecond";
 import DiagnosisThird from "../../../components/manage/diagnosis/DiagnosisThird";
+import DiagnosisResultPage from "./DiagnosisResultPage";
 
 export default function ManageDiagnosisPage() {
   const navigate = useNavigate();
@@ -25,8 +26,8 @@ export default function ManageDiagnosisPage() {
   const [pensionAmount, setPensionAmount] = useState("");
   const [estateAmount, setEstateAmount] = useState("");
   const nextButtonHandler = () => {
-    if (seq < 2) setSeq(seq + 1);
-    else navigate("../diagnosis-result");
+    if (seq < 1) setSeq(seq + 1);
+    else navigate("../result");
   };
   const firstPageStatesAndSetters = {
     age,
@@ -73,14 +74,16 @@ export default function ManageDiagnosisPage() {
             secondPageStatesAndSetters,
             thirdPageStatesAndSetters
           )}
-          <div className="w-[90vw] flex justify-end">
-            <button
-              className="w-[30vw] bg-main px-5 py-3 rounded-[10px] text-white font-bold"
-              onClick={() => nextButtonHandler()}
-            >
-              다음
-            </button>
-          </div>
+          {seq === 2 ? null : (
+            <div className="w-[90vw] flex justify-end">
+              <button
+                className="w-[30vw] bg-main px-5 py-3 rounded-[10px] text-white font-bold"
+                onClick={() => nextButtonHandler()}
+              >
+                {seq === 0 ? "다음" : "완료"}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -98,7 +101,5 @@ const renderDiagnosis = (
       return <DiagnosisFirst {...firstPageStatesAndSetters} />;
     case 1:
       return <DiagnosisSecond {...secondPageStatesAndSetters} />;
-    case 2:
-      return <DiagnosisThird {...thirdPageStatesAndSetters} />;
   }
 };
