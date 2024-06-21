@@ -1,10 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// components
 import Button from "../../Button";
+// apis
+import { getAllAssets } from "../../../lib/apis/mydataApi";
+// store
+import useUserStore from "../../../store/userStore";
 
 export default function MyDataNumber({ sendMydata }) {
   const navigate = useNavigate();
 
+  const { setAsset } = useUserStore();
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
@@ -16,6 +22,15 @@ export default function MyDataNumber({ sendMydata }) {
   const secondNumber = useRef(null);
   const thirdNumber = useRef(null);
   const fourthNumber = useRef(null);
+
+  const fetchGetAllAssets = async () => {
+    try {
+      const response = await getAllAssets();
+      setAsset(response.response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const numberInputChange = (e, nextInputRef, setValue) => {
     if (e.target.value.length >= 1 && nextInputRef) {
@@ -78,6 +93,7 @@ export default function MyDataNumber({ sendMydata }) {
           onClick={() => {
             numberSave();
             sendMydata();
+            fetchGetAllAssets();
             navigate("/mydata/end");
           }}
         >
