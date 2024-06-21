@@ -5,75 +5,96 @@ import { useNavigate } from "react-router-dom";
 import TopBar from "../../../components/common/topBar/TopBar";
 import DiagnosisFirst from "../../../components/manage/diagnosis/DiagnosisFirst";
 import DiagnosisSecond from "../../../components/manage/diagnosis/DiagnosisSecond";
-import DiagnosisThird from "../../../components/manage/diagnosis/DiagnosisThird";
-import DiagnosisResultPage from "./DiagnosisResultPage";
 
 export default function ManageDiagnosisPage() {
   const navigate = useNavigate();
   const [seq, setSeq] = useState(0);
-  const [age, setAge] = useState(0);
-  const [sex, setSex] = useState(0);
-  const [retirementAge, setRetirementAge] = useState(0);
-  const [pensionExpAmount, setPensionExpAmount] = useState(0);
-  const [incomeAmount, setIncomeAmount] = useState(0);
-  const [returnExp, setReturnExp] = useState(0);
-  const [livingExpenses, setLivingExpenses] = useState(0);
-  const [manageScore, setManageScore] = useState(0);
-  const [hasIncome, setHasIncome] = useState(0);
-  const [isYoung, setIsYoung] = useState(0);
-  const [isCalculate, setIsCalculate] = useState(0);
-  const [manageAsset, setManageAsset] = useState("");
-  const [pensionAmount, setPensionAmount] = useState("");
-  const [estateAmount, setEstateAmount] = useState("");
-  const nextButtonHandler = () => {
-    if (seq < 1) setSeq(seq + 1);
-    else navigate("../result");
+
+  // for first page
+  const [age, setAge] = useState("");
+  const [effort, setEffort] = useState(-1);
+  const [livingExpenses, setLivingExpenses] = useState("");
+
+  // for second page
+  const [receive, setReceive] = useState("");
+  const [estate, setEstate] = useState("");
+  const [asset, setAsset] = useState("");
+  const [returns, setReturns] = useState("");
+
+  // result
+  const result = {
+    retirement_age: Number(age),
+    career_effort_score: effort,
+    monthly_living_expenses: Number(livingExpenses),
+    expected_national_pension: Number(receive),
+    total_financial_assets: Number(asset),
+    expected_investment_return: Number(returns),
+    total_real_estate_value: Number(estate),
   };
-  const firstPageStatesAndSetters = {
+
+  const handleChange = (e, setValue) => {
+    const inputValue = e.target.value;
+    if (/^\d*$/.test(inputValue)) {
+      setValue(inputValue);
+    } else {
+      alert("숫자만 입력해주세요!");
+      setValue("");
+    }
+  };
+
+  const handleBlur = (below, above, value, setValue) => {
+    const numericValue = Number(value);
+    if (value !== "" && (numericValue < below || numericValue > above)) {
+      alert(`${below} 이상 ${above} 이하의 숫자만 입력해주세요!`);
+      setValue("");
+    }
+  };
+
+  const firstPageStates = {
     age,
     setAge,
-    retirementAge,
-    setRetirementAge,
-    sex,
-    setSex,
-    pensionExpAmount,
-    setPensionExpAmount,
-  };
-  const secondPageStatesAndSetters = {
-    incomeAmount,
-    setIncomeAmount,
-    returnExp,
-    setReturnExp,
+    effort,
+    setEffort,
     livingExpenses,
     setLivingExpenses,
-    manageScore,
-    setManageScore,
+    handleChange,
+    handleBlur,
   };
-  const thirdPageStatesAndSetters = {
-    hasIncome,
-    setHasIncome,
-    isYoung,
-    setIsYoung,
-    isCalculate,
-    setIsCalculate,
-    manageAsset,
-    setManageAsset,
-    pensionAmount,
-    setPensionAmount,
-    estateAmount,
-    setEstateAmount,
+
+  const secondPageStates = {
+    receive,
+    setReceive,
+    estate,
+    setEstate,
+    asset,
+    setAsset,
+    returns,
+    setReturns,
+    handleChange,
+    handleBlur,
+  };
+
+  const nextButtonHandler = () => {
+    if (seq === 0) {
+      if (age !== "" && effort !== -1 && livingExpenses !== "") {
+        setSeq(seq + 1);
+      } else {
+        alert("모든 항목에 빠짐없이 답변해주세요 :)");
+      }
+    } else if (seq === 1) {
+      if (receive !== "" && estate !== "" && asset !== "" && returns !== "") {
+        navigate("../result");
+      } else {
+        alert("모든 항목에 빠짐없이 답변해주세요 :)");
+      }
+    }
   };
   return (
     <div>
       <TopBar type={2} />
       <div className="w-full h-[80vh] px-5">
         <div className="flex flex-col items-center justify-between w-full h-full">
-          {renderDiagnosis(
-            seq,
-            firstPageStatesAndSetters,
-            secondPageStatesAndSetters,
-            thirdPageStatesAndSetters
-          )}
+          {renderDiagnosis(seq, firstPageStates, secondPageStates)}
           {seq === 2 ? null : (
             <div className="w-[90vw] flex justify-end">
               <button
@@ -90,16 +111,11 @@ export default function ManageDiagnosisPage() {
   );
 }
 
-const renderDiagnosis = (
-  seq,
-  firstPageStatesAndSetters,
-  secondPageStatesAndSetters,
-  thirdPageStatesAndSetters
-) => {
+const renderDiagnosis = (seq, firstPageStates, secondPageStates) => {
   switch (seq) {
     case 0:
-      return <DiagnosisFirst {...firstPageStatesAndSetters} />;
+      return <DiagnosisFirst {...firstPageStates} />;
     case 1:
-      return <DiagnosisSecond {...secondPageStatesAndSetters} />;
+      return <DiagnosisSecond {...secondPageStates} />;
   }
 };
