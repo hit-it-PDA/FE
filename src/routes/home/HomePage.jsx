@@ -67,6 +67,7 @@ export default function HomePage() {
             setOpenModal={setOpenModal}
             selectedPortfolio={selectedPortfolio}
             name={user.name}
+            hasPortfolio={user.portfolio}
           />
           {/** 로그인 O, 투자 성향 진단 테스트 X -> 투자 성향 진단 테스트 버튼 */}
           {isLogin && !isTestFinished ? (
@@ -164,7 +165,13 @@ export default function HomePage() {
   );
 }
 
-const SelectModal = ({ openModal, setOpenModal, selectedPortfolio, name }) => {
+const SelectModal = ({
+  openModal,
+  setOpenModal,
+  selectedPortfolio,
+  name,
+  hasPortfolio,
+}) => {
   return (
     <Sheet
       isOpen={openModal}
@@ -175,8 +182,8 @@ const SelectModal = ({ openModal, setOpenModal, selectedPortfolio, name }) => {
         <Sheet.Header />
         <Sheet.Content>
           <div className="flex flex-col items-center w-full h-full px-5 bg-white">
-            <span className="w-full text-center font-bold text-[25px] my-[1.5vh] py-[1.5vh] border-b-2">
-              포트폴리오 변경
+            <span className="w-full text-center font-bold text-[25px] my-[1.5vh] pb-[1.5vh] border-b-2">
+              {`포트폴리오 ${hasPortfolio ? "변경" : "선택"}`}
             </span>
             <div className="w-full px-2 my-[2vh] text-center ">
               <span className="text-[18px] whitespace-pre-line">
@@ -186,14 +193,20 @@ const SelectModal = ({ openModal, setOpenModal, selectedPortfolio, name }) => {
                   {selectedPortfolio}
                 </span>
                 <br />
-                {`포트폴리오로 변경합니다.`}
+                {`포트폴리오로 ${hasPortfolio ? "변경" : "선택"}합니다.`}
               </span>
             </div>
             <div className="flex justify-around w-full mb-[3vh]">
-              <Button className="w-5/12" onClick={() => setOpenModal(false)}>
-                변경하기
+              <Button
+                className="w-5/12 h-[6vh] flex justify-center items-center"
+                onClick={() => setOpenModal(false)}
+              >
+                {`${hasPortfolio ? "변경" : "선택"}하기`}
               </Button>
-              <Button className="w-5/12" onClick={() => setOpenModal(false)}>
+              <Button
+                className="w-5/12 h-[6vh] flex justify-center items-center"
+                onClick={() => setOpenModal(false)}
+              >
                 취소하기
               </Button>
             </div>

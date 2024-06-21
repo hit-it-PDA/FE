@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "../../store/userStore";
 
 const PortfolioRecommendComponent = ({
   type,
@@ -10,7 +9,7 @@ const PortfolioRecommendComponent = ({
   setSelectedPortfolio,
 }) => {
   const navigate = useNavigate();
-  const userPortfolio = useUserStore((state) => state.user.portfolio);
+
   return (
     <div
       className={`${
