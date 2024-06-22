@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../Button";
 // apis
 import { getAllAssets } from "../../../lib/apis/mydataApi";
+import { postMydata } from "../../../lib/apis/mydataApi";
 // store
 import useUserStore from "../../../store/userStore";
 
-export default function MyDataNumber({ sendMydata }) {
+export default function MyDataNumber({ selectedItemsByType }) {
   const navigate = useNavigate();
 
   const { setAsset } = useUserStore();
@@ -27,6 +28,15 @@ export default function MyDataNumber({ sendMydata }) {
     try {
       const response = await getAllAssets();
       setAsset(response.response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchPostData = async () => {
+    try {
+      const response = await postMydata(selectedItemsByType);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +102,7 @@ export default function MyDataNumber({ sendMydata }) {
           className={"w-[90vw] mt-[4vh] "}
           onClick={() => {
             numberSave();
-            sendMydata();
+            fetchPostData();
             fetchGetAllAssets();
             navigate("/mydata/end");
           }}
