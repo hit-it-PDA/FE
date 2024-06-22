@@ -4,6 +4,7 @@ import InvestResultBlue from "../../components/common/investResult/InvestResultB
 import InvestResultGreen from "../../components/common/investResult/InvestResultGreen";
 import InvestResultOrange from "../../components/common/investResult/InvestResultOrange";
 import InvestResultRed from "../../components/common/investResult/InvestResultRed";
+import InvestResultYellow from "../../components/common/investResult/InvestResultYellow";
 // apis
 import { getTestResult } from "../../lib/apis/testApi";
 //store
@@ -33,7 +34,7 @@ export default function InvestTestResultPage() {
       case "안정추구형":
         return <InvestResultBlue testDatas={testDatas} />;
       case "위험중립형":
-        return <InvestResultBlue testDatas={testDatas} />;
+        return <InvestResultYellow testDatas={testDatas} />;
       case "적극투자형":
         return <InvestResultOrange testDatas={testDatas} />;
       case "공격투자형":
