@@ -9,6 +9,7 @@ async function postMydata(selectedItemsByType) {
     console.log(response);
     return response;
   } catch (error) {
+    console.log(error);
     return error.response;
   }
 }
@@ -18,6 +19,7 @@ async function getAllAssets() {
     const response = await authInstance(8083).get(`/assets/totalAssets`);
     return response.data;
   } catch (error) {
+    console.log(error);
     return error.response;
   }
 }
