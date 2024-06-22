@@ -20,7 +20,7 @@ module.exports = {
         progress_color: "#F3F3F3",
         invest_text: "#FF9900",
         main: "#375AFF",
-        sub: "#E8ECFF",
+        sub: "#ECF8FF",
       },
     },
   },
