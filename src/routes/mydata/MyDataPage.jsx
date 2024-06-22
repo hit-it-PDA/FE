@@ -20,15 +20,6 @@ export default function MyDataPage() {
   const [page, setPage] = useState(1);
   const totalPages = 5;
 
-  const fetchPostData = async () => {
-    try {
-      const response = await postMydata(selectedItemsByType);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const sendMydata = () => {
     fetchPostData();
   };
@@ -58,7 +49,7 @@ export default function MyDataPage() {
       case 3:
         return <MyDataPhone handleButtonClick={handleNextPage} />;
       case 4:
-        return <MyDataNumber sendMydata={sendMydata} />;
+        return <MyDataNumber selectedItemsByType={selectedItemsByType} />;
       default:
         return null;
     }
