@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import TopBar from "../../components/common/topBar/TopBar";
@@ -10,14 +10,75 @@ export default function SignUpPage() {
   const [email, onChangeEmail] = useInput("");
   const [name, onChangeName] = useInput("");
   const [pwd, onChangePwd] = useInput("");
-  const [ssn, onChangeSsn] = useInput("");
-  const [sex, onChangeSex] = useInput("");
+  const [ssn, setSsn] = useState("");
+  const [sex, setSex] = useState("");
   const [number, onChangeNumber] = useInput("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isSsnValid, setIsSsnValid] = useState(true);
+  const [isSexValid, setIsSexValid] = useState(true);
+  const [isNumberValid, setIsNumberValid] = useState(true);
 
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateSsn = (ssn) => {
+    return ssn.length === 6 && /^\d+$/.test(ssn);
+  };
+
+  const validateSex = (sex) => {
+    return sex.length === 1 && /^[1-4]$/.test(sex);
+  };
+
+  const validateNumber = (number) => {
+    return number.length === 11 && /^\d+$/.test(number);
+  };
+
+  const handleEmailChange = (e) => {
+    const emailValue = e.target.value;
+    onChangeEmail(e);
+    setIsEmailValid(validateEmail(emailValue));
+  };
+
+  const handleSsnChange = (e) => {
+    const ssnValue = e.target.value;
+    setSsn(ssnValue);
+    setIsSsnValid(validateSsn(ssnValue));
+  };
+
+  const handleSexChange = (e) => {
+    const sexValue = e.target.value;
+    setSex(sexValue);
+    setIsSexValid(validateSex(sexValue));
+  };
+
+  const handleNumberChange = (e) => {
+    const numberValue = e.target.value;
+    onChangeNumber(e);
+    setIsNumberValid(validateNumber(numberValue));
+  };
+
   const SignUpClick = async (e) => {
     e.preventDefault();
+    if (!isEmailValid) {
+      window.alert("이메일 형식이 올바르지 않습니다.");
+      return;
+    }
+    if (!isSsnValid) {
+      window.alert("주민번호 앞자리가 올바르지 않습니다.");
+      return;
+    }
+    if (!isSexValid) {
+      window.alert("주민번호 뒷자리가 올바르지 않습니다.");
+      return;
+    }
+    if (!isNumberValid) {
+      window.alert("전화번호 형식이 올바르지 않습니다.");
+      return;
+    }
     const fullSsn = `${ssn}-${sex}`;
     const reqBody = {
       name,
@@ -46,14 +107,22 @@ export default function SignUpPage() {
         인적정보를 입력해주세요.
       </p>
       <div className="flex flex-col items-center gap-3">
-        <Input
-          type={"email"}
-          value={email}
-          placeholder={"ex. gildong@gmail.com"}
-          onChange={onChangeEmail}
-        >
-          이메일을 입력하세요
-        </Input>
+        <div>
+          <Input
+            type={"email"}
+            value={email}
+            placeholder={"ex. gildong@gmail.com"}
+            onChange={handleEmailChange}
+          >
+            이메일을 입력하세요
+          </Input>
+          {!isEmailValid && (
+            <p className="w-full ml-1 text-sm text-red-500">
+              이메일 형식에 맞춰주세요
+            </p>
+          )}
+        </div>
+
         <Input
           type={"text"}
           value={name}
@@ -69,30 +138,51 @@ export default function SignUpPage() {
           <p className="mb-[1vh]">주민번호를 입력하세요</p>
           <div className="flex flex-row items-center">
             <input
-              className={`bg-white w-[30vw] h-[4vh] rounded-[1vh] border border-gray-300 px-[3vw] py-[2.5vh]`}
-              onChange={onChangeSsn}
+              className={`bg-white w-[30vw] h-[4vh] rounded-[1vh] border border-gray-300 px-[3vw] py-[2.5vh] ${
+                !isSsnValid && "border-red-500"
+              }`}
+              onChange={handleSsnChange}
               placeholder="ex. 980629"
               type="number"
               value={ssn}
             ></input>
             <p>&ensp;&ensp;-&ensp;&ensp;</p>
             <input
-              className={`bg-white w-[9vw] h-[4vh] rounded-[1vh] border border-gray-300 px-[3vw] py-[2.5vh]`}
-              onChange={onChangeSex}
+              className={`bg-white w-[9vw] h-[4vh] rounded-[1vh] border border-gray-300 px-[3vw] py-[2.5vh] ${
+                !isSexValid && "border-red-500"
+              }`}
+              onChange={handleSexChange}
               type="number"
               value={sex}
             ></input>
             <p className="text-lg tracking-wider text-gray-400">&nbsp;XXXXXX</p>
           </div>
+          {!isSsnValid && (
+            <p className="w-full ml-1 text-sm text-red-500">
+              주민번호 앞자리는 6자리 숫자여야 합니다.
+            </p>
+          )}
+          {!isSexValid && (
+            <p className="w-full ml-1 text-sm text-red-500">
+              주민번호 뒷자리 첫 번째 숫자는 1~4 사이여야 합니다.
+            </p>
+          )}
         </div>
-        <Input
-          type={"text"}
-          placeholder={"ex) 010-0000-0000"}
-          onChange={onChangeNumber}
-          value={number}
-        >
-          전화번호를 입력하세요
-        </Input>
+        <div>
+          <Input
+            type={"number"}
+            placeholder={"ex) 01012341234"}
+            onChange={handleNumberChange}
+            value={number}
+          >
+            전화번호를 입력하세요
+          </Input>
+          {!isNumberValid && (
+            <p className="w-full ml-1 text-sm text-red-500">
+              전화번호 11자리를 입력하세요.
+            </p>
+          )}
+        </div>
       </div>
       <div className="flex flex-row justify-center">
         <Button className={"w-[90vw] mt-[4vh]"} onClick={(e) => SignUpClick(e)}>
