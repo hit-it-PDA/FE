@@ -94,7 +94,7 @@ export default function AssetPage() {
         </div>
         <div className="flex flex-col justify-center py-4 w-[88vw]">
           <span className="text-[23px] font-bold">📌 총 자산</span>
-          <div className=" flex flex-col justify-center items-center bg-sub h-[10vh] rounded-[3vh]">
+          <div className=" flex flex-col justify-center items-center bg-white shadow-lg h-[10vh] rounded-[3vh]">
             <div className="flex flex-col justify-center w-[75vw]">
               <div className="flex flex-row justify-between">
                 <p className="font-semibold">
@@ -111,7 +111,7 @@ export default function AssetPage() {
                 />
               </div>
               <p className="text-2xl font-bold">
-                {isLogin ? "8,000,000원" : "???원"}
+                {isLogin ? `${user.asset.toLocaleString()}원` : "???원"}
               </p>
             </div>
           </div>
@@ -122,17 +122,42 @@ export default function AssetPage() {
             {renderImage()}
             {isLogin ? (
               <div className="flex flex-col w-[63vw] items-center gap-3">
-                <p className="text-xl">
-                  {user.name}님은&nbsp;
-                  <span className="font-bold text-main">{user.type}</span>
-                  입니다.
-                </p>
-                <button
+                {user.type ? (
+                  <>
+                    <p className="text-[18px]">
+                      {user.name.slice(0, 5)}님은&nbsp;
+                      <span className="font-bold text-main">{user.type}</span>
+                      입니다.
+                    </p>
+                    <button
+                      className="bg-sub w-[40vw] h-[4vh] rounded-[2vh] font-semibold"
+                      onClick={() => navigate("/invest-test/user-result")}
+                    >
+                      더 알아보기
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-[17px]">
+                      {user.name}님은{" "}
+                      <span className="font-bold text-main">미실시자</span>
+                      입니다.
+                    </p>
+                    <button
+                      className="bg-sub w-[50vw] h-[4vh] rounded-[2vh] font-semibold"
+                      onClick={() => navigate("/invest-test")}
+                    >
+                      투자 성향 테스트 하러가기
+                    </button>
+                  </>
+                )}
+
+                {/* <button
                   className="bg-sub w-[40vw] h-[4vh] rounded-[2vh] font-semibold"
                   onClick={() => navigate("/invest-test/user-result")}
                 >
                   더 알아보기
-                </button>
+                </button> */}
               </div>
             ) : (
               <div className="flex flex-col w-[63vw] items-center gap-1">
