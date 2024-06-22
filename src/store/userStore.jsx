@@ -13,6 +13,13 @@ const useUserStore = create(
             type: newType,
           },
         })),
+      setAsset: (asset) =>
+        set((state) => ({
+          user: {
+            ...state.user,
+            asset: asset,
+          },
+        })),
       clearUser: () => set({ user: { name: "방문자", type: "미정" } }),
     }),
     {

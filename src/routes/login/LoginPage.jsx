@@ -10,6 +10,7 @@ import Input from "../../components/Input";
 import useInput from "../../hooks/useInput";
 //apis
 import { login } from "../../lib/apis/userApi";
+import { getAllAssets } from "../../lib/apis/mydataApi";
 // store
 import useUserStore from "../../store/userStore";
 
@@ -22,6 +23,16 @@ export default function LoginPage() {
   const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
   const setUser = useUserStore((state) => state.setUser);
+  const { setAsset } = useUserStore();
+
+  const fetchGetAllAssets = async () => {
+    try {
+      const response = await getAllAssets();
+      setAsset(response.response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const LoginClick = async (e) => {
     const reqBody = {
@@ -32,6 +43,7 @@ export default function LoginPage() {
     const userInfo = response.data.response.userInfo;
     const status_code = response.status;
     setUser(userInfo);
+    fetchGetAllAssets();
     if (status_code === 400) {
       window.alert("이메일 혹은 비밀번호를 확인하세요.");
     } else if (status_code === 200) {
