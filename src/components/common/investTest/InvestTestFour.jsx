@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import InvestButton from "../../InvestButton";
 import { getQuestion } from "../../../lib/apis/testApi";
 
-export default function InvestTestFour({
-  saveData,
-  handleButtonClick,
-}) {
+export default function InvestTestFour({ saveData, handleButtonClick }) {
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState([]);
   const fetchQuestion = async () => {
@@ -23,7 +20,7 @@ export default function InvestTestFour({
 
   return (
     <div className="flex flex-col w-[88vw]">
-      <p className="text-2xl font-bold mt-[8vh]">{question}</p>
+      <p className="text-2xl font-bold mt-[8vh]">{question.slice(0, -1)}</p>
       <div className="mt-[7vh] flex flex-col gap-6">
         {answers.map((answer) => (
           <InvestButton
