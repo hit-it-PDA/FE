@@ -17,11 +17,15 @@ export default function SignUpPage() {
   const [isSsnValid, setIsSsnValid] = useState(true);
   const [isSexValid, setIsSexValid] = useState(true);
   const [isNumberValid, setIsNumberValid] = useState(true);
-
+  const [isNameValid, setIsNameValid] = useState(true);
   const navigate = useNavigate();
 
+  const validateName = (name) => {
+    const nameRegex = /^[가-힣]+$/;
+    return nameRegex.test(name);
+  };
   const validateEmail = (email) => {
-    const emailRegex = /^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+    const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+$/;
     return emailRegex.test(email);
   };
 
@@ -35,6 +39,12 @@ export default function SignUpPage() {
 
   const validateNumber = (number) => {
     return number.length === 11 && /^\d+$/.test(number);
+  };
+
+  const handleNameChange = (e) => {
+    const nameValue = e.target.value;
+    onChangeName(e);
+    setIsNameValid(validateName(nameValue));
   };
 
   const handleEmailChange = (e) => {
@@ -77,6 +87,10 @@ export default function SignUpPage() {
     }
     if (!isNumberValid) {
       window.alert("전화번호 형식이 올바르지 않습니다.");
+      return;
+    }
+    if (!isNameValid) {
+      window.alert("이름 형식이 올바르지 않습니다.");
       return;
     }
     const fullSsn = `${ssn}-${sex}`;
@@ -122,15 +136,22 @@ export default function SignUpPage() {
             </p>
           )}
         </div>
+        <div>
+          <Input
+            type={"text"}
+            value={name}
+            placeholder={"ex. 홍길동"}
+            onChange={handleNameChange}
+          >
+            이름을 입력하세요
+          </Input>
+          {!isNameValid && (
+            <p className="w-full ml-1 text-sm text-red-500">
+              실명을 사용해주세요
+            </p>
+          )}
+        </div>
 
-        <Input
-          type={"text"}
-          value={name}
-          placeholder={"ex. 홍길동"}
-          onChange={onChangeName}
-        >
-          이름을 입력하세요
-        </Input>
         <Input type={"password"} onChange={onChangePwd}>
           비밀번호를 입력하세요
         </Input>

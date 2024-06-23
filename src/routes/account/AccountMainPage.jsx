@@ -21,8 +21,6 @@ export default function AccountMainPage() {
   const handleNextPage = () => {
     setPage(page + 1);
   };
-  console.log(job);
-  console.log(isOwner);
   const totalPages = 6;
   const renderPage = () => {
     switch (page) {
@@ -40,6 +38,13 @@ export default function AccountMainPage() {
             onChangePurpose={onChangePurpose}
             onChangeSource={onChangeSource}
             onChangeIsOwner={onChangeIsOwner}
+            name={name}
+            ssn={ssn}
+            email={email}
+            address={address}
+            job={job}
+            purpose={purpose}
+            source={source}
           />
         );
       case 3:
