@@ -59,12 +59,21 @@ export default function AssetPage() {
         <div className="flex flex-col justify-center py-4 w-[88vw]">
           <div className="flex flex-row items-center justify-between">
             <span className="text-[23px] font-bold">📌 포트폴리오</span>
-            <p
-              className="text-sm font-bold text-gray-500"
-              onClick={() => navigate("portfolio")}
-            >
-              더 보기
-            </p>
+            {isLogin ? (
+              <p
+                className="text-sm font-bold text-gray-500"
+                onClick={() => navigate("portfolio")}
+              >
+                더 보기
+              </p>
+            ) : (
+              <p
+                className="text-sm font-bold text-gray-500"
+                onClick={() => navigate("login")}
+              >
+                더 보기
+              </p>
+            )}
           </div>
           <div className="flex flex-row justify-center my-10 w-[88vw] h-[30vh]">
             {isLogin ? (
