@@ -13,23 +13,27 @@ export default function InvestResultYellow({ testDatas }) {
       <p className="text-2xl font-bold text-center mt-[3vh]">
         {user.name}님은
         <br />
-        <span className="text-[#f8df24]">{user.type}</span>입니다.
+        <span className="text-[#FABF3A]">{user.type}</span>입니다.
       </p>
 
       <img src={logo} alt="logo" className="w-[50vw] h-[38vw] mt-[1vh]" />
       <p className="font-bold text-gray-400 mt-[1vh] px-5">
-        이 성향은 높은 투자 수익에 따른 투자 위험이 있음을 충분히 인식해요.
-        예금, 적금보다 높은 수익을 낼 수 있다면, 손실 위험을 감수해요.
+        이 성향은 원금 손실 위험 대비 적정한 투자 수익을 기대해요. 예,적금보다
+        높고 대표적인 주가 지수 수준의 수익이 있다면 해당 수익금의 변동을 감내할
+        의향이 있어요.
       </p>
       <div className="flex flex-row justify-between mt-[4vh] w-[90vw] gap-4 bg-[#F8F9FB] py-[2vh] rounded-[2vh]">
         <div className="flex flex-col gap-2 ml-3">
-          <span className="font-bold text-main text-[20px]">
-            {user.name}님은
+          <span className="font-bold text-[#FABF3A] text-[22px] text-center">
+            {user.name}님의 테스트 결과
           </span>
           {testDatas.map((testData, idx) => {
             return (
-              <div className="text-[#454454] font-bold" key={idx}>
-                {testData}
+              <div
+                className="font-extrabold text-center text-gray-400"
+                key={idx}
+              >
+                {idx === 8 ? testData : `${testData}`}
               </div>
             );
           })}

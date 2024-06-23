@@ -11,7 +11,7 @@ export default function InvestResultRed({ testDatas }) {
 
   return (
     <div className="flex flex-col items-center mb-7">
-      <p className="text-2xl font-bold text-center mt-[8vh]">
+      <p className="text-2xl font-bold text-center mt-[3vh]">
         {user.name}님은
         <br />
         <span className="text-[#F4253F]">공격투자형</span>입니다.
@@ -25,13 +25,16 @@ export default function InvestResultRed({ testDatas }) {
       </p>
       <div className="flex flex-row justify-between mt-[4vh] w-[90vw] gap-4 bg-[#F8F9FB] py-[2vh] rounded-[2vh]">
         <div className="flex flex-col gap-2 ml-3">
-          <span className="font-bold text-main text-[20px]">
-            {user.name}님은
+          <span className="font-bold text-[#F4253F] text-[20px] text-center">
+            {user.name}님의 테스트 결과
           </span>
           {testDatas.map((testData, idx) => {
             return (
-              <div className="text-[#454454] font-bold" key={idx}>
-                {testData}
+              <div
+                className="font-extrabold text-center text-gray-400"
+                key={idx}
+              >
+                {idx === 8 ? testData : `${testData}`}
               </div>
             );
           })}
