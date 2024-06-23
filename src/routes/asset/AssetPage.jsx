@@ -130,7 +130,7 @@ export default function AssetPage() {
                       입니다.
                     </p>
                     <button
-                      className="bg-sub w-[40vw] h-[4vh] rounded-[2vh] font-semibold"
+                      className="bg-main text-white w-[40vw] h-[4vh] rounded-[2vh] font-bold"
                       onClick={() => navigate("/invest-test/user-result")}
                     >
                       더 알아보기
@@ -151,13 +151,6 @@ export default function AssetPage() {
                     </button>
                   </>
                 )}
-
-                {/* <button
-                  className="bg-sub w-[40vw] h-[4vh] rounded-[2vh] font-semibold"
-                  onClick={() => navigate("/invest-test/user-result")}
-                >
-                  더 알아보기
-                </button> */}
               </div>
             ) : (
               <div className="flex flex-col w-[63vw] items-center gap-1">
