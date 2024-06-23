@@ -21,16 +21,18 @@ import InvestTestResultPage from "../routes/investTest/InvestTestResultPage";
 import RebalancingListPage from "../routes/rebalancing/RebalancingListPage";
 import AccountMainPage from "../routes/account/AccountMainPage";
 import AccountEndPage from "../routes/account/AccountEndPage";
-import ManageDiagnosisPage from "../routes/manage/ManageDiagnosisPage";
+import DiagnosisLayout from "../routes/manage/diagnosis/DiagnosisLayout";
+import DiagnosisStartPage from "../routes/manage/diagnosis/DiagnosisStartPage";
 import ManageUnclaimedPensionPage from "../routes/manage/unclaimedPension/ManageUnclaimedPensionPage";
 import AssetAllPage from "../routes/asset/AssetAllPage";
 import AssetPortfolio from "../routes/asset/AssetPortfolio";
-import DiagnosisResultPage from "../routes/manage/DiagnosisResultPage";
+import DiagnosisResultPage from "../routes/manage/diagnosis/DiagnosisResultPage";
 import PensionAccountListPage from "../routes/manage/unclaimedPension/PensionAccountListPage";
 import PensionApplyInfoPage from "../routes/manage/unclaimedPension/PensionApplyInfoPage";
 import KaKaoLoginPage from "../routes/login/KaKaoLoginPage";
 import FundDetailPage from "../routes/home/FundDetailPage";
 import InvestTestUserResultPage from "../routes/investTest/InvestTestUserResultPage";
+import ManageDiagnosisPage from "../routes/manage/diagnosis/ManageDiagnosisPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -76,13 +78,24 @@ export const mainRouter = [
           },
           {
             path: "diagnosis",
-            element: <ManageDiagnosisPage />,
-            index: true,
-          },
-          {
-            path: "diagnosis-result",
-            element: <DiagnosisResultPage />,
-            index: true,
+            element: <DiagnosisLayout />,
+            children: [
+              {
+                path: "",
+                element: <DiagnosisStartPage />,
+                index: true,
+              },
+              {
+                path: "test",
+                element: <ManageDiagnosisPage />,
+                index: true,
+              },
+              {
+                path: "result",
+                element: <DiagnosisResultPage />,
+                index: true,
+              },
+            ],
           },
           {
             path: "pension",

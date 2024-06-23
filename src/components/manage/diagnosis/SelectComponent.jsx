@@ -5,7 +5,7 @@ import Creatable from "react-select/creatable";
 
 export default function SelectComponent({ question, options, state, func }) {
   return (
-    <div className="animate-slide-down">
+    <div>
       <p>{question}</p>
       <Creatable
         options={options}
