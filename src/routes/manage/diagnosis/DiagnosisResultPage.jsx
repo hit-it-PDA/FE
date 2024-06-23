@@ -28,7 +28,6 @@ export default function DiagnosisResultPage() {
   const location = useLocation();
   const getData = async () => {
     const response = await getDiagnosisResult(location.state);
-    console.log(response.response);
     setResult(response.response);
   };
   useEffect(() => {
@@ -37,7 +36,6 @@ export default function DiagnosisResultPage() {
       setIsLoading(false);
     }, 1500);
   }, []);
-  console.log(location.state);
   return (
     <>
       {isLoading ? null : <TopBar type={2} />}
