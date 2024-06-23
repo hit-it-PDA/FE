@@ -37,6 +37,7 @@ export default function MyDataNumber({ selectedItemsByType }) {
     try {
       const response = await postMydata(selectedItemsByType);
       console.log(response);
+      await fetchGetAllAssets(); // fetchPostData 후에 fetchGetAllAssets 호출
     } catch (error) {
       console.log(error);
     }
@@ -102,9 +103,7 @@ export default function MyDataNumber({ selectedItemsByType }) {
           className={"w-[90vw] mt-[4vh] "}
           onClick={() => {
             numberSave();
-            fetchPostData();
-            fetchGetAllAssets();
-            navigate("/mydata/end");
+            fetchPostData().then(() => navigate("/mydata/end"));
           }}
         >
           입력 완료

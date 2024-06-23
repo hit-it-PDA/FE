@@ -103,9 +103,17 @@ export default function AssetAllPage() {
   const renderContent = () => {
     switch (selectedTab) {
       case "은행":
+        if (bank.length === 0) {
+          return (
+            <div className="flex flex-row items-center justify-center w-full h-[5vh] mb-[2.5vh] bg-white mt-[1vh] gap-2 rounded-[3vh]">
+              <p className="font-bold text-gray-400">
+                보유한 은행상품이 없습니다.
+              </p>
+            </div>
+          );
+        }
         return bank.map((item, index) => {
           let logo;
-
           switch (item.bank_name) {
             case "신한은행":
               logo = shinhan;
@@ -162,6 +170,15 @@ export default function AssetAllPage() {
           );
         });
       case "증권":
+        if (security.length === 0) {
+          return (
+            <div className="flex flex-row items-center justify-center w-full h-[5vh] mb-[2.5vh] bg-white mt-[1vh] gap-2 rounded-[3vh]">
+              <p className="font-bold text-gray-400">
+                보유한 증권상품이 없습니다.
+              </p>
+            </div>
+          );
+        }
         return security.map((item, index) => {
           let logo;
 
@@ -215,6 +232,15 @@ export default function AssetAllPage() {
           );
         });
       case "카드":
+        if (card.length === 0) {
+          return (
+            <div className="flex flex-row items-center justify-center w-full h-[5vh] mb-[2.5vh] bg-white mt-[1vh] gap-2 rounded-[3vh]">
+              <p className="font-bold text-gray-400">
+                보유한 카드상품이 없습니다.
+              </p>
+            </div>
+          );
+        }
         return card.map((item, index) => {
           let logo;
 
@@ -262,9 +288,17 @@ export default function AssetAllPage() {
           );
         });
       case "대출":
+        if (loan.length === 0) {
+          return (
+            <div className="flex flex-row items-center justify-center w-full h-[5vh] mb-[2.5vh] bg-white mt-[1vh] gap-2 rounded-[3vh]">
+              <p className="font-bold text-gray-400">
+                보유한 대출상품이 없습니다.
+              </p>
+            </div>
+          );
+        }
         return loan.map((item, index) => {
           let logo;
-
           switch (item.company_name) {
             case "신한은행":
               logo = shinhan;
@@ -324,9 +358,17 @@ export default function AssetAllPage() {
           );
         });
       case "연금":
+        if (pension.length === 0) {
+          return (
+            <div className="flex flex-row items-center justify-center w-full h-[5vh] mb-[2.5vh] bg-white mt-[1vh] gap-2 rounded-[3vh]">
+              <p className="font-bold text-gray-400">
+                보유한 연금상품이 없습니다.
+              </p>
+            </div>
+          );
+        }
         return pension.map((item, index) => {
           let logo;
-
           switch (item.company_name) {
             case "신한은행":
               logo = shinhan;
@@ -359,7 +401,7 @@ export default function AssetAllPage() {
           return (
             <div
               key={index}
-              className="flex flex-row items-center justify-center w-full h-[7vh] mb-[2.5vh] bg-white shadow-lg mt-[1vh] gap-2 rounded-[3vh] py-[10vw] shadow-lg"
+              className="flex flex-row items-center justify-center w-full h-[7vh] mb-[2.5vh] bg-white mt-[1vh] gap-2 rounded-[3vh] py-[10vw] shadow-lg"
             >
               <div className="flex flex-col">
                 <div className="flex flex-row gap-2 ml-3">
