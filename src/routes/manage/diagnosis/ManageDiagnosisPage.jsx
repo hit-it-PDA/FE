@@ -83,12 +83,13 @@ export default function ManageDiagnosisPage() {
       }
     } else if (seq === 1) {
       if (receive !== "" && estate !== "" && asset !== "" && returns !== "") {
-        navigate("../result");
+        navigate("../result", { state: result });
       } else {
         alert("모든 항목에 빠짐없이 답변해주세요 :)");
       }
     }
   };
+
   return (
     <div>
       <TopBar type={2} />
