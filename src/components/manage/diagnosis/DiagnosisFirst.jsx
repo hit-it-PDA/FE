@@ -6,10 +6,14 @@ import Input from "../../Input";
 export default function DiagnosisFirst({
   age,
   setAge,
+  ageValid,
+  setAgeValid,
   effort,
   setEffort,
   livingExpenses,
   setLivingExpenses,
+  livingExpensesValid,
+  setLivingExpensesValid,
   handleChange,
   handleBlur,
 }) {
@@ -26,19 +30,17 @@ export default function DiagnosisFirst({
       <div className="flex flex-col gap-3 mt-5">
         <Input
           placeholder={"20~99 이내의 숫자를 입력해주세요."}
-          onChange={(e) => handleChange(e, setAge)}
-          onBlur={() => handleBlur(20, 99, age, setAge)}
+          onChange={(e) => handleChange(e, setAge, setAgeValid, 20, 99)}
+          onBlur={() => handleBlur(20, 99, age, setAge, setAgeValid)}
           value={age}
         >
           희망 퇴직 나이를 입력해주세요.
         </Input>
-        {/* <SelectComponent
-          question={`현재의 소득활동을 지속하거나 다른 소득활동을 위해 
-            직업능력 향상을 위한 노력을 하고 계신가요?`}
-          options={options}
-          state={isSelected}
-          func={setIsSelected}
-        /> */}
+        {!ageValid ? (
+          <p className="w-full ml-3 text-sm text-red-500">
+            20 이상 99 이하의 숫자만 입력해주세요!
+          </p>
+        ) : null}
         <span className="whitespace-pre-line">
           {`현재의 소득활동을 지속하거나 다른 소득활동을 위해 
             직업능력 향상을 위한 노력을 하고 계신가요?`}
@@ -56,19 +58,27 @@ export default function DiagnosisFirst({
         </div>
         <Input
           placeholder={"50~9999 이내의 숫자를 입력해주세요."}
-          onChange={(e) => handleChange(e, setLivingExpenses)}
-          onBlur={() => handleBlur(50, 9999, livingExpenses, setLivingExpenses)}
+          onChange={(e) =>
+            handleChange(e, setLivingExpenses, setLivingExpensesValid, 50, 9999)
+          }
+          onBlur={() =>
+            handleBlur(
+              50,
+              9999,
+              livingExpenses,
+              setLivingExpenses,
+              setLivingExpensesValid
+            )
+          }
           value={livingExpenses}
         >
           은퇴 이후에 필요할 것으로 예상하는 생활비는 얼마인가요? (단위: 만원)
         </Input>
-        {/* <Input placeholder={"ex) 103만원"}>
-          국민연금 예상 수령액을 입력해주세요.
-        </Input>
-        <span className="text-[13px] text-[#505050] whitespace-pre-line">
-          {`국민연금 20년 이상 가입자의 월 평균 수령액은 103만원입니다. (국민연금공단, 2023년 1월 기준) 
-            본인이 확인한 예상 수령 금액을 입력해주세요.`}
-        </span> */}
+        {!livingExpensesValid ? (
+          <p className="w-full ml-3 text-sm text-red-500">
+            50 이상 9999 이하의 숫자만 입력해주세요!
+          </p>
+        ) : null}
       </div>
     </div>
   );
