@@ -19,19 +19,30 @@ import good_navy from "../../../assets/characters/good_navy.svg";
 import sad_white2 from "../../../assets/characters/sad_white2.svg";
 
 // apis
-import { getDiagnosisResult } from "../../../lib/apis/diagnosisApi";
+import {
+  getDiagnosisResult,
+  getPreviousDiagnosisResult,
+} from "../../../lib/apis/diagnosisApi";
+import RobotAnalyzing from "../../../components/home/RobotAnalyzing";
 
 export default function DiagnosisResultPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [result, setResult] = useState([]);
+  const [isPrevious, setIsPrevious] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const getData = async () => {
+  const getResultData = async () => {
     const response = await getDiagnosisResult(location.state);
     setResult(response.response);
   };
+  const getPreviousResultData = async () => {
+    const response = await getPreviousDiagnosisResult();
+    setResult(response.response);
+    setIsLoading(false);
+  };
   useEffect(() => {
-    getData();
+    if (location.state) getResultData();
+    else getPreviousResultData();
     setInterval(() => {
       setIsLoading(false);
     }, 1500);
@@ -41,19 +52,20 @@ export default function DiagnosisResultPage() {
       {isLoading ? null : <TopBar type={2} />}
       <div className="flex flex-col items-center">
         {isLoading ? (
-          <div className="w-full h-[90vh] flex flex-col items-center justify-center">
-            <img src={logo} className="animate-bounce" />
-            <span className="whitespace-pre-line text-center mt-5 text-[18px]">
-              <span className="text-[#375AFF] font-bold">
-                노후준비정도를 종합적으로 분석 중
-              </span>
-              이에요! <br /> 조금만 기다려주세요 :)
-            </span>
-          </div>
+          <RobotAnalyzing>
+            {location.state
+              ? "노후준비정도를 종합적으로 분석 중"
+              : "데이터를 가져오는 중"}
+          </RobotAnalyzing>
         ) : (
           <div className="w-[90vw]">
-            <div className="pb-4 mb-4 border-b">
+            <div className="flex items-baseline justify-between pb-4 mb-4 border-b">
               <span className="text-[25px] font-bold ml-2">재무 진단 결과</span>
+              {result.created_at ? (
+                <span className="text-[15px] text-[#717171] ml-2">
+                  {result?.created_at.slice(0, 10)}
+                </span>
+              ) : null}
             </div>
             <div className="flex flex-col items-center gap-3">
               <ManageTypeComponent
@@ -99,7 +111,7 @@ export default function DiagnosisResultPage() {
                   }
                   ${
                     result?.life_expectancy - result?.asset_life > 0
-                      ? `월 생활비를 ${result.optimal_monthly_living_expenses}만원으로 낮추면 자산수명과 기대수명이 일치해요.`
+                      ? `월 생활비를 ${result?.optimal_monthly_living_expenses}만원으로 낮추면 자산수명과 기대수명이 일치해요.`
                       : ""
                   }
                   `}
@@ -126,13 +138,13 @@ const ManageTypeComponent = ({ level, type, detail }) => {
       imgSrc = sad_white;
       break;
     case "2":
-      imgSrc = good_yellow;
+      imgSrc = good_white;
       break;
     case "3":
       imgSrc = sad_purple;
       break;
     case "4":
-      imgSrc = good_white;
+      imgSrc = good_yellow;
       break;
     default:
       good_yellow;
@@ -145,7 +157,7 @@ const ManageTypeComponent = ({ level, type, detail }) => {
         {type}
       </span>
       <img src={imgSrc} />
-      <span className="text-[15px] font-bold text-center whitespace-pre-line">
+      <span className="text-[15px] text-[#717171] font-bold text-center whitespace-pre-line">
         {detail}
       </span>
     </>
