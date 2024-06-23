@@ -22,7 +22,7 @@ export default function DiagnosisStartPage() {
         </div>
         <div className="flex flex-col w-full gap-3">
           <Button onClick={() => navigate("test")}>테스트 하러가기</Button>
-          <Button>이전 결과 보기</Button>
+          <Button onClick={() => navigate("result")}>이전 결과 보기</Button>
         </div>
       </div>
     </>
