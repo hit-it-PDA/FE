@@ -12,13 +12,58 @@ export default function AccountInformation({
   onChangePurpose,
   onChangeSource,
   onChangeIsOwner,
+  name,
+  ssn,
+  email,
+  address,
+  job,
+  purpose,
+  source,
 }) {
   const [isChecked, setIsChecked] = useState(2);
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
   const PositiveButtonClick = () => {
     setIsChecked(0);
   };
   const NegativeButtonClick = () => {
     setIsChecked(1);
+  };
+
+  const validateName = (name) => {
+    const nameRegex = /^[가-힣]+$/;
+    return nameRegex.test(name);
+  };
+  const validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleNameChange = (e) => {
+    const nameValue = e.target.value;
+    onChangeName(e);
+    setIsNameValid(validateName(nameValue));
+  };
+
+  const handleEmailChange = (e) => {
+    const emailValue = e.target.value;
+    onChangeEmail(e);
+    setIsEmailValid(validateEmail(emailValue));
+  };
+
+  const nextButtonClick = async () => {
+    if (!isEmailValid) {
+      window.alert("이메일 형식이 올바르지 않습니다.");
+      return;
+    }
+    if (!isNameValid) {
+      window.alert("실명을 입력해주세요.");
+      return;
+    }
+    if (name && ssn && email && address && job && source && purpose)
+      handleNextPage();
+    window.alert("모든 항목을 입력해주세요.");
   };
   return (
     <div className="flex flex-col items-center">
@@ -29,15 +74,29 @@ export default function AccountInformation({
         </p>
       </div>
       <div className="w-[88vw] mt-[3vh] flex flex-col items-center gap-3">
-        <Input type={"text"} onChange={onChangeName}>
-          이름
-        </Input>
-        <Input type={"text"} onChange={onChangeSsn}>
+        <div>
+          <Input type={"text"} onChange={handleNameChange}>
+            이름
+          </Input>
+          {!isNameValid && (
+            <p className="w-full ml-1 text-sm text-red-500">
+              실명을 입력해주세요
+            </p>
+          )}
+        </div>
+        <Input type={"number"} onChange={onChangeSsn}>
           주민등록번호
         </Input>
-        <Input type={"text"} onChange={onChangeEmail}>
-          이메일
-        </Input>
+        <div>
+          <Input type={"email"} onChange={handleEmailChange}>
+            이메일
+          </Input>
+          {!isEmailValid && (
+            <p className="w-full ml-1 text-sm text-red-500">
+              이메일 형식에 맞춰주세요
+            </p>
+          )}
+        </div>
         <Input type={"text"} onChange={onChangeAddress}>
           주소
         </Input>
@@ -82,7 +141,10 @@ export default function AccountInformation({
           </div>
         </div>
       </div>
-      <Button className={"w-[90vw] mt-[4vh] mb-[2vh]"} onClick={handleNextPage}>
+      <Button
+        className={"w-[90vw] mt-[4vh] mb-[2vh]"}
+        onClick={nextButtonClick}
+      >
         다음
       </Button>
     </div>
