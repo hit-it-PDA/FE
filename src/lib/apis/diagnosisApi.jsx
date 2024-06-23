@@ -11,3 +11,12 @@ export async function getDiagnosisResult(survey) {
     return error.response;
   }
 }
+
+export async function getPreviousDiagnosisResult() {
+  try {
+    const response = await authInstance(8081).get(`/retirements/test/results`);
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+}
