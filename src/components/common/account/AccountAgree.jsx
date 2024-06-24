@@ -1,21 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../Button";
+// apis
+import { getAccount } from "../../../lib/apis/accountApi";
 
-export default function AccountAgree({ handleNextPage }) {
+export default function AccountAgree({
+  handleNextPage,
+  handleMoreNextPage,
+  setName,
+  setBalance,
+}) {
   const [isChecked, setIsChecked] = useState(false);
-
+  const [isHave, setIsHave] = useState(0);
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
 
+  const fetchGetAccount = async () => {
+    try {
+      const response = await getAccount();
+      response.data.response ? setAll(response) : setIsHave(1); // 데이터가 있으면 1, 없으면 2
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const setAll = (response) => {
+    setIsHave(2);
+    setBalance(response.data.response.balance);
+  };
+  useEffect(() => {
+    fetchGetAccount();
+  });
   return (
     <>
       <div className="w-[88vw] mt-[3vh]">
         <p>STEP 1.</p>
         <p className="text-2xl">
-          <span className="font-bold">계좌 개설</span>을 위해
+          <span className="text-2xl font-bold">계좌 개설</span>을 위해
           <br />
-          <span className="font-bold">개인정보수집에 동의</span>해주세요.
+          <span className="text-2xl font-bold">개인정보수집에 동의</span>
+          해주세요.
+          <p className="text-sm font-bold text-gray-400">
+            ※계좌가 있으시면 조회 후 비밀번호를 재설정할게요
+          </p>
         </p>
       </div>
       <div className="flex flex-col items-center w-[90vw] mt-[10vh] bg-gray-200 pb-[2vh] rounded-[3vh]">
@@ -61,10 +87,13 @@ export default function AccountAgree({ handleNextPage }) {
       <Button
         className={"w-[90vw] mt-[4vh] fixed bottom-5"}
         onClick={() => {
-          if (isChecked) {
+          if (isChecked && isHave === 1) {
             handleNextPage();
+          } else if (isChecked && isHave === 2) {
+            window.alert("계좌가 있어요!");
+            handleMoreNextPage();
           } else {
-            alert("개인정보동의 체크해주세요!");
+            window.alert("개인 정보 동의해주세요!");
           }
         }}
       >

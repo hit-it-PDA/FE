@@ -1,16 +1,33 @@
 import React, { useRef, useState } from "react";
 import Button from "../../Button";
+// apis
+import { postNumber } from "../../../lib/apis/mydataApi";
 
-export default function MyDataPhone({ handleButtonClick }) {
+export default function MyDataPhone({ handleButtonClick, setPhone }) {
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
-  const [phone, setPhone] = useState("");
-
   const firstRef = useRef(null);
   const secondRef = useRef(null);
   const thirdRef = useRef(null);
 
+  const fetchPostNumber = async () => {
+    try {
+      const res = phoneNumberSave();
+      const reqBody = { phone: res };
+      console.log(reqBody);
+      const response = await postNumber(reqBody);
+      if (response.data.success === false) {
+        window.alert("번호를 다시 입력하세요.");
+      } else {
+        console.log(response);
+        handleButtonClick();
+      }
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const threeInputChange = (e, nextInputRef, setValue) => {
     if (e.target.value.length >= 3 && nextInputRef) {
       setValue(e.target.value);
@@ -26,9 +43,10 @@ export default function MyDataPhone({ handleButtonClick }) {
   };
 
   const phoneNumberSave = () => {
-    const phoneNumber = `${first}-${second}-${third}`;
+    const phoneNumber = `${first}${second}${third}`;
     console.log(phoneNumber);
     setPhone(phoneNumber);
+    return phoneNumber;
     // handleButtonClick(phoneNumber);
   };
 
@@ -66,10 +84,7 @@ export default function MyDataPhone({ handleButtonClick }) {
       </div>
       <Button
         className={"w-[90vw] mt-[4vh] fixed bottom-5"}
-        onClick={() => {
-          phoneNumberSave();
-          handleButtonClick();
-        }}
+        onClick={() => fetchPostNumber()}
       >
         다음
       </Button>
