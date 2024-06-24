@@ -33,6 +33,7 @@ import KaKaoLoginPage from "../routes/login/KaKaoLoginPage";
 import FundDetailPage from "../routes/home/FundDetailPage";
 import InvestTestUserResultPage from "../routes/investTest/InvestTestUserResultPage";
 import ManageDiagnosisPage from "../routes/manage/diagnosis/ManageDiagnosisPage";
+import RebalancingReportPage from "../routes/rebalancing/RebalancingReportPage";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -237,6 +238,11 @@ export const mainRouter = [
   {
     path: "notification",
     element: <NotificationPage />,
+    index: true,
+  },
+  {
+    path: "rebalancing-report",
+    element: <RebalancingReportPage />,
     index: true,
   },
   {
