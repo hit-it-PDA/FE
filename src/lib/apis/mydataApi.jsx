@@ -69,6 +69,32 @@ async function getPensionAssets() {
   }
 }
 
+async function postNumber(reqBody) {
+  try {
+    console.log(reqBody);
+    const response = await authInstance(8083).post(
+      `/assets/auth/send`,
+      reqBody
+    );
+    console.log(response);
+    return response;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function postAuthNumber(reqBody) {
+  try {
+    const response = await authInstance(8083).post(
+      `/assets/auth/confirm`,
+      reqBody
+    );
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+
 export {
   postMydata,
   getAllAssets,
@@ -77,4 +103,6 @@ export {
   getCardAssets,
   getLoanAssets,
   getPensionAssets,
+  postNumber,
+  postAuthNumber,
 };
