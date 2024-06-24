@@ -56,6 +56,16 @@ export const mainRouter = [
             index: true,
           },
           {
+            path: "detail/all/:portfolioId",
+            element: <PortfolioDetailPage />,
+            index: true,
+          },
+          {
+            path: "detail/all/:portfolioId/:fundId",
+            element: <FundDetailPage />,
+            index: true,
+          },
+          {
             path: "detail/:portfolioId",
             element: <PortfolioDetailPage />,
             index: true,
