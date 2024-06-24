@@ -63,7 +63,8 @@ export default function AccountInformation({
     }
     if (name && ssn && email && address && job && source && purpose)
       handleNextPage();
-    window.alert("모든 항목을 입력해주세요.");
+    if (!name || !ssn || !email || !address || !job || !source || !purpose)
+      window.alert("모든 항목을 입력해주세요.");
   };
   return (
     <div className="flex flex-col items-center">
