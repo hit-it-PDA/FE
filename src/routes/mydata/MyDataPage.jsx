@@ -10,6 +10,7 @@ import { postMydata } from "../../lib/apis/mydataApi";
 
 export default function MyDataPage() {
   const [selectedItems, setSelectedItems] = useState([]);
+  const [phone, setPhone] = useState("");
   const [selectedItemsByType, setSelectedItemsByType] = useState({
     bank_accounts: [],
     security_accounts: [],
@@ -47,9 +48,16 @@ export default function MyDataPage() {
           />
         );
       case 3:
-        return <MyDataPhone handleButtonClick={handleNextPage} />;
+        return (
+          <MyDataPhone handleButtonClick={handleNextPage} setPhone={setPhone} />
+        );
       case 4:
-        return <MyDataNumber selectedItemsByType={selectedItemsByType} />;
+        return (
+          <MyDataNumber
+            selectedItemsByType={selectedItemsByType}
+            phone={phone}
+          />
+        );
       default:
         return null;
     }
