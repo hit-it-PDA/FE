@@ -1,10 +1,14 @@
 import React, { useState, useRef } from "react";
-import Button from "../../Button";
 import { useNavigate } from "react-router-dom";
+import Button from "../../Button";
+// store
+import useUserStore from "../../../store/userStore";
+// apis
+import { postAccount } from "../../../lib/apis/accountApi";
 
-export default function AccountPwd({ handleNextPage }) {
+export default function AccountPwd({ handleNextPage, name, balance }) {
   const navigate = useNavigate();
-
+  const user = useUserStore((state) => state.user);
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
@@ -28,10 +32,27 @@ export default function AccountPwd({ handleNextPage }) {
     }
   };
 
+  const fetchPostAccount = async () => {
+    try {
+      const pwd = pwdSave();
+      console.log(pwd);
+      const reqBody = {
+        name: user.name,
+        ssn: user.birthdate,
+        password: pwd,
+        balance: balance,
+      };
+      const response = await postAccount(reqBody);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const pwdSave = () => {
     const pwd = `${first}${second}${third}${fourth}`;
     console.log(pwd);
     setPwd(pwd);
+    return pwd;
   };
   return (
     <>
@@ -74,8 +95,7 @@ export default function AccountPwd({ handleNextPage }) {
       <Button
         className={"w-[90vw] mt-[4vh] fixed bottom-5"}
         onClick={() => {
-          pwdSave();
-          navigate("/account-create/end")
+          fetchPostAccount().then(() => navigate("/account-create/end"));
         }}
       >
         다음
