@@ -23,13 +23,15 @@ export default function MorePage() {
           <div className="text-[18px] border-b-[1px] mt-[10px] pb-[6px] mb-[10px] border-gray-300 font-bold">
             나의 계좌
           </div>
-          <div className="flex flex-row items-center justify-center h-[7vh] mb-[2.5vh] bg-sub mt-[1vh] gap-2 rounded-[3vh] py-[10vw]">
+          <div className="flex flex-row items-center justify-center h-[7vh] mb-[2.5vh] bg-sub shadow-lg mt-[1vh] gap-2 rounded-[3vh] py-[10vw]">
             <p className="w-[30vw] h-[5vh] ml-4 font-bold">신한투자증권</p>
             <div className="flex flex-col justify-center items-end w-[45vw] h-[5vh] mr-5">
               <p className="h-[2.5vh] text-[#3A3A3A] font-medium">
                 973-021-038-01-014
               </p>
-              <p className="h-[2.5vh] font-bold">8,000,000원</p>
+              <p className="h-[2.5vh] font-bold">
+                {user.asset.toLocaleString()}원
+              </p>
             </div>
           </div>
         </div>

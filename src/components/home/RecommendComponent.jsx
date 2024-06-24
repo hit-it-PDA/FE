@@ -76,10 +76,12 @@ const PortfolioRecommendComponent = ({
             </div>
           ) : null}
           <div
-            className={`bg-main text-white font-bold ${
-              isLogin ? "w-5/12" : "w-full"
-            } py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer`}
-            onClick={() => navigate(`/detail/${data.id}`)}
+            className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
+            onClick={() => {
+              data.funds
+                ? navigate(`/detail/${data.name}`, { state: data.funds })
+                : navigate(`/detail/all/${data.id}`);
+            }}
           >
             자세히 보기
           </div>

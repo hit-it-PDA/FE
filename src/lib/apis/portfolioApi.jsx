@@ -34,3 +34,21 @@ export async function getFundDetail(portfolioId, fundId) {
     return error.response;
   }
 }
+
+export async function getMyDataPortfolio(body) {
+  const token = localStorage.getItem("accessToken");
+  try {
+    const response = await axios.post(
+      `http://3.39.217.69:8084/api/portfolios/mydata/leveltest`,
+      body
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // }
+    );
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+}

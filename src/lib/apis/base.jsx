@@ -8,19 +8,17 @@ const instance = axios.create({
 // const token = persistedString?.includes("accessToken")
 //   ? JSON.parse(JSON.parse(persistedString).userInfo).accessToken
 //   : "";
-const token = localStorage.getItem("accessToken");
 
-/**
- * axios instance with Authorization header
- */
-const authInstance = (port) =>
-  axios.create({
+const authInstance = (port) => {
+  const token = localStorage.getItem("accessToken");
+  return axios.create({
     baseURL: import.meta.env.VITE_BASE_URL || `http://localhost:${port}/api`,
     headers: {
       "Content-Type": "application/json",
-      Authorization: token !== "" ? `Bearer ${token}` : "",
+      Authorization: token ? `Bearer ${token}` : "",
     },
   });
+};
 
 export default instance;
 export { authInstance };

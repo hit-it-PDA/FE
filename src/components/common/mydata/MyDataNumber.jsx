@@ -1,10 +1,21 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// components
 import Button from "../../Button";
+// apis
+import { getAllAssets } from "../../../lib/apis/mydataApi";
+import {
+  postMydata,
+  postAuthNumber,
+  postNumber,
+} from "../../../lib/apis/mydataApi";
+// store
+import useUserStore from "../../../store/userStore";
 
-export default function MyDataNumber() {
+export default function MyDataNumber({ selectedItemsByType, phone }) {
   const navigate = useNavigate();
 
+  const { setAsset } = useUserStore();
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
@@ -17,6 +28,57 @@ export default function MyDataNumber() {
   const thirdNumber = useRef(null);
   const fourthNumber = useRef(null);
 
+  const fetchGetAllAssets = async () => {
+    try {
+      const response = await getAllAssets();
+      setAsset(response.response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchPostAuthNumber = async () => {
+    try {
+      const authNum = numberSave();
+      console.log(authNum);
+      const reqBody = { phone: phone, certificationNumber: authNum };
+      const response = await postAuthNumber(reqBody);
+      console.log(response.status);
+      if (response.status === 500) {
+        window.alert("번호를 다시 입력하세요");
+      } else {
+        await fetchPostData();
+        navigate("/mydata/end");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchPostNumber = async (phone) => {
+    try {
+      const reqBody = { phone: phone };
+      const response = await postNumber(reqBody);
+      console.log(response);
+      if (response.data.success === false) {
+        window.alert("번호를 다시 입력하세요.");
+      } else {
+        console.log(response);
+        window.alert("재발송되었습니다.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchPostData = async () => {
+    try {
+      const response = await postMydata(selectedItemsByType);
+      console.log(response);
+      await fetchGetAllAssets(); // fetchPostData 후에 fetchGetAllAssets 호출
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const numberInputChange = (e, nextInputRef, setValue) => {
     if (e.target.value.length >= 1 && nextInputRef) {
       setValue(e.target.value);
@@ -28,6 +90,7 @@ export default function MyDataNumber() {
     const number = `${first}${second}${third}${fourth}`;
     console.log(number);
     setNumber(number);
+    return number;
   };
 
   return (
@@ -70,14 +133,16 @@ export default function MyDataNumber() {
       <div className="fixed flex flex-col bottom-5">
         <div className="mx-auto flex flex-row justify-center w-[50vw] gap-2">
           <p className="font-bold text-input_color">번호가 안왔나요?</p>
-          <button className="underline">재발송</button>
+          <button className="underline" onClick={() => fetchPostNumber(phone)}>
+            재발송
+          </button>
         </div>
 
         <Button
           className={"w-[90vw] mt-[4vh] "}
           onClick={() => {
             numberSave();
-            navigate("/mydata/end");
+            fetchPostAuthNumber();
           }}
         >
           입력 완료
