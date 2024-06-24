@@ -9,7 +9,7 @@ import PortfolioCompositionComponent from "../../components/home/PortfolioCompos
 // apis
 import { getFundDetail } from "../../lib/apis/portfolioApi";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function FundDetailPage() {
@@ -18,6 +18,7 @@ export default function FundDetailPage() {
   const [bondList, setBondList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { portfolioId: portfolioId, fundId: fundId } = useParams();
+  const location = useLocation();
   const getData = async () => {
     const data = await getFundDetail(portfolioId, fundId);
     setDetailData(data.response);
@@ -25,9 +26,18 @@ export default function FundDetailPage() {
     setBondList(data.response.fundBonds);
     if (data) setIsLoading(false);
   };
-  useEffect(() => {
-    getData();
-  }, [portfolioId, fundId]);
+  if (location.state) {
+    useEffect(() => {
+      setDetailData(location.state);
+      setStockList(location.state.fundStocks);
+      setBondList(location.state.fundBonds);
+      setIsLoading(false);
+    }, []);
+  } else {
+    useEffect(() => {
+      getData();
+    }, [portfolioId, fundId]);
+  }
   return (
     <div className="relative bg-white">
       <TopBar type={3} />

@@ -11,12 +11,17 @@ import Tab from "../../components/home/TabComponent";
 import RobotAnalyzing from "../../components/home/RobotAnalyzing";
 
 // apis
-import { getAllPortfolio } from "../../lib/apis/portfolioApi";
+import {
+  getAllPortfolio,
+  getMyDataPortfolio,
+} from "../../lib/apis/portfolioApi";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isAllDataLoading, setIsAllDataLoading] = useState(true);
+  const [isMyDataLoading, setIsMyDataLoading] = useState(true);
   const [portfolioData, setPortfolioData] = useState([]);
+  const [myDataPortfolioData, setMyDataPortfolioData] = useState([]);
   const [isSelected, setSelected] = useState(0);
   const [isLogin, setIsLogin] = useState(false);
   const [isTestFinished, setIsTestFinished] = useState(false);
@@ -30,11 +35,19 @@ export default function HomePage() {
   const getPortfolioData = async () => {
     const data = await getAllPortfolio();
     setPortfolioData(data.response);
-    if (data) setIsLoading(false);
+    if (data) setIsAllDataLoading(false);
   };
+
+  const getMyDataPortfolioData = async (body) => {
+    const data = await getMyDataPortfolio(body);
+    setMyDataPortfolioData(data.response);
+    if (data) setIsMyDataLoading(false);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     getPortfolioData();
+    getMyDataPortfolioData({ user_id: 2, level: 5 });
     if (token) setIsLogin(true);
   }, []);
 
@@ -94,11 +107,20 @@ export default function HomePage() {
           {/** 포트폴리오 추천 리스트 */}
           {isSelected ? (
             isLogin ? (
-              <div className="flex flex-col items-center justify-center gap-5">
-                {portfolioData.map((elem, index) => (
-                  <RecommendComponent key={index} type={0} data={elem} />
-                ))}
-              </div>
+              // 로그인 한 상태의 개인화 탭
+              isMyDataLoading ? (
+                <div className="absolute flex w-full h-full bg-gray-200 opacity-90">
+                  <div className="w-full h-[80vh] flex items-center justify-center">
+                    <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-5">
+                  {myDataPortfolioData.map((elem, index) => (
+                    <RecommendComponent key={index} type={0} data={elem} />
+                  ))}
+                </div>
+              )
             ) : (
               <div className="relative overflow-y-hidden">
                 <div className="flex h-[70vh] flex-col justify-center items-center gap-5 blur">
@@ -117,7 +139,7 @@ export default function HomePage() {
                 </div>
               </div>
             )
-          ) : isLoading ? (
+          ) : isAllDataLoading ? (
             <div className="absolute flex w-full h-full bg-gray-200 opacity-90">
               <div className="w-full h-[80vh] flex items-center justify-center">
                 <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />

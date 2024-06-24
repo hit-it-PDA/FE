@@ -2,7 +2,7 @@ import { data } from "autoprefixer";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 // components
 import FundChartComponent from "../../components/common/chart/FundChartComponent";
@@ -19,20 +19,37 @@ export default function PortfolioDetailPage() {
   const [fundListData, setFundListData] = useState([]);
   const [fundRatio, setFundRatio] = useState([]);
   const { portfolioId: params_id } = useParams();
+  const location = useLocation();
   const getData = async () => {
     const data = await getFundList(params_id);
     setFundListData(data.response);
     setFundRatio(data.response.map((elem) => elem.weight));
+    if (data) setIsLoading(false);
   };
 
-  useEffect(() => {
-    getData();
-  }, [params_id]);
+  if (location.state) {
+    useEffect(() => {
+      setFundListData(location.state);
+      setFundRatio(location.state.map((elem) => elem.weight));
+      setIsLoading(false);
+    }, [location.state]);
+  } else {
+    useEffect(() => {
+      getData();
+    }, [params_id]);
+  }
 
   return (
     <div>
       <TopBar type={3} />
       <div className="w-[88vw] mx-auto flex flex-col items-center">
+        {isLoading ? (
+          <div className="absolute flex w-full h-full bg-gray-200 opacity-90">
+            <div className="w-full h-[90vh] flex items-center justify-center">
+              <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+            </div>
+          </div>
+        ) : null}
         <span className="w-[88vw] text-[23px] font-bold">
           📌 포트폴리오 구성
         </span>
@@ -43,7 +60,12 @@ export default function PortfolioDetailPage() {
         />
         <div className="flex flex-col mt-10 gap-7">
           {fundListData.map((elem, index) => (
-            <FundListComponent key={index} index={index} data={elem} />
+            <FundListComponent
+              key={index}
+              index={index}
+              data={elem}
+              type={location.state ? "my-data" : "all"}
+            />
           ))}
         </div>
       </div>
@@ -51,7 +73,7 @@ export default function PortfolioDetailPage() {
   );
 }
 
-const FundListComponent = ({ index, data }) => {
+const FundListComponent = ({ index, data, type }) => {
   const navigate = useNavigate();
   const COLORS = [
     "#F0F4FF",
@@ -69,7 +91,11 @@ const FundListComponent = ({ index, data }) => {
   return (
     <div
       className={`flex justify-between w-[90vw] rounded-[25px] px-5 py-5 shadow-lg hover:cursor-pointer`}
-      onClick={() => navigate(`${index}`)}
+      onClick={() => {
+        type === "all"
+          ? navigate(`${index}`)
+          : navigate(`${index}`, { state: data });
+      }}
       style={{ backgroundColor: `${COLORS[index]}` }}
     >
       <div className="flex flex-col flex-1 mr-2 truncate">
