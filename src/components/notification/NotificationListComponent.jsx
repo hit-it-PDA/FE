@@ -26,10 +26,10 @@ export default function NotificationListComponent({
         fetchPatchNotification(id);
       }}
     >
-      <p className="text-[18px]">리밸런싱 리포트</p>
+      <p className="text-[15px]">리밸런싱 리포트</p>
       <div className="flex flex-col items-end">
-        <span className="flex justify-center flex-1">{content}</span>
-        <span className="text-[12px]">{date}</span>
+        <span className="flex justify-center flex-1 text-[12px]">{content}</span>
+        <span className="text-[11px]">{date}</span>
       </div>
     </div>
   );

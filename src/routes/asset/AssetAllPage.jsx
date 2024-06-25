@@ -154,7 +154,7 @@ export default function AssetAllPage() {
                   alt="logo"
                   className="w-[3vh] h-[3vh] rounded-[50%]"
                 />
-                <p className="w-[30vw] h-[5vh] text-[#717171] text-[15px] font-bold">
+                <p className="w-[30vw] h-[5vh] text-[#717171] text-[13px] font-bold">
                   {item.name}
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function AssetAllPage() {
                   alt="logo"
                   className="w-[3vh] h-[3vh] rounded-[50%]"
                 />
-                <p className="w-[30vw] h-[5vh] text-[#717171] font-bold">
+                <p className="w-[30vw] h-[5vh] text-[#717171] font-bold text-[13px]">
                   {item.security_name}
                 </p>
               </div>
@@ -410,7 +410,7 @@ export default function AssetAllPage() {
                     alt="logo"
                     className="w-[3vh] h-[3vh] rounded-[50%]"
                   />
-                  <p className="w-[40vw] h-[3vh] text-[#717171] font-bold">
+                  <p className="w-[40vw] h-[3vh] text-[#717171] font-bold text-[13px]">
                     {item.pension_name.slice(0, 9)}
                   </p>
                 </div>

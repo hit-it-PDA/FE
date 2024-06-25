@@ -204,7 +204,7 @@ export default function AssetPage() {
               <div className="flex flex-col w-[63vw] items-center gap-3">
                 {user.type ? (
                   <>
-                    <p className="text-[18px]">
+                    <p className="text-[16px]">
                       {user.name.slice(0, 5)}님은&nbsp;
                       <span className="font-bold text-main">{user.type}</span>
                       입니다.
