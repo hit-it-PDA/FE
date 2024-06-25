@@ -69,7 +69,7 @@ const PortfolioRecommendComponent = ({
               className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
               onClick={() => {
                 setOpenModal(true);
-                setSelectedPortfolio(data.name);
+                setSelectedPortfolio(data);
               }}
             >
               선택하기

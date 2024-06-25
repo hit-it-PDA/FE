@@ -17,12 +17,13 @@ import { Sheet } from "react-modal-sheet";
 import {
   getAllPortfolio,
   getMyDataPortfolio,
+  changePortfolio,
 } from "../../lib/apis/portfolioApi";
 
 export default function HomePage() {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
-  const [selectedPortfolio, setSelectedPortfolio] = useState();
+  const [selectedPortfolio, setSelectedPortfolio] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isAllDataLoading, setIsAllDataLoading] = useState(true);
   const [isMyDataLoading, setIsMyDataLoading] = useState(true);
@@ -81,7 +82,6 @@ export default function HomePage() {
             setOpenModal={setOpenModal}
             selectedPortfolio={selectedPortfolio}
             name={user.name}
-            hasPortfolio={user.portfolio}
           />
           {/** 로그인 O, 투자 성향 진단 테스트 X -> 투자 성향 진단 테스트 버튼 */}
           {isLogin && !isTestFinished ? (
@@ -192,13 +192,15 @@ export default function HomePage() {
   );
 }
 
-const SelectModal = ({
-  openModal,
-  setOpenModal,
-  selectedPortfolio,
-  name,
-  hasPortfolio,
-}) => {
+const SelectModal = ({ openModal, setOpenModal, selectedPortfolio, name }) => {
+  const [result, setResult] = useState("");
+  const changePortfolioFunc = async (id) => {
+    const data = await changePortfolio(id);
+    setResult(data.response);
+  };
+  useEffect(() => {
+    setResult("");
+  }, [selectedPortfolio]);
   return (
     <Sheet
       isOpen={openModal}
@@ -209,33 +211,53 @@ const SelectModal = ({
         <Sheet.Header />
         <Sheet.Content>
           <div className="flex flex-col items-center w-full h-full px-5 bg-white">
-            <span className="w-full text-center font-bold text-[25px] my-[1.5vh] pb-[1.5vh] border-b-2">
-              {`포트폴리오 ${hasPortfolio ? "변경" : "선택"}`}
+            <span className="w-full text-center font-bold text-[25px] my-[1.5vh] pb-[1.5vh] border-b">
+              {`포트폴리오 선택`}
             </span>
             <div className="w-full px-2 my-[2vh] text-center ">
-              <span className="text-[18px] whitespace-pre-line">
-                {`${name}님의 포트폴리오를`}
-                <br />
-                <span className="font-bold text-main text-[22px]">
-                  {selectedPortfolio}
-                </span>
-                <br />
-                {`포트폴리오로 ${hasPortfolio ? "변경" : "선택"}합니다.`}
-              </span>
-            </div>
-            <div className="flex justify-around w-full mb-[3vh]">
-              <Button
-                className="w-5/12 h-[6vh] flex justify-center items-center"
-                onClick={() => setOpenModal(false)}
-              >
-                {`${hasPortfolio ? "변경" : "선택"}하기`}
-              </Button>
-              <Button
-                className="w-5/12 h-[6vh] flex justify-center items-center"
-                onClick={() => setOpenModal(false)}
-              >
-                취소하기
-              </Button>
+              {result ? (
+                <>
+                  <span className="text-[18px]">{result}</span>
+                  <div className="flex justify-center w-full mt-[3vh]">
+                    <Button
+                      className="w-5/12 h-[6vh] flex justify-center items-center"
+                      onClick={() => setOpenModal(false)}
+                    >
+                      완료
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <span className="text-[18px] whitespace-pre-line">
+                      {`${name}님의 포트폴리오를`}
+                      <br />
+                      <span className="font-bold text-main text-[22px]">
+                        {selectedPortfolio.name}
+                      </span>
+                      <br />
+                      {`포트폴리오로 선택합니다.`}
+                    </span>
+                  </div>
+                  <div className="flex justify-around w-full mt-[3vh]">
+                    <Button
+                      className="w-5/12 h-[6vh] flex justify-center items-center"
+                      onClick={() => {
+                        changePortfolioFunc(selectedPortfolio.id);
+                      }}
+                    >
+                      {`선택하기`}
+                    </Button>
+                    <Button
+                      className="w-5/12 h-[6vh] flex justify-center items-center"
+                      onClick={() => setOpenModal(false)}
+                    >
+                      취소하기
+                    </Button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </Sheet.Content>
