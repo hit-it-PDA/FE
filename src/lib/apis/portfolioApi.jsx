@@ -52,3 +52,12 @@ export async function getMyDataPortfolio(body) {
     return error.response;
   }
 }
+
+export async function changePortfolio(id) {
+  try {
+    const response = await authInstance(8084).post(`/portfolios/change/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+}
