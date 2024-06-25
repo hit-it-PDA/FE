@@ -14,15 +14,18 @@ export default function MorePage() {
   const user = useUserStore((state) => state.user);
   const token = localStorage.getItem("accessToken");
   const [account, setAccount] = useState({});
+  const { clearUser } = useUserStore();
 
   const fetchGetAccount = async () => {
     try {
       const response = await getAccount();
-      console.log(response);
       setAccount(response.data.response);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
+  };
+
+  const handleLogout = () => {
+    clearUser(); // 유저 정보 초기화
+    localStorage.removeItem("accessToken"); // localStorage에서 accessToken 제거
   };
 
   useEffect(() => {
@@ -124,19 +127,26 @@ export default function MorePage() {
           <div className="flex flex-col justify-center">
             <div className="flex flex-row justify-between">
               <div className="py-[0.5vh]">알림</div>
-              {isChecked ? (
+              {isLogin ? (
                 <button
                   className="px-2 py-1 text-[15px] mr-2 border-2 border-main text-main rounded-[15px] font-bold text-justify"
-                  onClick={() => setIsChecked(false)}
+                  onClick={() => {
+                    window.alert("로그아웃되었습니다.");
+                    handleLogout();
+                    navigate("/login");
+                  }}
                 >
-                  ON
+                  로그아웃
                 </button>
               ) : (
                 <button
-                  className="px-2 py-1 text-[15px] mr-2 border-2 border-[#FF0000] text-[#FF0000] rounded-[15px] font-bold text-justify"
-                  onClick={() => setIsChecked(true)}
+                  className="px-2 py-1 text-[15px] mr-2 border-2 border-main text-main rounded-[15px] font-bold text-justify"
+                  onClick={() => {
+                    window.alert("로그인하러 갈게요.");
+                    navigate("/login");
+                  }}
                 >
-                  OFF
+                  로그인
                 </button>
               )}
             </div>
