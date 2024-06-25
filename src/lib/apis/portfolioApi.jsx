@@ -53,12 +53,33 @@ export async function getMyDataPortfolio(body) {
   }
 }
 
+export async function changePortfolio(id) {
+  try {
+    const response = await authInstance(8084).post(`/portfolios/change/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+}
+
 export async function getUserPortfolio() {
   try {
     const response = await authInstance(8084).get(`/portfolios/user`);
     return response.data;
   } catch (error) {
     console.log(error);
+    return error.response;
+  }
+}
+
+export async function changeMyDataPortfolio(body) {
+  try {
+    const response = await authInstance(8084).post(
+      `/portfolios/mydata/change`,
+      body
+    );
+    return response.data;
+  } catch (error) {
     return error.response;
   }
 }
@@ -72,6 +93,7 @@ export async function getUserPortfolioDetail() {
     return error.response;
   }
 }
+    
 export async function getUserFundDetail(fundId) {
   try {
     const response = await authInstance(8084).get(
