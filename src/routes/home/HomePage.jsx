@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../../store/userStore";
-// icons
-import downArrow from "../../assets/icons/downArrow.svg";
 
 // components
 import TopBar from "../../components/common/topBar/TopBar";
@@ -18,13 +16,13 @@ import {
   getAllPortfolio,
   getMyDataPortfolio,
   changePortfolio,
+  changeMyDataPortfolio,
 } from "../../lib/apis/portfolioApi";
 
 export default function HomePage() {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
   const [isAllDataLoading, setIsAllDataLoading] = useState(true);
   const [isMyDataLoading, setIsMyDataLoading] = useState(true);
   const [portfolioData, setPortfolioData] = useState([]);
@@ -58,6 +56,7 @@ export default function HomePage() {
     getMyDataPortfolioData({ user_id: 2, level: 5 });
     if (token) setIsLogin(true);
   }, []);
+
   return (
     <div>
       <TopBar type={0} />
@@ -195,8 +194,15 @@ export default function HomePage() {
 const SelectModal = ({ openModal, setOpenModal, selectedPortfolio, name }) => {
   const [result, setResult] = useState("");
   const changePortfolioFunc = async (id) => {
-    const data = await changePortfolio(id);
-    setResult(data.response);
+    if (selectedPortfolio.funds) {
+      const data = await changeMyDataPortfolio(selectedPortfolio);
+      console.log(data);
+      setResult(data.response);
+    } else {
+      const data = await changePortfolio(id);
+      console.log(data);
+      setResult(data.response);
+    }
   };
   useEffect(() => {
     setResult("");
