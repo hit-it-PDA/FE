@@ -13,11 +13,13 @@ import useUserStore from "../../store/userStore";
 export default function InvestTestResultPage() {
   const [testDatas, setTestDatas] = useState([]);
   const user = useUserStore((state) => state.user);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchGetTestResult = async () => {
     try {
       const response = await getTestResult();
       setTestDatas(response.data.response);
+      if (response) setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -41,5 +43,16 @@ export default function InvestTestResultPage() {
         return <InvestResultRed testDatas={testDatas} />;
     }
   };
-  return <div>{renderPage()}</div>;
+  return (
+    <>
+      {isLoading ? (
+        <div className="absolute flex w-full h-full bg-gray-200 opacity-90">
+          <div className="w-full h-[90vh] flex items-center justify-center">
+            <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+          </div>
+        </div>
+      ) : null}
+      <div>{renderPage()}</div>
+    </>
+  );
 }
