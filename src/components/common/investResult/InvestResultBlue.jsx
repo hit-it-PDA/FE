@@ -46,7 +46,7 @@ export default function InvestResultBlue({ testDatas }) {
         >
           다시 테스트하기
         </Button>
-        <Button className={"w-[32vw]"} onClick={() => navigate("/")}>
+        <Button className={"w-[32vw]"} onClick={() => navigate("/asset")}>
           확인
         </Button>
       </div>

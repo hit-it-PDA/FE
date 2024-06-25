@@ -40,13 +40,15 @@ export default function LoginPage() {
       password: pwd,
     };
     const response = await login(reqBody);
-    const userInfo = response.data.response.userInfo;
+    console.log(response);
     const status_code = response.status;
-    setUser(userInfo);
-    fetchGetAllAssets();
+
     if (status_code === 400) {
       window.alert("이메일 혹은 비밀번호를 확인하세요.");
     } else if (status_code === 200) {
+      const userInfo = response.data.response.userInfo;
+      setUser(userInfo);
+      fetchGetAllAssets();
       navigate("/");
     }
   };

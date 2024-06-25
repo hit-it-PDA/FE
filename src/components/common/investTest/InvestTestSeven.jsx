@@ -32,7 +32,7 @@ export default function InvestTestSeven({
         {answers.map((answer) => (
           <InvestButton
             key={answer.id}
-            className="w-[85vw] h-[10vh]"
+            className="w-[88vw] h-[10vh]"
             onClick={() => {
               const tempData = {
                 question: answer.questionNo,
