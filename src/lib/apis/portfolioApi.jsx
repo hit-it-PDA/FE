@@ -1,11 +1,11 @@
 import instance, { authInstance } from "./base";
 import axios from "axios";
 
-export async function getAllPortfolio() {
-	const baseUrl = import.meta.env.VITE_PORTFOLIO_BASE_URI;
-	const port = 8084;
-	const url = `${baseUrl}:${port}`;
+const baseUrl = import.meta.env.VITE_PORTFOLIO_BASE_URI;
+const port = 8084;
+const url = `${baseUrl}:${port}`;
 
+export async function getAllPortfolio() {
 	try {
 		// const response = await authInstance(8084).get("/portfolios/hitit");
 		const response = await axios.get(`${url}/api/portfolios/hitit`);
@@ -37,6 +37,7 @@ export async function getFundDetail(portfolioId, fundId) {
 
 export async function getMyDataPortfolio(body) {
 	const token = localStorage.getItem("accessToken");
+	console.log(`${url}/api/portfolios/mydata/leveltest`);
 	try {
 		const response = await axios.post(
 			`${url}/api/portfolios/mydata/leveltest`,
