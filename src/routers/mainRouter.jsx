@@ -33,6 +33,7 @@ import KaKaoLoginPage from "../routes/login/KaKaoLoginPage";
 import FundDetailPage from "../routes/home/FundDetailPage";
 import InvestTestUserResultPage from "../routes/investTest/InvestTestUserResultPage";
 import ManageDiagnosisPage from "../routes/manage/diagnosis/ManageDiagnosisPage";
+import AssetPortfolioDetail from "../routes/asset/AssetPortfolioDetail";
 
 // layouts
 import HomeLayout from "../routes/home/HomeLayout";
@@ -147,6 +148,11 @@ export const mainRouter = [
           {
             path: "portfolio",
             element: <AssetPortfolio />,
+            index: true,
+          },
+          {
+            path: "portfolio/:fundId",
+            element: <AssetPortfolioDetail />,
             index: true,
           },
         ],
