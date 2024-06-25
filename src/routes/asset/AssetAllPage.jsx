@@ -410,7 +410,7 @@ export default function AssetAllPage() {
                     alt="logo"
                     className="w-[3vh] h-[3vh] rounded-[50%]"
                   />
-                  <p className="w-[33vw] h-[3vh] text-[#717171] font-bold">
+                  <p className="w-[40vw] h-[3vh] text-[#717171] font-bold">
                     {item.pension_name.slice(0, 9)}
                   </p>
                 </div>
