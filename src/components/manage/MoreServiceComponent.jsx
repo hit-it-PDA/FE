@@ -18,7 +18,9 @@ export default function MoreServiceComponent({ title, detail }) {
         src={rightCircleArrow}
         className="w-[50px] hover:cursor-pointer"
         onClick={() =>
-          navigate(`${title === "노후준비종합진단" ? "diagnosis" : "pension"}`)
+          navigate(
+            `${title === "노후 준비 종합 진단" ? "diagnosis" : "pension"}`
+          )
         }
       />
     </div>
