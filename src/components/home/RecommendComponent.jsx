@@ -45,7 +45,6 @@ const PortfolioRecommendComponent = ({ type, data }) => {
             <span>{data.minimumSubscriptionFee}만원</span>
           </div>
         )}
-
         <div className="text-[15px] flex justify-between items-center">
           <span>수익률</span>
           <div className="flex items-baseline gap-1.5">
@@ -64,11 +63,11 @@ const PortfolioRecommendComponent = ({ type, data }) => {
       </div>
       {type ? null : (
         <div className="flex items-center justify-around flex-1">
-          <div className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer">
+          <div className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center">
             선택하기
           </div>
           <div
-            className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
+            className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center"
             onClick={() => {
               data.funds
                 ? navigate(`/detail/${data.name}`, { state: data.funds })

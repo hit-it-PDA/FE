@@ -6,7 +6,7 @@ export default function NotificationListComponent({ date, content }) {
     <div
       className={`${
         isRead ? "bg-white" : "bg-sub"
-      } border-b px-[8vw] py-3 h-[8vh] w-full flex items-center justify-around hover:cursor-pointer`}
+      } border-b px-[8vw] py-3 h-[8vh] w-full flex items-center justify-around`}
       onClick={() => setIsRead(true)}
     >
       <span>{date}</span>

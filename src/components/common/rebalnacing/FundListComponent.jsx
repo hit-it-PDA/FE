@@ -6,7 +6,7 @@ import arrow from "../../../assets/icons/cheveron-right.svg";
 export default function FundListComponent({ setOpen }) {
   return (
     <div
-      className={`flex justify-between w-[90vw] rounded-[25px] px-5 py-5 shadow-lg hover:cursor-pointer`}
+      className={`flex justify-between w-[90vw] rounded-[25px] px-5 py-5 shadow-lg`}
       style={{ backgroundColor: `#E5E9FF` }}
       onClick={() => setOpen(true)}
     >

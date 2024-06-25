@@ -16,7 +16,7 @@ export default function MoreServiceComponent({ title, detail }) {
       </div>
       <img
         src={rightCircleArrow}
-        className="w-[50px] hover:cursor-pointer"
+        className="w-[50px]"
         onClick={() =>
           navigate(`${title === "노후준비종합진단" ? "diagnosis" : "pension"}`)
         }
