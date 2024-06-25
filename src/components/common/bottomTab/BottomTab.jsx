@@ -74,7 +74,7 @@ const Tab = ({ img, imgSelected, title, setSelected, isSelected }) => {
   };
   return (
     <div
-      className="flex flex-col items-center w-fit hover:cursor-pointer relative"
+      className="relative flex flex-col items-center w-fit"
       onClick={() => onClickFn()}
     >
       <img src={isSelected ? imgSelected : img} className="flex-1 h-full" />

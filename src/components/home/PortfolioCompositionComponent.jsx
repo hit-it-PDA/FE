@@ -52,7 +52,7 @@ export default function PortfolioCompositionComponent({ type, data }) {
               >
                 <div className="flex items-center justify-between w-full px-5">
                   <span className="flex-1 truncate mr-1 font-bold text-[15px]">
-                    {elem.stock_name || elem.bond_name}
+                    {elem.stockName || elem.bondName}
                   </span>
                   <span className="text-[13px]">{elem.weight}%</span>
                 </div>

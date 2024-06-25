@@ -26,7 +26,7 @@ export default function PortfolioRatioComponent({
 const RatioComponent = ({ title, ratio }) => {
   return (
     <div className="flex items-center justify-center">
-      <div className="flex w-[15vw] justify-center font-bold text-[15px]">
+      <div className="flex w-[16vw] justify-center font-bold text-[15px]">
         {title}
       </div>
       <div className="w-[50vw] h-[2.5vh] bg-[#F0F0F0] mx-[5vw]">
