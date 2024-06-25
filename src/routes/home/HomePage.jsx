@@ -196,11 +196,9 @@ const SelectModal = ({ openModal, setOpenModal, selectedPortfolio, name }) => {
   const changePortfolioFunc = async (id) => {
     if (selectedPortfolio.funds) {
       const data = await changeMyDataPortfolio(selectedPortfolio);
-      console.log(data);
       setResult(data.response);
     } else {
       const data = await changePortfolio(id);
-      console.log(data);
       setResult(data.response);
     }
   };
