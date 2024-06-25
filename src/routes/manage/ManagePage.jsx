@@ -53,7 +53,7 @@ export default function ManagePage() {
           <span className="text-[23px] font-bold">📌 부가 서비스</span>
           <div className="flex flex-col justify-around flex-1 mt-2">
             <MoreServiceComponent
-              title="노후준비종합진단"
+              title="노후 준비 종합 진단"
               detail={`나는 노후를 잘 준비하고 있을까?
               노후에 생활비를 얼마나 쓸 수 있을까?`}
             />
