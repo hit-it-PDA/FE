@@ -2,7 +2,7 @@ import { authInstance } from "./base";
 
 const getNotification = async () => {
   try {
-    const response = await authInstance(8081).get(`/notifications`);
+    const response = await authInstance(8081).get(`/users/notifications`);
     return response.data;
   } catch (error) {
     return error.response;
@@ -11,7 +11,10 @@ const getNotification = async () => {
 
 const postNotification = async (reqBody) => {
   try {
-    const response = await authInstance(8084).post(`/send/message`, reqBody);
+    const response = await authInstance(8084).post(
+      `/portfolios/send/message`,
+      reqBody
+    );
     return response.data;
   } catch (error) {
     return error.response;
@@ -22,7 +25,7 @@ const patchNotification = async (notificationId) => {
   try {
     console.log(notificationId);
     const response = await authInstance(8081).patch(
-      `/notifications/${notificationId}`
+      `/users/notifications/${notificationId}`
     );
     return response.data;
   } catch (error) {

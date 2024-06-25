@@ -95,6 +95,15 @@ async function postAuthNumber(reqBody) {
   }
 }
 
+async function getMydata() {
+  try {
+    const response = await authInstance(8083).get(`/assets/mydata-link`);
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
+}
+
 export {
   postMydata,
   getAllAssets,
@@ -105,4 +114,5 @@ export {
   getPensionAssets,
   postNumber,
   postAuthNumber,
+  getMydata,
 };

@@ -18,6 +18,7 @@ import {
   changePortfolio,
   changeMyDataPortfolio,
 } from "../../lib/apis/portfolioApi";
+import { getMydata } from "../../lib/apis/mydataApi";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -32,11 +33,7 @@ export default function HomePage() {
   const [isTestFinished, setIsTestFinished] = useState(false);
   const { clearUser } = useUserStore();
   const user = useUserStore((state) => state.user);
-
-  const handleLogout = () => {
-    clearUser(); // 유저 정보 초기화
-    localStorage.removeItem("accessToken"); // localStorage에서 accessToken 제거
-  };
+  const [checkNum, setCheckNum] = useState();
 
   const getPortfolioData = async () => {
     const data = await getAllPortfolio();
@@ -50,17 +47,51 @@ export default function HomePage() {
     if (data) setIsMyDataLoading(false);
   };
 
+  // const fetchGetMydata = async () => {
+  //   try {
+  //     const response = await getMydata();
+  //     console.log(response);
+  //     console.log(response.response);
+  //     const token = localStorage.getItem("accessToken");
+  //     if (token) setIsLogin(true);
+  //     setCheckNum(response.response);
+  //     if (isLogin === true && response.response === 0) {
+  //       console.log(isLogin, checkNum);
+  //       navigate("/mydata");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  useEffect(() => {
+    const fetchGetMydata = async () => {
+      try {
+        const response = await getMydata();
+        const token = localStorage.getItem("accessToken");
+        if (token) setIsLogin(true);
+        setCheckNum(response.response);
+
+        if (response.response === 0) {
+          navigate("/mydata");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchGetMydata();
+  }, [navigate]);
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
+    if (token) setIsLogin(true);
     getPortfolioData();
     getMyDataPortfolioData({ user_id: 2, level: 5 });
-    if (token) setIsLogin(true);
   }, []);
 
   return (
     <div>
       <TopBar type={0} />
-      <button onClick={handleLogout}>로그아웃</button>
       <div className="flex flex-col items-center justify-center w-screen">
         {/** 전체/개인화 탭 */}
         <div className="h-[5vh] w-11/12 bg-white flex flex-row items-center border-b">
