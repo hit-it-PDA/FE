@@ -37,17 +37,12 @@ export async function getFundDetail(portfolioId, fundId) {
 
 export async function getMyDataPortfolio(body) {
 	const token = localStorage.getItem("accessToken");
-	console.log(`${url}/api/portfolios/mydata/leveltest`);
 	try {
-		const response = await axios.post(
-			`${url}/api/portfolios/mydata/leveltest`,
-			body
-			// {
-			//   headers: {
-			//     Authorization: `Bearer ${token}`,
-			//   },
-			// }
-		);
+		const response = await authInstance(8084).get(`/portfolios/mydata`, {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
 		return response.data;
 	} catch (error) {
 		return error.response;
