@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import TopBar from "../../../components/common/topBar/TopBar";
 import { useNavigate } from "react-router-dom";
 
-// components
-import RobotAnalyzing from "../../../components/home/RobotAnalyzing";
-
 // icons
 import info from "../../../assets/icons/info.svg";
 import arrow from "../../../assets/icons/cheveron-right.svg";
@@ -37,7 +34,6 @@ export default function PensionAccountListPage() {
   const user = useUserStore((state) => state.user);
   const navigate = useNavigate();
   const [isOpen, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSelected, setIsSelected] = useState([]);
   const [accountData, setAccountData] = useState([]);
   const [total, setTotal] = useState(0);
@@ -65,7 +61,6 @@ export default function PensionAccountListPage() {
       return accumulator + Number(elem.balance);
     }, 0);
     setTotal(total);
-    setIsLoading(false);
   };
   useEffect(() => {
     getData();
@@ -73,9 +68,6 @@ export default function PensionAccountListPage() {
   return (
     <div>
       <TopBar type={2} />
-      {isLoading ? (
-        <RobotAnalyzing>미청구 퇴직연금 조회 중</RobotAnalyzing>
-      ) : null}
       <DetailModal isOpen={isOpen} setOpen={setOpen} isSelected={isSelected} />
       <div className="w-full flex flex-col relative pb-[8vh] items-start">
         <div className="bg-[#375AFF] w-full p-5 flex flex-col justify-between">
@@ -86,14 +78,14 @@ export default function PensionAccountListPage() {
             <span className="text-white text-[20px] my-1">
               총 {total?.toLocaleString()}원
             </span>
-            <span className="text-[10px] text-[#DDDDDD]">
+            <span className="text-[12px] text-[#DDDDDD]">
               미청구 퇴직연금 조회정보는 해당 금융기관으로부터 제공받은
               정보입니다. 동 정보에 대한 문의는 해당 금융기관 고객센터로
               해주시길 바랍니다.
             </span>
           </div>
           <div
-            className="flex items-center justify-end mt-5 hover:cursor-pointer"
+            className="flex items-center justify-end mt-5"
             onClick={() => navigate("../apply-info")}
           >
             <img src={info} />
