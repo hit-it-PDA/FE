@@ -10,7 +10,7 @@ import Input from "../../components/Input";
 import useInput from "../../hooks/useInput";
 //apis
 import { login } from "../../lib/apis/userApi";
-import { getAllAssets } from "../../lib/apis/mydataApi";
+import { getAllAssets, getMydata } from "../../lib/apis/mydataApi";
 // store
 import useUserStore from "../../store/userStore";
 

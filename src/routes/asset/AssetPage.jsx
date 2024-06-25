@@ -186,7 +186,8 @@ export default function AssetPage() {
                   onClick={() => {
                     isLogin
                       ? navigate("all")
-                      : window.alert("로그인 후 이용 가능해요!");
+                      : window.alert("로그인 후 이용 가능해요!"),
+                      navigate("/login");
                   }}
                 />
               </div>
@@ -247,7 +248,7 @@ export default function AssetPage() {
                     navigate("/login");
                   }}
                 >
-                  <span className="font-semibold">투자 성향 테스트</span>
+                  <span className="font-semibold">로그인 하러가기</span>
                 </button>
               </div>
             )}
