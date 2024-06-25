@@ -38,7 +38,7 @@ export default function InvestResultOrange({ testDatas }) {
           })}
         </div>
       </div>
-      <div className="flex flex-row justify-between w-[70vw] fixed bottom-5">
+      <div className="flex flex-row justify-between w-[70vw] fmt-[4vh]">
         <Button
           className={"w-[32vw]"}
           onClick={() => navigate("/invest-test/start")}
