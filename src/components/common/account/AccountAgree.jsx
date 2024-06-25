@@ -34,7 +34,7 @@ export default function AccountAgree({
     <>
       <div className="w-[88vw] mt-[3vh]">
         <p>STEP 1.</p>
-        <p className="text-2xl">
+        <div className="text-2xl">
           <span className="text-2xl font-bold">계좌 개설</span>을 위해
           <br />
           <span className="text-2xl font-bold">개인정보수집에 동의</span>
@@ -42,7 +42,7 @@ export default function AccountAgree({
           <p className="text-sm font-bold text-gray-400">
             ※계좌가 있으시면 조회 후 비밀번호를 재설정할게요
           </p>
-        </p>
+        </div>
       </div>
       <div className="flex flex-col items-center w-[90vw] mt-[10vh] bg-gray-200 pb-[2vh] rounded-[3vh]">
         <div className="flex flex-row justify-between w-[80vw] mt-[2vh]">
