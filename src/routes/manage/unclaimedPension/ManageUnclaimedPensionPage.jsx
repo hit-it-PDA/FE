@@ -5,9 +5,15 @@ import { useNavigate } from "react-router-dom";
 // icons
 import warning from "../../../assets/icons/warning.svg";
 import Button from "../../../components/Button";
+import useUserStore from "../../../store/userStore";
 
 export default function ManageUnclaimedPensionPage() {
   const navigate = useNavigate();
+  const user = useUserStore((store) => store.user);
+  const applyFunc = () => {
+    alert("로그인 후 이용해주세요!");
+    navigate("/login");
+  };
   return (
     <div>
       <TopBar type={2} />
@@ -46,7 +52,7 @@ export default function ManageUnclaimedPensionPage() {
               📌 퇴직연금 제도 유형 알아보기
             </span>
             <div className="flex flex-col mt-2">
-              <div className="flex flex-col px-5 gap-3">
+              <div className="flex flex-col gap-3 px-5">
                 <div>
                   <p className="text-[16px] font-bold ">
                     1. 확정급여형 퇴직연금(DB)
@@ -77,12 +83,12 @@ export default function ManageUnclaimedPensionPage() {
               </div>
             </div>
           </div>
-          <div className="border-t py-5">
+          <div className="py-5 border-t">
             <div className="flex items-center">
               <img src={warning} className="mr-1" />
               <span className="text-[20px] font-bold">조회 가능 금융 기관</span>
             </div>
-            <div className="px-5 mt-2 flex gap-3 flex-col">
+            <div className="flex flex-col gap-3 px-5 mt-2">
               <div className="flex items-center">
                 <span className="w-[10vw] font-bold">은행</span>
                 <span className="flex-1 text-[12px]">
@@ -116,7 +122,9 @@ export default function ManageUnclaimedPensionPage() {
         </div>
         <Button
           className={"fixed bottom-[10vh] w-[90vw] self-center"}
-          onClick={() => navigate("list")}
+          onClick={() => {
+            user?.name === "방문자" ? applyFunc() : navigate("list");
+          }}
         >
           조회하기
         </Button>
