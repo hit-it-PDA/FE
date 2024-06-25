@@ -15,7 +15,7 @@ const PortfolioRecommendComponent = ({
       className={`${
         type
           ? "bg-main flex flex-col box-content p-7"
-          : "flex flex-col w-[70vw] h-[20vh] rounded-[10px] p-4 box-content shadow-lg"
+          : "flex flex-col w-[70vw] rounded-[10px] p-4 box-content shadow-lg"
       }`}
     >
       <div className={`flex-1 ${type ? null : "mb-2"}`}>
@@ -46,7 +46,7 @@ const PortfolioRecommendComponent = ({
           type ? "justify-end text-white" : null
         }`}
       >
-        <div className="text-[15px] flex justify-between items-center">
+        <div className="text-[15px] flex my-[1.3vh] justify-between items-center">
           <span>수익률</span>
           <div className="flex items-baseline gap-1.5">
             <span

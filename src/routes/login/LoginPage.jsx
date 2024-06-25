@@ -85,9 +85,9 @@ export default function LoginPage() {
           카카오톡 로그인
         </a>
       </div>
-      <div className="mx-auto flex flex-row justify-center w-[50vw] gap-2">
-        <p className="font-bold text-input_color">회원이 아니라면?</p>
-        <button className="underline" onClick={SignUpClick}>
+      <div className="flex flex-row justify-center w-full gap-2 mx-auto">
+        <p className="px-2 font-bold text-input_color">회원이 아니라면?</p>
+        <button className="px-2 underline" onClick={SignUpClick}>
           회원가입
         </button>
       </div>
