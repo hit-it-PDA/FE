@@ -14,7 +14,7 @@ const PortfolioRecommendComponent = ({
     <div
       className={`${
         type
-          ? "bg-main flex flex-col h-[20vh] box-content p-7"
+          ? "bg-main flex flex-col box-content p-7"
           : "flex flex-col w-[70vw] h-[20vh] rounded-[10px] p-4 box-content shadow-lg"
       }`}
     >
