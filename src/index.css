@@ -5,9 +5,28 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  cursor: default !important;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  font-weight: normal;
+  src: url("./fonts/NotoSansKR-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  font-weight: bold;
+  src: url("./fonts/NotoSansKR-Bold.ttf") format("truetype");
+}
+
+body {
+  font-family: "NotoSansKR", sans-serif;
+  font-weight: normal;
+  cursor: default !important;
 }
