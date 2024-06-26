@@ -34,7 +34,6 @@ export default function HomePage() {
   const { clearUser } = useUserStore();
   const user = useUserStore((state) => state.user);
   const [checkNum, setCheckNum] = useState();
-
   const getPortfolioData = async () => {
     const data = await getAllPortfolio();
     setPortfolioData(data.response);
@@ -81,6 +80,10 @@ export default function HomePage() {
 
     fetchGetMydata();
   }, [navigate]);
+
+  useEffect(() => {
+    if (user.type !== null && user.type !== "미정") setIsTestFinished(true);
+  }, [user.type]);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
