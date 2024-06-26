@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 // modal
 import { Sheet } from "react-modal-sheet";
@@ -6,7 +8,11 @@ import { Sheet } from "react-modal-sheet";
 // components
 import NewsInfo from "./NewsInfo";
 
-export default function ReportModal({ isOpen, setOpen }) {
+export default function ReportModal({ isOpen, setOpen, data }) {
+  // bad_news가 null이 아닌 항목들만 필터링
+  const filteredStocks =
+    data.stocks?.filter((stock) => stock.bad_news_title !== "None") || [];
+
   return (
     <Sheet
       isOpen={isOpen}
@@ -19,12 +25,12 @@ export default function ReportModal({ isOpen, setOpen }) {
           <div className="flex flex-col items-center w-full my-[2vh]">
             <div className="flex flex-col w-[90vw] px-5 py-3 border-b mb-[2vh]">
               <span className="text-[20px] font-bold self-center mb-3">
-                신한BNPP글로벌밸런스EMP
+                {data.fund_name}
               </span>
               <div className="flex flex-col justify-center w-full gap-1">
                 <div className="flex justify-between w-full">
                   <span className="text-[15px]">운용사</span>
-                  <span className="text-[17px]">신한자산운용</span>
+                  <span className="text-[17px]">{data.company_name}</span>
                 </div>
                 <div className="flex justify-between w-full">
                   <span className="text-[15px]">수익률</span>
@@ -33,7 +39,7 @@ export default function ReportModal({ isOpen, setOpen }) {
                       3개월
                     </span>
                     <span className="text-[18px] font-bold text-[#ff0000]">
-                      21.7%
+                      {data.return3m?.toFixed(2)}%
                     </span>
                   </div>
                 </div>
@@ -41,17 +47,18 @@ export default function ReportModal({ isOpen, setOpen }) {
             </div>
             <div className="w-[90vw] mb-[2vh]">
               <p className="text-[15px]">
-                ✔︎ 해당 펀드의 비중은{" "}
-                <span className="font-bold">20%에서 30%로 변경</span>되었어요.
-              </p>
-              <p className="text-[15px]">
-                ✔︎ <span className="font-bold">총 1개의 위험 판단 주식</span>을
-                찾았어요.
+                ✔︎{" "}
+                <span className="font-bold">
+                  총 {filteredStocks.length}개의 위험 판단 주식
+                </span>
+                을 찾았어요.
               </p>
             </div>
             {/** 뉴스 기사 */}
             <div className="flex flex-col w-[90vw] mb-[2vh]">
-              <NewsInfo />
+              {filteredStocks.map((elem, index) => (
+                <NewsInfo data={elem} key={index} />
+              ))}
             </div>
             <div className="flex justify-center w-full">
               <button
