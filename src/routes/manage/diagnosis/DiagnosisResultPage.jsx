@@ -28,6 +28,7 @@ import RobotAnalyzing from "../../../components/home/RobotAnalyzing";
 export default function DiagnosisResultPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [result, setResult] = useState([]);
+  const [noResult, setNoResult] = useState("");
   const [isPrevious, setIsPrevious] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,7 +38,10 @@ export default function DiagnosisResultPage() {
   };
   const getPreviousResultData = async () => {
     const response = await getPreviousDiagnosisResult();
-    setResult(response.response);
+    if (response.response) setResult(response.response);
+    else {
+      setResult(response.data);
+    }
     setIsLoading(false);
   };
   useEffect(() => {
@@ -67,57 +71,65 @@ export default function DiagnosisResultPage() {
                 </span>
               ) : null}
             </div>
-            <div className="flex flex-col items-center gap-3">
-              <ManageTypeComponent
-                level={result?.type[0]}
-                type={result?.type[1]}
-                detail={result?.type[2]}
-              />
-              <div className="flex flex-col w-full gap-2 mt-[2vh]">
-                <AssetAnalysisComponent
-                  category="예상 노후생활비"
-                  detail={result?.monthly_living_expenses[1]}
-                  state={result?.monthly_living_expenses[0]}
+            {result.success ? (
+              <div className="flex flex-col items-center gap-3">
+                <ManageTypeComponent
+                  level={result?.type[0]}
+                  type={result?.type[1]}
+                  detail={result?.type[2]}
                 />
-                <AssetAnalysisComponent
-                  category="공적 연금"
-                  state={result?.expected_national_pension}
-                />
-                <AssetAnalysisComponent
-                  category="금융 자산"
-                  state={result?.total_financial_assets}
-                />
-                <AssetAnalysisComponent
-                  category="부동산 자산"
-                  state={result?.total_real_estate_value}
-                />
-                <AssetAnalysisComponent
-                  category="소득 활동"
-                  state={result?.career_effort_score}
-                />
-              </div>
-              <div className="flex flex-col w-full mt-[2vh]">
-                <AssetAgeAnalysisComponent
-                  asset_life={result?.asset_life}
-                  life_expectancy={result?.life_expectancy}
-                  detail={`자산 수명 ${result?.asset_life}세는 평균수명(${
-                    result?.life_expectancy
-                  }세)보다 ${Math.abs(
-                    result?.life_expectancy - result?.asset_life
-                  )}년 ${
-                    result?.life_expectancy - result?.asset_life > 0
-                      ? "짧아요."
-                      : "길어요."
-                  }
+                <div className="flex flex-col w-full gap-2 mt-[2vh]">
+                  <AssetAnalysisComponent
+                    category="예상 노후생활비"
+                    detail={result?.monthly_living_expenses[1]}
+                    state={result?.monthly_living_expenses[0]}
+                  />
+                  <AssetAnalysisComponent
+                    category="공적 연금"
+                    state={result?.expected_national_pension}
+                  />
+                  <AssetAnalysisComponent
+                    category="금융 자산"
+                    state={result?.total_financial_assets}
+                  />
+                  <AssetAnalysisComponent
+                    category="부동산 자산"
+                    state={result?.total_real_estate_value}
+                  />
+                  <AssetAnalysisComponent
+                    category="소득 활동"
+                    state={result?.career_effort_score}
+                  />
+                </div>
+                <div className="flex flex-col w-full mt-[2vh]">
+                  <AssetAgeAnalysisComponent
+                    asset_life={result?.asset_life}
+                    life_expectancy={result?.life_expectancy}
+                    detail={`자산 수명 ${result?.asset_life}세는 평균수명(${
+                      result?.life_expectancy
+                    }세)보다 ${Math.abs(
+                      result?.life_expectancy - result?.asset_life
+                    )}년 ${
+                      result?.life_expectancy - result?.asset_life > 0
+                        ? "짧아요."
+                        : "길어요."
+                    }
                   ${
                     result?.life_expectancy - result?.asset_life > 0
                       ? `월 생활비를 ${result?.optimal_monthly_living_expenses}만원으로 낮추면 자산수명과 기대수명이 일치해요.`
                       : ""
                   }
                   `}
-                />
+                  />
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center w-full h-[60vh]">
+                <span>이전 기록이 없어요!</span>
+                <p>노후 준비 종합 진단을 진행해주세요!</p>
+              </div>
+            )}
+
             <Button
               className="w-full mt-[5vh]"
               onClick={() => navigate("/manage")}
