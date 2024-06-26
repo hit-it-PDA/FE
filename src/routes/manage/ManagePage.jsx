@@ -22,7 +22,7 @@ export default function ManagePage() {
 
   const getData = async () => {
     const data = await getRates();
-    setRates(rates);
+    setRates(data.response);
     const newDates = [];
     const newValues = [];
     data.response.forEach((item) => {
