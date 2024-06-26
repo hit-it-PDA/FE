@@ -76,7 +76,6 @@ export default function MorePage() {
             >
               포트폴리오 조회
             </div>
-            <div className="py-[0.5vh]">리스크 관리</div>
           </div>
         </div>
         <div className="flex flex-col">

@@ -76,7 +76,11 @@ export default function AccountInformation({
       </div>
       <div className="w-[88vw] mt-[3vh] flex flex-col items-center gap-3">
         <div>
-          <Input type={"text"} onChange={handleNameChange}>
+          <Input
+            type={"text"}
+            onChange={handleNameChange}
+            placeholder={"ex)홍길동"}
+          >
             이름
           </Input>
           {!isNameValid && (
@@ -85,11 +89,19 @@ export default function AccountInformation({
             </p>
           )}
         </div>
-        <Input type={"number"} onChange={onChangeSsn}>
+        <Input
+          type={"number"}
+          onChange={onChangeSsn}
+          placeholder={"ex)9806291111111"}
+        >
           주민등록번호
         </Input>
         <div>
-          <Input type={"email"} onChange={handleEmailChange}>
+          <Input
+            type={"email"}
+            onChange={handleEmailChange}
+            placeholder={"ex)jj@naver.com"}
+          >
             이메일
           </Input>
           {!isEmailValid && (

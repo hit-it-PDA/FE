@@ -40,7 +40,7 @@ export default function InvestResultRed({ testDatas }) {
           })}
         </div>
       </div>
-      <div className="flex flex-row justify-between w-[70vw] mt-[4vh]">
+      <div className="flex flex-row justify-between w-[70vw] mt-[4vh] mb-[1.5vh]">
         <Button
           className={"w-[32vw]"}
           onClick={() => navigate("/invest-test/start")}
