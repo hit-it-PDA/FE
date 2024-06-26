@@ -13,12 +13,12 @@ export const LogoWithNotification = () => {
     <div className="p-3 flex flex-row items-center justify-between h-[7vh] bg-white">
       <img
         src={logo}
-        className="w-[10vw] max-w-10 hover:cursor-pointer"
+        className="w-[10vw] max-w-10"
         onClick={() => navigate("/")}
       />
       <img
         src={noti}
-        className="w-[10vw] max-w-10 hover:cursor-pointer"
+        className="w-[10vw] max-w-10"
         onClick={() => navigate("/notification")}
       />
     </div>
@@ -31,12 +31,12 @@ export const BackArrowWithNotification = () => {
     <div className="p-3 flex flex-row items-center justify-between h-[7vh] bg-white">
       <img
         src={backArrow}
-        className="w-[10vw] max-w-10 hover:cursor-pointer"
+        className="w-[10vw] max-w-10"
         onClick={() => navigate(-1)}
       />
       <img
         src={noti}
-        className="w-[10vw] max-w-10 hover:cursor-pointer"
+        className="w-[10vw] max-w-10"
         onClick={() => navigate("/notification")}
       />
     </div>
@@ -49,12 +49,12 @@ export const NotificationWithSetting = () => {
     <div className="p-3 flex flex-row items-center justify-end h-[7vh] bg-white gap-2">
       <img
         src={noti}
-        className="w-[10vw] max-w-10 hover:cursor-pointer"
+        className="w-[10vw] max-w-10"
         onClick={() => navigate("/notification")}
       />
       <img
         src={setting}
-        className="w-[10vw] max-w-10 hover:cursor-pointer"
+        className="w-[10vw] max-w-10"
         onClick={() => navigate("/setting")}
       />
     </div>
@@ -67,7 +67,7 @@ export const BackArrow = () => {
     <div className="p-3 flex items-center h-7[vh] bg-white">
       <img
         src={backArrow}
-        className="w-[9vw] max-w-9 hover:cursor-pointer"
+        className="w-[9vw] max-w-9"
         onClick={() => navigate(-1)}
       />
     </div>

@@ -183,10 +183,6 @@ const DetailModal = ({ isOpen, setOpen, isSelected }) => {
                   {isSelected?.expiration_date?.slice(0, 10)}
                 </div>
               </div>
-              {/* <div className="flex">
-                <div className="flex justify-start flex-1">관리점명</div>
-                <div className="flex justify-end flex-1">강남역점</div>
-              </div> */}
               <div className="flex">
                 <div className="flex justify-start flex-1">
                   단체명(사용자명)
@@ -197,14 +193,6 @@ const DetailModal = ({ isOpen, setOpen, isSelected }) => {
                 <div className="flex justify-start flex-1">사업장 상태</div>
                 <div className="flex justify-end flex-1">폐업확인</div>
               </div>
-              {/* <div className="flex">
-                <div className="flex justify-start flex-1">복수사업자 여부</div>
-                <div className="flex justify-end flex-1">개인</div>
-              </div> */}
-              {/* <div className="flex">
-                <div className="flex justify-start flex-1">담당자 연락처</div>
-                <div className="flex justify-end flex-1">1588-5000</div>
-              </div> */}
             </div>
             <div className="flex justify-center w-full">
               <button

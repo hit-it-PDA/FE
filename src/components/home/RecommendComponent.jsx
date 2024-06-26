@@ -76,7 +76,7 @@ const PortfolioRecommendComponent = ({
             </div>
           ) : null}
           <div
-            className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
+            className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center"
             onClick={() => {
               data.funds
                 ? navigate(`/detail/${data.name}`, { state: data.funds })
