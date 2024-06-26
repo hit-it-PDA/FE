@@ -44,6 +44,7 @@ export default function MyDataNumber({ selectedItemsByType, phone }) {
       const reqBody = { phone: phone, certificationNumber: authNum };
       const response = await postAuthNumber(reqBody);
       console.log(response.status);
+      if (response) setIsLoading(false);
       if (response.status === 500) {
         window.alert("번호를 다시 입력하세요");
       } else {
@@ -73,7 +74,6 @@ export default function MyDataNumber({ selectedItemsByType, phone }) {
     try {
       const response = await postMydata(selectedItemsByType);
       console.log(response);
-      if (response) setIsLoading(false);
       await fetchGetAllAssets(); // fetchPostData 후에 fetchGetAllAssets 호출
     } catch (error) {
       console.log(error);
@@ -149,6 +149,7 @@ export default function MyDataNumber({ selectedItemsByType, phone }) {
         <Button
           className={"w-[90vw] mt-[4vh] "}
           onClick={() => {
+            window.alert("잠시만 기다려주세요!");
             numberSave();
             setIsLoading(true);
             fetchPostAuthNumber();
