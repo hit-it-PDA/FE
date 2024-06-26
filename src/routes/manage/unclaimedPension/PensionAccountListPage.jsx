@@ -76,7 +76,7 @@ export default function PensionAccountListPage() {
               {user.name}님의 미청구 퇴직연금
             </span>
             <span className="text-white text-[20px] my-1">
-              총 {total?.toLocaleString()}원
+              총 {accountData[0]?.balance}원
             </span>
             <span className="text-[12px] text-[#DDDDDD]">
               미청구 퇴직연금 조회정보는 해당 금융기관으로부터 제공받은
@@ -96,16 +96,15 @@ export default function PensionAccountListPage() {
         </div>
         <div className="flex flex-col items-center w-full gap-5 p-5 mt-3">
           {accountData?.length > 0 ? (
-            accountData.map((elem, index) => (
-              <AccountListComponent
-                key={index}
-                data={elem}
-                setOpen={setOpen}
-                setIsSelected={setIsSelected}
-                logo={LOGOS[elem.company_name]}
-              />
-            ))
+            // accountData.map((elem, index) => (
+            <AccountListComponent
+              data={accountData[0]}
+              setOpen={setOpen}
+              setIsSelected={setIsSelected}
+              logo={LOGOS[accountData[0].company_name]}
+            />
           ) : (
+            // ))
             <span>데이터가 없습니다.</span>
           )}
         </div>
