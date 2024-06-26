@@ -92,9 +92,6 @@ export default function MorePage() {
             >
               자산 조회
             </div>
-            <div className="py-[0.5vh]" onClick={() => navigate("/mydata")}>
-              마이데이터 자산 연결(추후 삭제)
-            </div>
           </div>
         </div>
         <div className="flex flex-col">
@@ -126,10 +123,8 @@ export default function MorePage() {
           </div>
           <div className="flex flex-col justify-center">
             <div className="flex flex-row justify-between">
-              <div className="py-[0.5vh]">알림</div>
               {isLogin ? (
-                <button
-                  className="px-2 py-1 text-[15px] mr-2 border-2 border-main text-main rounded-[15px] font-bold text-justify"
+                <span
                   onClick={() => {
                     window.alert("로그아웃되었습니다.");
                     handleLogout();
@@ -137,17 +132,16 @@ export default function MorePage() {
                   }}
                 >
                   로그아웃
-                </button>
+                </span>
               ) : (
-                <button
-                  className="px-2 py-1 text-[15px] mr-2 border-2 border-main text-main rounded-[15px] font-bold text-justify"
+                <span
                   onClick={() => {
                     window.alert("로그인하러 갈게요.");
                     navigate("/login");
                   }}
                 >
                   로그인
-                </button>
+                </span>
               )}
             </div>
           </div>

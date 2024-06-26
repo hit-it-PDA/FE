@@ -41,8 +41,8 @@ export default function HomePage() {
     if (data) setIsAllDataLoading(false);
   };
 
-  const getMyDataPortfolioData = async (body) => {
-    const data = await getMyDataPortfolio(body);
+  const getMyDataPortfolioData = async () => {
+    const data = await getMyDataPortfolio();
     setMyDataPortfolioData(data.response);
     if (data) setIsMyDataLoading(false);
   };
@@ -86,7 +86,7 @@ export default function HomePage() {
     const token = localStorage.getItem("accessToken");
     if (token) setIsLogin(true);
     getPortfolioData();
-    getMyDataPortfolioData({ user_id: 2, level: 5 });
+    getMyDataPortfolioData();
   }, []);
 
   return (
