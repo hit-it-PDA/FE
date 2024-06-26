@@ -57,9 +57,13 @@ export default function PortfolioCompositionComponent({ type, data }) {
                   className="flex items-center justify-between w-full px-5"
                   data-tooltip-id="my-tooltip"
                   data-tooltip-content={`매출: ${
-                    elem.rev ? elem.rev / 100000000 + "억" : "정보 없음"
+                    elem.rev
+                      ? `${Number((elem.rev / 100000000).toFixed(1))}억`
+                      : "정보 없음"
                   }, 영업 이익: ${
-                    elem.income ? elem.income / 100000000 + "억" : "정보 없음"
+                    elem.income
+                      ? `${Number((elem.income / 100000000).toFixed(1))}억`
+                      : "정보 없음"
                   }`}
                 >
                   <span className="flex-1 truncate mr-1 font-bold text-[15px]">
