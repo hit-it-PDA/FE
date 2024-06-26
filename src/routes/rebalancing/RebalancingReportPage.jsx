@@ -11,6 +11,11 @@ import rightArrow from "../../assets/icons/rightArrow.svg";
 
 export default function RebalancingReportPage() {
   const [isOpen, setOpen] = useState(false);
+  const FUNDS = [
+    "신한BNPP글로벌밸런스EMP",
+    "AB미국그로스증권투자신탁",
+    "미래에셋퇴직플랜글로벌다이나믹증권자투자신탁",
+  ];
   return (
     <div>
       <TopBar type={2} />
@@ -53,8 +58,10 @@ export default function RebalancingReportPage() {
               {`감정 분석을 통해 위험 주식이라고 판단된 주식들과 
               감정 분석에 사용된 네이버 뉴스 기사를 볼 수 있어요!`}
             </p>
-            <div className="my-[2vh] flex flex-col w-full items-center">
-              <FundListComponent setOpen={setOpen} />
+            <div className="my-[2vh] flex flex-col w-full items-center gap-4">
+              {FUNDS.map((elem, index) => (
+                <FundListComponent key={index} title={elem} setOpen={setOpen} />
+              ))}
             </div>
           </div>
         </div>

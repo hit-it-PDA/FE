@@ -45,17 +45,12 @@ export default function ReportModal({ isOpen, setOpen }) {
                 <span className="font-bold">20%에서 30%로 변경</span>되었어요.
               </p>
               <p className="text-[15px]">
-                ✔︎ <span className="font-bold">총 6개의 위험 판단 주식</span>을
+                ✔︎ <span className="font-bold">총 1개의 위험 판단 주식</span>을
                 찾았어요.
               </p>
             </div>
             {/** 뉴스 기사 */}
             <div className="flex flex-col w-[90vw] mb-[2vh]">
-              <NewsInfo />
-              <NewsInfo />
-              <NewsInfo />
-              <NewsInfo />
-              <NewsInfo />
               <NewsInfo />
             </div>
             <div className="flex justify-center w-full">

@@ -25,7 +25,9 @@ export default function NewsInfo() {
           판”…생각보다 심각한 상황이라는데
         </span>
       </div>
-      <img src={arrow} className="w-fit" />
+      <a href="https://www.hankyung.com/article/202406235264i" target="_blank">
+        <img src={arrow} className="w-fit" />
+      </a>
     </div>
   );
 }
