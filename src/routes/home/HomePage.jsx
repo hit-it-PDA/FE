@@ -142,7 +142,7 @@ export default function HomePage() {
             ) : (
               <>
                 <span className="font-bold text-[20px]">
-                  📌 Hit it! 테마별 상품
+                  📌 Hit it! 자체 상품
                 </span>
               </>
             )}
