@@ -18,9 +18,11 @@ export default function ManagePage() {
   const user = useUserStore((store) => store.user);
   const [dates, setDates] = useState([]);
   const [values, setValues] = useState([]);
+  const [rates, setRates] = useState([]);
 
   const getData = async () => {
     const data = await getRates();
+    setRates(rates);
     const newDates = [];
     const newValues = [];
     data.response.forEach((item) => {
@@ -77,7 +79,7 @@ export default function ManagePage() {
               />
             </div>
           </div>
-        ) : (
+        ) : rates?.length > 0 ? (
           <>
             <ManageTitleComponent
               stockReturns={(
@@ -87,6 +89,14 @@ export default function ManagePage() {
             />
             <LineChartComponent dates={dates} values={values} />
           </>
+        ) : rates?.length === 0 ? (
+          <div className="flex justify-center w-full">
+            <span>아직 수익률 정보가 없어요!</span>
+          </div>
+        ) : (
+          <div className="flex justify-center w-full">
+            <span>포트폴리오가 없어요!</span>
+          </div>
         )}
 
         <div className="w-full h-[30vh] flex flex-col">
