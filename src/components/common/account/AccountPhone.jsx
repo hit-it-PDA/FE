@@ -1,15 +1,36 @@
 import React, { useState, useRef } from "react";
 import Button from "../../Button";
 
-export default function AccountPhone({ handleNextPage }) {
+// apis
+import { postNumber } from "../../../lib/apis/mydataApi";
+
+export default function AccountPhone({ handleNextPage, setPhone }) {
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
-  const [phone, setPhone] = useState("");
 
   const firstRef = useRef(null);
   const secondRef = useRef(null);
   const thirdRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchPostNumber = async () => {
+    try {
+      const phone = phoneNumberSave();
+      const reqBody = { phone: phone };
+      console.log(reqBody);
+      const response = await postNumber(reqBody);
+      if (response) setIsLoading(false);
+      if (response.data.success === false) {
+        window.alert("번호를 다시 입력하세요.");
+      } else {
+        console.log(response);
+        handleNextPage();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleInputChange = (e, maxLength, nextInputRef, setValue) => {
     let value = e.target.value;
@@ -26,10 +47,18 @@ export default function AccountPhone({ handleNextPage }) {
     const phoneNumber = `${first}${second}${third}`;
     console.log(phoneNumber);
     setPhone(phoneNumber);
+    return phoneNumber;
   };
 
   return (
     <>
+      {isLoading ? (
+        <div className="absolute flex w-full h-full opacity-90">
+          <div className="w-full h-[90vh] flex items-center justify-center">
+            <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+          </div>
+        </div>
+      ) : null}
       <div className="w-[88vw] mt-[3vh]">
         <p>STEP 3.</p>
         <p className="text-2xl">
@@ -66,8 +95,9 @@ export default function AccountPhone({ handleNextPage }) {
       <Button
         className={"w-[90vw] mt-[4vh] fixed bottom-5"}
         onClick={() => {
-          handleNextPage();
-          phoneNumberSave();
+          console.log(123);
+          fetchPostNumber();
+          setIsLoading(true);
         }}
       >
         다음

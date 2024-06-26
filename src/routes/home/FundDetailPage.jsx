@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
 // components
 import PortfolioRatioComponent from "../../components/home/PortfolioRatioComponent";
 import RecommendComponent from "../../components/home/RecommendComponent";
@@ -8,9 +8,6 @@ import PortfolioCompositionComponent from "../../components/home/PortfolioCompos
 
 // apis
 import { getFundDetail } from "../../lib/apis/portfolioApi";
-import { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { useEffect } from "react";
 
 export default function FundDetailPage() {
   const [detailData, setDetailData] = useState([]);

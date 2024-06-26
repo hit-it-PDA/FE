@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
+// tooltip
+import { Tooltip } from "react-tooltip";
+
 // components
 import DoughnutChartComponent from "../common/chart/DoughnutChartComponent";
 import FundChartComponent from "../common/chart/FundChartComponent";
@@ -50,9 +53,17 @@ export default function PortfolioCompositionComponent({ type, data }) {
                   }`,
                 }}
               >
-                <div className="flex items-center justify-between w-full px-5">
+                <div
+                  className="flex items-center justify-between w-full px-5"
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={`매출: ${
+                    elem.rev ? elem.rev / 100000000 + "억" : "정보 없음"
+                  }, 영업 이익: ${
+                    elem.income ? elem.income / 100000000 + "억" : "정보 없음"
+                  }`}
+                >
                   <span className="flex-1 truncate mr-1 font-bold text-[15px]">
-                    {elem.stock_name || elem.bond_name}
+                    {elem.stockName || elem.bondName}
                   </span>
                   <span className="text-[13px]">{elem.weight}%</span>
                 </div>
@@ -63,6 +74,7 @@ export default function PortfolioCompositionComponent({ type, data }) {
           <div className="flex justify-center w-full">데이터가 없습니다.</div>
         )}
       </div>
+      <Tooltip id="my-tooltip" />
     </>
   );
 }

@@ -37,9 +37,6 @@ export default function SignUpPage() {
     return sex.length === 1 && /^[1-4]$/.test(sex);
   };
 
-  const validateNumber = (number) => {
-    return number.length === 11 && /^\d+$/.test(number);
-  };
 
   const handleNameChange = (e) => {
     const nameValue = e.target.value;
@@ -68,7 +65,6 @@ export default function SignUpPage() {
   const handleNumberChange = (e) => {
     const numberValue = e.target.value;
     onChangeNumber(e);
-    setIsNumberValid(validateNumber(numberValue));
   };
 
   const SignUpClick = async (e) => {
@@ -83,10 +79,6 @@ export default function SignUpPage() {
     }
     if (!isSexValid) {
       window.alert("주민번호 뒷자리가 올바르지 않습니다.");
-      return;
-    }
-    if (!isNumberValid) {
-      window.alert("전화번호 형식이 올바르지 않습니다.");
       return;
     }
     if (!isNameValid) {
@@ -191,8 +183,8 @@ export default function SignUpPage() {
         </div>
         <div>
           <Input
-            type={"number"}
-            placeholder={"ex) 01012341234"}
+            type={"text"}
+            placeholder={"ex) 010-1234-1234"}
             onChange={handleNumberChange}
             value={number}
           >

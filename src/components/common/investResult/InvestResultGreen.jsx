@@ -38,14 +38,14 @@ export default function InvestResultGreen({ testDatas }) {
           })}
         </div>
       </div>
-      <div className="flex flex-row justify-between w-[70vw] fixed bottom-5">
+      <div className="flex flex-row justify-between w-[70vw] mt-[4vh]">
         <Button
           className={"w-[32vw]"}
           onClick={() => navigate("/invest-test/start")}
         >
           다시 테스트하기
         </Button>
-        <Button className={"w-[32vw]"} onClick={() => navigate("/")}>
+        <Button className={"w-[32vw]"} onClick={() => navigate("/asset")}>
           확인
         </Button>
       </div>

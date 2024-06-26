@@ -1,27 +1,86 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+// components
 import TopBar from "../../components/common/topBar/TopBar";
 import DoughnutChartComponent from "../../components/common/chart/DoughnutChartComponent";
+import FundChartComponent from "../../components/common/chart/FundChartComponent";
+// assets
 import green_logo from "../../assets/logos/green_logo.png";
 import blue_logo from "../../assets/logos/blue_logo.png";
 import yellow_logo from "../../assets/logos/yellow_logo.png";
 import red_logo from "../../assets/logos/red_logo.png";
 import orange_logo from "../../assets/logos/orange_logo.png";
 import go from "../../assets/icons/cheveron-right.svg";
-import { useNavigate } from "react-router-dom";
+// store
 import useUserStore from "../../store/userStore";
+// apis
+import { getUserPortfolio } from "../../lib/apis/portfolioApi";
 
 export default function AssetPage() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState("");
+  const [values, setValues] = useState([]);
+  const [api, setApi] = useState(false);
+  const [items, setItems] = useState({});
   const token = localStorage.getItem("accessToken");
   const user = useUserStore((state) => state.user);
-  console.log(user);
-  console.log(token);
-  console.log(isLogin);
+
+  const defaultColors = [
+    "#EBEEFF",
+    "#D8DDFF",
+    "#C4CCFF",
+    "#B0BBFF",
+    "#9CAAFF",
+    "#8899FF",
+    "#7488FF",
+    "#6077FF",
+    "#4B66FF",
+    "#3755FF",
+  ];
+
+  const keyMap = {
+    bond: "채권",
+    bondForeign: "해외채권",
+    etc: "기타",
+    investment: "투자",
+    stock: "주식",
+    stockForeign: "해외주식",
+  };
+
+  const filteredEntries = Object.entries(items)
+    .filter(([key, value]) => value !== 0)
+    .map(([key, value], index) => ({
+      key: keyMap[key] || key, // 키 변환 적용
+      color: defaultColors[index % defaultColors.length], // 색상 배열을 순환하여 적용
+    }));
+
+  const fetchGetUserPortfolio = async () => {
+    try {
+      const response = await getUserPortfolio();
+      console.log(response);
+      console.log(response.response);
+      const transformedItems = Object.fromEntries(
+        Object.entries(response.response).map(([key, value]) => [
+          keyMap[key] || key,
+          value,
+        ])
+      );
+      setApi(response.success);
+      setItems(transformedItems);
+      setValues(
+        Object.values(response.response).filter((value) => value !== 0)
+      );
+      console.log(
+        Object.values(response.response).filter((value) => value !== 0)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     token ? setIsLogin(token) : setIsLogin("");
-    console.log(isLogin);
+    fetchGetUserPortfolio();
   }, [token]);
 
   const renderImage = () => {
@@ -55,7 +114,6 @@ export default function AssetPage() {
       <TopBar type={0} />
 
       <div className="flex flex-col items-center bg-white">
-        {/* <p className="w-[88vw] text-2xl font-bold">MY 자산</p> */}
         <div className="flex flex-col justify-center py-4 w-[88vw]">
           <div className="flex flex-row items-center justify-between">
             <span className="text-[23px] font-bold">📌 포트폴리오</span>
@@ -69,21 +127,21 @@ export default function AssetPage() {
             ) : (
               <p
                 className="text-sm font-bold text-gray-500"
-                onClick={() => navigate("login")}
+                onClick={() => navigate("/login")}
               >
                 더 보기
               </p>
             )}
           </div>
           <div className="flex flex-row justify-center my-10 w-[88vw] h-[30vh]">
-            {isLogin ? (
-              <DoughnutChartComponent
+            {isLogin && api === true ? (
+              <FundChartComponent
                 type="stock"
-                ratio={[70, 30]}
-                className={"w-[60vw] h-[30vh]"}
+                ratio={values}
+                className={"w-[60vw] h-[30vh] mt-[2vh]"}
               />
             ) : (
-              <DoughnutChartComponent
+              <FundChartComponent
                 type="stock"
                 ratio={[100]}
                 className={"w-[60vw] h-[30vh]"}
@@ -91,14 +149,27 @@ export default function AssetPage() {
             )}
           </div>
           <div className="flex justify-center">
-            <div className="flex justify-center w-[30vw] gap-3">
-              <div className="bg-[#6D87FF] w-[24px] h-[24px]" />
-              <span className="font-bold">국내 주식</span>
-            </div>
-            <div className="flex justify-center w-[30vw] gap-3">
-              <div className="bg-[#FF8F8F] w-[24px] h-[24px]" />
-              <span className="font-bold">국내 채권</span>
-            </div>
+            {isLogin && api === true ? (
+              <div className="flex flex-wrap justify-center w-full gap-3">
+                {filteredEntries.map(({ key, color }) => (
+                  <div
+                    key={key}
+                    className="flex items-center justify-between gap-3"
+                  >
+                    <div
+                      style={{ backgroundColor: color }}
+                      className={`w-[24px] h-[24px]`}
+                    />
+                    <span className="font-bold">{key}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="flex justify-center w-[40vw] gap-3">
+                <div className="bg-[#EBEEFF] w-[24px] h-[24px]" />
+                <span className="font-bold">국내 주식</span>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex flex-col justify-center py-4 w-[88vw]">
@@ -115,7 +186,8 @@ export default function AssetPage() {
                   onClick={() => {
                     isLogin
                       ? navigate("all")
-                      : window.alert("로그인 후 이용 가능해요!");
+                      : window.alert("로그인 후 이용 가능해요!"),
+                      navigate("/login");
                   }}
                 />
               </div>
@@ -133,7 +205,7 @@ export default function AssetPage() {
               <div className="flex flex-col w-[63vw] items-center gap-3">
                 {user.type ? (
                   <>
-                    <p className="text-[18px]">
+                    <p className="text-[16px]">
                       {user.name.slice(0, 5)}님은&nbsp;
                       <span className="font-bold text-main">{user.type}</span>
                       입니다.
@@ -176,7 +248,7 @@ export default function AssetPage() {
                     navigate("/login");
                   }}
                 >
-                  <span className="font-semibold">투자 성향 테스트</span>
+                  <span className="font-semibold">로그인 하러가기</span>
                 </button>
               </div>
             )}

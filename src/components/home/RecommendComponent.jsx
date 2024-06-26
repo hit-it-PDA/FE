@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const PortfolioRecommendComponent = ({ type, data }) => {
+const PortfolioRecommendComponent = ({
+  type,
+  data,
+  isLogin,
+  setOpenModal,
+  setSelectedPortfolio,
+}) => {
   const navigate = useNavigate();
+
   return (
     <div
       className={`${
         type
-          ? "bg-main flex flex-col h-[20vh] box-content p-7"
-          : "flex flex-col w-[70vw] h-[20vh] rounded-[10px] p-4 box-content shadow-lg"
+          ? "bg-main flex flex-col box-content p-7"
+          : "flex flex-col w-[70vw] rounded-[10px] p-4 box-content shadow-lg"
       }`}
     >
       <div className={`flex-1 ${type ? null : "mb-2"}`}>
@@ -35,17 +42,11 @@ const PortfolioRecommendComponent = ({ type, data }) => {
         </div>
       </div>
       <div
-        className={`flex-1 flex flex-col gap-1 ${
+        className={`flex-1 justify-center flex flex-col gap-1 ${
           type ? "justify-end text-white" : null
         }`}
       >
-        {type ? null : (
-          <div className="text-[15px] flex justify-between items-center">
-            <span>최소 가입 비용</span>
-            <span>{data.minimumSubscriptionFee}만원</span>
-          </div>
-        )}
-        <div className="text-[15px] flex justify-between items-center">
+        <div className="text-[15px] flex my-[1.3vh] justify-between items-center">
           <span>수익률</span>
           <div className="flex items-baseline gap-1.5">
             <span
@@ -63,9 +64,17 @@ const PortfolioRecommendComponent = ({ type, data }) => {
       </div>
       {type ? null : (
         <div className="flex items-center justify-around flex-1">
-          <div className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center">
-            선택하기
-          </div>
+          {isLogin ? (
+            <div
+              className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center hover:cursor-pointer"
+              onClick={() => {
+                setOpenModal(true);
+                setSelectedPortfolio(data);
+              }}
+            >
+              선택하기
+            </div>
+          ) : null}
           <div
             className="bg-main text-white font-bold w-5/12 py-1.5 rounded-[20px] text-[12px] flex justify-center items-center"
             onClick={() => {

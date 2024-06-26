@@ -1,16 +1,36 @@
 import React, { useRef, useState } from "react";
 import Button from "../../Button";
+// apis
+import { postNumber } from "../../../lib/apis/mydataApi";
 
-export default function MyDataPhone({ handleButtonClick }) {
+export default function MyDataPhone({ handleButtonClick, setPhone }) {
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
-  const [phone, setPhone] = useState("");
-
   const firstRef = useRef(null);
   const secondRef = useRef(null);
   const thirdRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const fetchPostNumber = async () => {
+    try {
+      const res = phoneNumberSave();
+      const reqBody = { phone: res };
+      console.log(reqBody);
+      const response = await postNumber(reqBody);
+      if (response) setIsLoading(false);
+
+      if (response.data.success === false) {
+        window.alert("번호를 다시 입력하세요.");
+      } else {
+        console.log(response);
+        handleButtonClick();
+      }
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const threeInputChange = (e, nextInputRef, setValue) => {
     if (e.target.value.length >= 3 && nextInputRef) {
       setValue(e.target.value);
@@ -26,14 +46,22 @@ export default function MyDataPhone({ handleButtonClick }) {
   };
 
   const phoneNumberSave = () => {
-    const phoneNumber = `${first}-${second}-${third}`;
+    const phoneNumber = `${first}${second}${third}`;
     console.log(phoneNumber);
     setPhone(phoneNumber);
+    return phoneNumber;
     // handleButtonClick(phoneNumber);
   };
 
   return (
     <div className="flex flex-col items-center">
+      {isLoading ? (
+        <div className="absolute flex w-full h-full opacity-90">
+          <div className="w-full h-[90vh] flex items-center justify-center">
+            <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+          </div>
+        </div>
+      ) : null}
       <div className="w-[88vw] mt-[3vh]">
         <p>STEP 3.</p>
         <p className="text-2xl">
@@ -67,8 +95,8 @@ export default function MyDataPhone({ handleButtonClick }) {
       <Button
         className={"w-[90vw] mt-[4vh] fixed bottom-5"}
         onClick={() => {
-          phoneNumberSave();
-          handleButtonClick();
+          fetchPostNumber();
+          setIsLoading(true);
         }}
       >
         다음

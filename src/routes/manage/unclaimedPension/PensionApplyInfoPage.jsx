@@ -8,19 +8,19 @@ export default function PensionApplyInfoPage() {
   return (
     <div>
       <TopBar type={2} />
-      <div className="w-full flex flex-col items-start">
+      <div className="flex flex-col items-start w-full">
         <div className="bg-[#375AFF] w-full p-5 flex flex-col justify-between">
           <span className="text-white text-[20px] font-bold">
             미청구 퇴직연금 신청방법 안내
           </span>
-          <span className="text-[10px] text-[#DDDDDD] whitespace-pre-line mt-2">
+          <span className="text-[12px] text-[#DDDDDD] whitespace-pre-line mt-2">
             {`퇴직연금 적립금이 남아있는 퇴직자는 
             언제든지 퇴직연금사업자(금융기관)에 지급신청을 할 수 있습니다.`}
           </span>
         </div>
         <div className="p-5">
           <span className="text-[20px] font-bold">📌 제출서류</span>
-          <div className="px-5 flex flex-col">
+          <div className="flex flex-col px-5">
             <span className="font-bold text-[18px]">
               - 필수제출 : 신분증 및 지급신청서
             </span>
@@ -50,12 +50,12 @@ export default function PensionApplyInfoPage() {
               제출서류 등을 해당 금융기관으로 연락하여 최종 확인
             </span>
           </div>
-          <div className="border-t py-5 my-5 flex flex-col">
+          <div className="flex flex-col py-5 my-5 border-t">
             <div className="flex items-center mb-2">
               <img src={warning} className="mr-1" />
               <span className="text-[20px] font-bold">주의사항</span>
             </div>
-            <div className="px-5 flex flex-col">
+            <div className="flex flex-col px-5">
               <span className="whitespace-pre-line text-[13px]">
                 {`∙ 미청구퇴직연금 지급 심사과정에서 추가적인 서류가 징구될 수 있습니다.
               ∙ 미청구퇴직연금 신청 및 수령 관련한 자세한 사항은 해당 금융기관 앞 문의바랍니다.`}

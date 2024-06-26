@@ -10,7 +10,7 @@ import Input from "../../components/Input";
 import useInput from "../../hooks/useInput";
 //apis
 import { login } from "../../lib/apis/userApi";
-import { getAllAssets } from "../../lib/apis/mydataApi";
+import { getAllAssets, getMydata } from "../../lib/apis/mydataApi";
 // store
 import useUserStore from "../../store/userStore";
 
@@ -40,13 +40,15 @@ export default function LoginPage() {
       password: pwd,
     };
     const response = await login(reqBody);
-    const userInfo = response.data.response.userInfo;
+    console.log(response);
     const status_code = response.status;
-    setUser(userInfo);
-    fetchGetAllAssets();
+
     if (status_code === 400) {
       window.alert("이메일 혹은 비밀번호를 확인하세요.");
     } else if (status_code === 200) {
+      const userInfo = response.data.response.userInfo;
+      setUser(userInfo);
+      fetchGetAllAssets();
       navigate("/");
     }
   };
@@ -83,9 +85,9 @@ export default function LoginPage() {
           카카오톡 로그인
         </a>
       </div>
-      <div className="mx-auto flex flex-row justify-center w-[50vw] gap-2">
-        <p className="font-bold text-input_color">회원이 아니라면?</p>
-        <button className="underline" onClick={SignUpClick}>
+      <div className="flex flex-row justify-center w-full gap-2 mx-auto">
+        <p className="px-2 font-bold text-input_color">회원이 아니라면?</p>
+        <button className="px-2 underline" onClick={SignUpClick}>
           회원가입
         </button>
       </div>

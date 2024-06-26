@@ -1,15 +1,20 @@
 import React from "react";
-import logo from "../../assets/logos/mydata_logo.svg";
-import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
+// assets
+import logo from "../../assets/logos/mydata_logo.svg";
+// components
+import Button from "../../components/Button";
+// store
+import useUserStore from "../../store/userStore";
 
 export default function MyDataMainPage() {
+  const user = useUserStore((state) => state.user);
   const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-center mt-[15vh] gap-1">
-        <p className="text-2xl font-bold">정찬진님 환영합니다!</p>
+        <p className="text-2xl font-bold">{user.name}님 환영합니다!</p>
         <img src={logo} alt="logo" className="mt-[9vh]" />
         <p className="text-xl font-bold text-center">
           마이데이터 연동을 통해
@@ -21,9 +26,6 @@ export default function MyDataMainPage() {
         </p>
       </div>
       <div className="flex flex-col items-center mt-[5vh]">
-        <button className="text-gray-400 underline">
-          [필수]마이데이터 이용약관
-        </button>
         <Button
           className={"w-[90vw] mt-[1.5vh]"}
           onClick={() => navigate("start")}

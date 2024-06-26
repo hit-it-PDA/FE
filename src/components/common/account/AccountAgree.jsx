@@ -1,22 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../Button";
+// apis
+import { getAccount } from "../../../lib/apis/accountApi";
 
-export default function AccountAgree({ handleNextPage }) {
+export default function AccountAgree({
+  handleNextPage,
+  handleMoreNextPage,
+  setName,
+  setBalance,
+}) {
   const [isChecked, setIsChecked] = useState(false);
-
+  const [isHave, setIsHave] = useState(0);
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
 
+  const fetchGetAccount = async () => {
+    try {
+      const response = await getAccount();
+      response.data.response ? setAll(response) : setIsHave(1); // 데이터가 있으면 1, 없으면 2
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const setAll = (response) => {
+    setIsHave(2);
+    setBalance(response.data.response.balance);
+  };
+  useEffect(() => {
+    fetchGetAccount();
+  });
   return (
     <>
       <div className="w-[88vw] mt-[3vh]">
         <p>STEP 1.</p>
-        <p className="text-2xl">
-          <span className="font-bold">계좌 개설</span>을 위해
+        <div className="text-2xl">
+          <span className="text-2xl font-bold">계좌 개설</span>을 위해
           <br />
-          <span className="font-bold">개인정보수집에 동의</span>해주세요.
-        </p>
+          <span className="text-2xl font-bold">개인정보수집에 동의</span>
+          해주세요.
+          <p className="text-sm font-bold text-gray-400">
+            ※계좌가 있으시면 조회 후 비밀번호를 재설정할게요
+          </p>
+        </div>
       </div>
       <div className="flex flex-col items-center w-[90vw] mt-[10vh] bg-gray-200 pb-[2vh] rounded-[3vh]">
         <div className="flex flex-row justify-between w-[80vw] mt-[2vh]">
@@ -46,25 +72,36 @@ export default function AccountAgree({ handleNextPage }) {
             </span>
           </label>
         </div>
-        <p className="mt-[3vh] w-[85vw]">
-          [개인정보 취급 위탁에 대한 동의]
-          <br />
-          (예시) 본인 확인 서비스 제공을 위해 개인정보 취급 위탁 동의를 받고자
-          합니다. 아래 보기에서 동의 여부를 선택해 주세요. 수탁자: (주)회사명
-          개인정보 수집 및 이용 목적: 회원가입 등에 필요한 본인확인 서비스 제공
-          수집하는 개인정보 항목: 이름, 연락처 개인정보 보유 및 이용 기간: 수집
-          일로부터 3년 ※ 귀하께서는 동의하지 않을 권리가 있습니다. 동의하지 않을
-          경우 서비스를 이용할 수 없음을 알려드립니다. 개인정보 취급 위탁에 대해
-          동의하시나요?
+        <p className="mt-[3vh] w-[85vw] px-2 whitespace-pre-line">
+          {`[개인정보 취급 위탁에 대한 동의]
+          
+          본인 확인 서비스 제공을 위해 개인정보 취급 위탁 동의를 받고자 합니다. 
+          아래 보기에서 동의 여부를 선택해 주세요. 
+
+          ∙ 수탁자: 히릿(Hit it!)
+          • 개인정보 수집 및 이용 목적: 포트폴리오 추천 등에 필요한 개인화 서비스 제공
+          • 수집하는 개인정보 항목: 
+            - 금융 정보
+            계좌번호 및 은행명, 신용카드 정보(카드번호, 유효기간 등), 대출 및 부채 정보, 보험 가입 내역
+            - 거래 정보
+            거래 내역(입출금 내역, 카드 사용 내역 등), 금융 상품 가입 내역, 투자 내역
+          • 개인정보 보유 및 이용 기간: 수집일로부터 3년 
+
+          ※ 귀하께서는 동의하지 않을 권리가 있습니다. 
+          동의하지 않을 경우 서비스를 이용할 수 없음을 알려드립니다. 
+          개인정보 취급 위탁에 대해 동의하시나요?`}
         </p>
       </div>
       <Button
-        className={"w-[90vw] mt-[4vh] fixed bottom-5"}
+        className={"w-[90vw] mt-[4vh]"}
         onClick={() => {
-          if (isChecked) {
+          if (isChecked && isHave === 1) {
             handleNextPage();
+          } else if (isChecked && isHave === 2) {
+            window.alert("계좌가 있어요!");
+            handleMoreNextPage();
           } else {
-            alert("개인정보동의 체크해주세요!");
+            window.alert("개인 정보 동의해주세요!");
           }
         }}
       >

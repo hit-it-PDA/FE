@@ -5,9 +5,15 @@ import { useNavigate } from "react-router-dom";
 import characters from "../../../assets/icons/diagnosis-main.svg";
 import Button from "../../../components/Button";
 import TopBar from "../../../components/common/topBar/TopBar";
+import useUserStore from "../../../store/userStore";
 
 export default function DiagnosisStartPage() {
   const navigate = useNavigate();
+  const user = useUserStore((store) => store.user);
+  const alertFunc = () => {
+    alert("로그인 후 이용해주세요!");
+    navigate("/login");
+  };
   return (
     <>
       <TopBar type={2} />
@@ -21,8 +27,16 @@ export default function DiagnosisStartPage() {
           </span>
         </div>
         <div className="flex flex-col w-full gap-3">
-          <Button onClick={() => navigate("test")}>테스트 하러가기</Button>
-          <Button onClick={() => navigate("result")}>이전 결과 보기</Button>
+          <Button
+            onClick={() => {
+              user?.name === "방문자" ? alertFunc() : navigate("test");
+            }}
+          >
+            테스트 하러가기
+          </Button>
+          {user?.name === "방문자" ? null : (
+            <Button onClick={() => navigate("result")}>이전 결과 보기</Button>
+          )}
         </div>
       </div>
     </>

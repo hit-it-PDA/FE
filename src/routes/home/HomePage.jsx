@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../../store/userStore";
-// icons
-import downArrow from "../../assets/icons/downArrow.svg";
 
 // components
 import TopBar from "../../components/common/topBar/TopBar";
 import RecommendComponent from "../../components/home/RecommendComponent";
 import Tab from "../../components/home/TabComponent";
-import RobotAnalyzing from "../../components/home/RobotAnalyzing";
+import Button from "../../components/Button";
+
+// modal
+import { Sheet } from "react-modal-sheet";
 
 // apis
 import {
   getAllPortfolio,
   getMyDataPortfolio,
+  changePortfolio,
+  changeMyDataPortfolio,
 } from "../../lib/apis/portfolioApi";
+import { getMydata } from "../../lib/apis/mydataApi";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedPortfolio, setSelectedPortfolio] = useState({});
   const [isAllDataLoading, setIsAllDataLoading] = useState(true);
   const [isMyDataLoading, setIsMyDataLoading] = useState(true);
   const [portfolioData, setPortfolioData] = useState([]);
@@ -26,11 +32,8 @@ export default function HomePage() {
   const [isLogin, setIsLogin] = useState(false);
   const [isTestFinished, setIsTestFinished] = useState(false);
   const { clearUser } = useUserStore();
-
-  const handleLogout = () => {
-    clearUser(); // 유저 정보 초기화
-    localStorage.removeItem("accessToken"); // localStorage에서 accessToken 제거
-  };
+  const user = useUserStore((state) => state.user);
+  const [checkNum, setCheckNum] = useState();
 
   const getPortfolioData = async () => {
     const data = await getAllPortfolio();
@@ -38,23 +41,57 @@ export default function HomePage() {
     if (data) setIsAllDataLoading(false);
   };
 
-  const getMyDataPortfolioData = async (body) => {
-    const data = await getMyDataPortfolio(body);
+  const getMyDataPortfolioData = async () => {
+    const data = await getMyDataPortfolio();
     setMyDataPortfolioData(data.response);
     if (data) setIsMyDataLoading(false);
   };
 
+  // const fetchGetMydata = async () => {
+  //   try {
+  //     const response = await getMydata();
+  //     console.log(response);
+  //     console.log(response.response);
+  //     const token = localStorage.getItem("accessToken");
+  //     if (token) setIsLogin(true);
+  //     setCheckNum(response.response);
+  //     if (isLogin === true && response.response === 0) {
+  //       console.log(isLogin, checkNum);
+  //       navigate("/mydata");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  useEffect(() => {
+    const fetchGetMydata = async () => {
+      try {
+        const response = await getMydata();
+        const token = localStorage.getItem("accessToken");
+        if (token) setIsLogin(true);
+        setCheckNum(response.response);
+
+        if (response.response === 0) {
+          navigate("/mydata");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchGetMydata();
+  }, [navigate]);
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
-    getPortfolioData();
-    getMyDataPortfolioData({ user_id: 2, level: 5 });
     if (token) setIsLogin(true);
+    getPortfolioData();
+    getMyDataPortfolioData();
   }, []);
 
   return (
     <div>
       <TopBar type={0} />
-      <button onClick={handleLogout}>로그아웃</button>
       <div className="flex flex-col items-center justify-center w-screen">
         {/** 전체/개인화 탭 */}
         <div className="h-[5vh] w-11/12 bg-white flex flex-row items-center border-b">
@@ -70,6 +107,12 @@ export default function HomePage() {
           />
         </div>
         <div className="flex flex-col w-full">
+          <SelectModal
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            selectedPortfolio={selectedPortfolio}
+            name={user.name}
+          />
           {/** 로그인 O, 투자 성향 진단 테스트 X -> 투자 성향 진단 테스트 버튼 */}
           {isLogin && !isTestFinished ? (
             <div className="flex flex-row items-center justify-center w-full pt-2">
@@ -117,7 +160,14 @@ export default function HomePage() {
               ) : (
                 <div className="flex flex-col items-center justify-center gap-5">
                   {myDataPortfolioData.map((elem, index) => (
-                    <RecommendComponent key={index} type={0} data={elem} />
+                    <RecommendComponent
+                      key={index}
+                      type={0}
+                      data={elem}
+                      isLogin={isLogin}
+                      setOpenModal={setOpenModal}
+                      setSelectedPortfolio={setSelectedPortfolio}
+                    />
                   ))}
                 </div>
               )
@@ -125,7 +175,14 @@ export default function HomePage() {
               <div className="relative overflow-y-hidden">
                 <div className="flex h-[70vh] flex-col justify-center items-center gap-5 blur">
                   {portfolioData.map((elem, index) => (
-                    <RecommendComponent key={index} type={0} data={elem} />
+                    <RecommendComponent
+                      key={index}
+                      type={0}
+                      data={elem}
+                      isLogin={isLogin}
+                      setOpenModal={setOpenModal}
+                      setSelectedPortfolio={setSelectedPortfolio}
+                    />
                   ))}
                 </div>
                 <div className="absolute inset-0 flex justify-center items-center flex-col text-[20px] font-bold">
@@ -148,7 +205,14 @@ export default function HomePage() {
           ) : (
             <div className="flex flex-col items-center justify-center gap-5">
               {portfolioData.map((elem, index) => (
-                <RecommendComponent key={index} type={0} data={elem} />
+                <RecommendComponent
+                  key={index}
+                  type={0}
+                  data={elem}
+                  isLogin={isLogin}
+                  setOpenModal={setOpenModal}
+                  setSelectedPortfolio={setSelectedPortfolio}
+                />
               ))}
             </div>
           )}
@@ -157,3 +221,82 @@ export default function HomePage() {
     </div>
   );
 }
+
+const SelectModal = ({ openModal, setOpenModal, selectedPortfolio, name }) => {
+  const [result, setResult] = useState("");
+  const changePortfolioFunc = async (id) => {
+    if (selectedPortfolio.funds) {
+      const data = await changeMyDataPortfolio(selectedPortfolio);
+      setResult(data.response);
+    } else {
+      const data = await changePortfolio(id);
+      setResult(data.response);
+    }
+  };
+  useEffect(() => {
+    setResult("");
+  }, [selectedPortfolio]);
+  return (
+    <Sheet
+      isOpen={openModal}
+      onClose={() => setOpenModal(false)}
+      detent={"content-height"}
+    >
+      <Sheet.Container>
+        <Sheet.Header />
+        <Sheet.Content>
+          <div className="flex flex-col items-center w-full h-full px-5 bg-white">
+            <span className="w-full text-center font-bold text-[25px] my-[1.5vh] pb-[1.5vh] border-b">
+              {`포트폴리오 선택`}
+            </span>
+            <div className="w-full px-2 my-[2vh] text-center ">
+              {result ? (
+                <>
+                  <span className="text-[18px]">{result}</span>
+                  <div className="flex justify-center w-full mt-[3vh]">
+                    <Button
+                      className="w-5/12 h-[6vh] flex justify-center items-center"
+                      onClick={() => setOpenModal(false)}
+                    >
+                      완료
+                    </Button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <span className="text-[18px] whitespace-pre-line">
+                      {`${name}님의 포트폴리오를`}
+                      <br />
+                      <span className="font-bold text-main text-[22px]">
+                        {selectedPortfolio.name}
+                      </span>
+                      <br />
+                      {`포트폴리오로 선택합니다.`}
+                    </span>
+                  </div>
+                  <div className="flex justify-around w-full mt-[3vh]">
+                    <Button
+                      className="w-5/12 h-[6vh] flex justify-center items-center"
+                      onClick={() => {
+                        changePortfolioFunc(selectedPortfolio.id);
+                      }}
+                    >
+                      {`선택하기`}
+                    </Button>
+                    <Button
+                      className="w-5/12 h-[6vh] flex justify-center items-center"
+                      onClick={() => setOpenModal(false)}
+                    >
+                      취소하기
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </Sheet.Content>
+      </Sheet.Container>
+    </Sheet>
+  );
+};
