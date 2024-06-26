@@ -19,6 +19,7 @@ import { getUserPortfolio } from "../../lib/apis/portfolioApi";
 export default function AssetPage() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState("");
+  const [isCheck, setIsCheck] = useState(false);
   const [values, setValues] = useState([]);
   const [api, setApi] = useState(false);
   const [items, setItems] = useState({});
@@ -57,8 +58,8 @@ export default function AssetPage() {
   const fetchGetUserPortfolio = async () => {
     try {
       const response = await getUserPortfolio();
-      console.log(response);
-      console.log(response.response);
+      console.log(response.status);
+      if (response.status === 400) setIsCheck(true);
       const transformedItems = Object.fromEntries(
         Object.entries(response.response).map(([key, value]) => [
           keyMap[key] || key,
@@ -117,21 +118,14 @@ export default function AssetPage() {
         <div className="flex flex-col justify-center py-4 w-[88vw]">
           <div className="flex flex-row items-center justify-between">
             <span className="text-[23px] font-bold">📌 포트폴리오</span>
-            {isLogin ? (
+            {isLogin && isCheck == false ? (
               <p
                 className="text-sm font-bold text-gray-500"
                 onClick={() => navigate("portfolio")}
               >
                 더 보기
               </p>
-            ) : (
-              <p
-                className="text-sm font-bold text-gray-500"
-                onClick={() => navigate("/login")}
-              >
-                더 보기
-              </p>
-            )}
+            ) : null}
           </div>
           <div className="flex flex-row justify-center my-10 w-[88vw] h-[30vh]">
             {isLogin && api === true ? (

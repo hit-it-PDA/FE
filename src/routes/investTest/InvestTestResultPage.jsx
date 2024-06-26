@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 // components
 import InvestResultBlue from "../../components/common/investResult/InvestResultBlue";
@@ -22,6 +22,7 @@ export default function InvestTestResultPage() {
   const user = useUserStore((state) => state.user);
   const token = localStorage.getItem("accessToken");
   const postDatas = location.state.testDatas;
+  const [loading, setLoading] = useState(true);
 
   const fetchTestResult = async () => {
     try {
@@ -36,6 +37,7 @@ export default function InvestTestResultPage() {
     try {
       const response = await getTestResult();
       setTestDatas(response.data.response);
+      if (response) setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +72,7 @@ export default function InvestTestResultPage() {
   };
   return (
     <div>
-      {isLoading ? (
+      {loading ? (
         <div className="w-full h-[80vh] flex items-center justify-center">
           <RobotAnalyzing>{user.name}님의 투자 성향을 분석 중</RobotAnalyzing>
         </div>
