@@ -184,10 +184,12 @@ export default function AssetPage() {
                   src={go}
                   alt="go"
                   onClick={() => {
-                    isLogin
-                      ? navigate("all")
-                      : window.alert("로그인 후 이용 가능해요!"),
+                    if (isLogin) {
+                      navigate("all");
+                    } else {
+                      window.alert("로그인 후 이용 가능해요!");
                       navigate("/login");
+                    }
                   }}
                 />
               </div>
