@@ -12,6 +12,7 @@ export default function AccountPhone({ handleNextPage, setPhone }) {
   const firstRef = useRef(null);
   const secondRef = useRef(null);
   const thirdRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchPostNumber = async () => {
     try {
@@ -19,6 +20,7 @@ export default function AccountPhone({ handleNextPage, setPhone }) {
       const reqBody = { phone: phone };
       console.log(reqBody);
       const response = await postNumber(reqBody);
+      if (response) setIsLoading(false);
       if (response.data.success === false) {
         window.alert("번호를 다시 입력하세요.");
       } else {
@@ -50,6 +52,13 @@ export default function AccountPhone({ handleNextPage, setPhone }) {
 
   return (
     <>
+      {isLoading ? (
+        <div className="absolute flex w-full h-full opacity-90">
+          <div className="w-full h-[90vh] flex items-center justify-center">
+            <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+          </div>
+        </div>
+      ) : null}
       <div className="w-[88vw] mt-[3vh]">
         <p>STEP 3.</p>
         <p className="text-2xl">
@@ -85,7 +94,11 @@ export default function AccountPhone({ handleNextPage, setPhone }) {
       </div>
       <Button
         className={"w-[90vw] mt-[4vh] fixed bottom-5"}
-        onClick={fetchPostNumber}
+        onClick={() => {
+          console.log(123);
+          fetchPostNumber();
+          setIsLoading(true);
+        }}
       >
         다음
       </Button>
