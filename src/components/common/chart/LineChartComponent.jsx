@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,6 +10,8 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { getRates } from "../../../lib/apis/manageApi";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -21,26 +22,13 @@ ChartJS.register(
   Legend
 );
 
-export default function LineChartComponent({ returnsData }) {
+export default function LineChartComponent({ dates, values }) {
   const data = {
-    labels: [
-      "1월",
-      "2월",
-      "3월",
-      "4월",
-      "5월",
-      "6월",
-      "7월",
-      "8월",
-      "9월",
-      "10월",
-      "11월",
-      "12월",
-    ],
+    labels: dates,
     datasets: [
       {
-        label: "2024 수익률",
-        data: returnsData,
+        label: "2024년 6월",
+        data: values,
         backgroundColor: ["#375AFF"],
         borderWidth: 2,
         spanGaps: true,

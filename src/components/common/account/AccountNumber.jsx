@@ -10,7 +10,7 @@ export default function AccountNumber({ handleNextPage, phone }) {
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
   const [fourth, setFourth] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const [number, setNumber] = useState("");
 
   const firstNumber = useRef(null);
@@ -24,6 +24,7 @@ export default function AccountNumber({ handleNextPage, phone }) {
       console.log(authNum);
       const reqBody = { phone: phone, certificationNumber: authNum };
       const response = await postAuthNumber(reqBody);
+      if (response) setIsLoading(false);
       console.log(response.status);
       if (response.status === 500) {
         window.alert("번호를 다시 입력하세요");
@@ -69,6 +70,13 @@ export default function AccountNumber({ handleNextPage, phone }) {
   };
   return (
     <>
+      {isLoading ? (
+        <div className="absolute flex w-full h-full opacity-90">
+          <div className="w-full h-[90vh] flex items-center justify-center">
+            <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+          </div>
+        </div>
+      ) : null}
       <div className="w-[88vw] mt-[3vh]">
         <p>STEP 4.</p>
         <p className="text-2xl">
@@ -115,7 +123,13 @@ export default function AccountNumber({ handleNextPage, phone }) {
             재발송
           </button>
         </div>
-        <Button className={"w-[90vw] mt-[4vh] "} onClick={fetchPostAuthNumber}>
+        <Button
+          className={"w-[90vw] mt-[4vh] "}
+          onClick={() => {
+            fetchPostAuthNumber();
+            setIsLoading(true);
+          }}
+        >
           다음
         </Button>
       </div>

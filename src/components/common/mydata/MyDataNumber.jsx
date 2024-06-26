@@ -20,7 +20,7 @@ export default function MyDataNumber({ selectedItemsByType, phone }) {
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
   const [fourth, setFourth] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const [number, setNumber] = useState("");
 
   const firstNumber = useRef(null);
@@ -73,6 +73,7 @@ export default function MyDataNumber({ selectedItemsByType, phone }) {
     try {
       const response = await postMydata(selectedItemsByType);
       console.log(response);
+      if (response) setIsLoading(false);
       await fetchGetAllAssets(); // fetchPostData 후에 fetchGetAllAssets 호출
     } catch (error) {
       console.log(error);
@@ -95,6 +96,13 @@ export default function MyDataNumber({ selectedItemsByType, phone }) {
 
   return (
     <div className="flex flex-col items-center">
+      {isLoading ? (
+        <div className="absolute flex w-full h-full opacity-90">
+          <div className="w-full h-[90vh] flex items-center justify-center">
+            <div className="fixed w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+          </div>
+        </div>
+      ) : null}
       <div className="w-[88vw] mt-[3vh]">
         <p>STEP 4.</p>
         <p className="text-2xl">
@@ -142,6 +150,7 @@ export default function MyDataNumber({ selectedItemsByType, phone }) {
           className={"w-[90vw] mt-[4vh] "}
           onClick={() => {
             numberSave();
+            setIsLoading(true);
             fetchPostAuthNumber();
           }}
         >

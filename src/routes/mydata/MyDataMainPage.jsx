@@ -26,9 +26,6 @@ export default function MyDataMainPage() {
         </p>
       </div>
       <div className="flex flex-col items-center mt-[5vh]">
-        <button className="text-gray-400 underline">
-          [필수]마이데이터 이용약관
-        </button>
         <Button
           className={"w-[90vw] mt-[1.5vh]"}
           onClick={() => navigate("start")}

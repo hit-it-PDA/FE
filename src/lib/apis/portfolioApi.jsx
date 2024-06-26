@@ -35,10 +35,10 @@ export async function getFundDetail(portfolioId, fundId) {
 	}
 }
 
-export async function getMyDataPortfolio(body) {
+export async function getMyDataPortfolio() {
 	const token = localStorage.getItem("accessToken");
 	try {
-		const response = await authInstance(8084).get(`/portfolios/mydata`, {
+		const response = await axios.get(`${url}/api/portfolios/mydata`, {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
