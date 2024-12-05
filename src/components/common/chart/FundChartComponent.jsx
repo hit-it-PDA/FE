@@ -5,18 +5,6 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Legend);
 
 export default function FundChartComponent({ type, ratio, className }) {
-  // const defaultColors = [
-  //   "#F0F4FF",
-  //   "#E4ECFF",
-  //   "#CCD8FF",
-  //   "#B3C5FF",
-  //   "#98B1FF",
-  //   "#6A8CFF",
-  //   "#375AFF",
-  //   "#B3C5FF",
-  //   "#B3C5FF",
-  //   "#B3C5FF",
-  // ]; // 기본 색상 배열
   const defaultColors = [
     "#EBEEFF",
     "#D8DDFF",
@@ -43,7 +31,6 @@ export default function FundChartComponent({ type, ratio, className }) {
   const backgroundColors = ratio.map(
     (_, index) => defaultColors[index % defaultColors.length]
   );
-
   const data = {
     labels: ["주식", "채권"],
     datasets: [

@@ -18,19 +18,28 @@ export default function ManagePage() {
   const user = useUserStore((store) => store.user);
   const [dates, setDates] = useState([]);
   const [values, setValues] = useState([]);
+  const [rates, setRates] = useState([]);
 
   const getData = async () => {
     const data = await getRates();
-    const newDates = [];
-    const newValues = [];
-    data.response.forEach((item) => {
-      const date = Object.keys(item)[0];
-      const value = item[date];
-      newDates.push(date?.slice(0, 10));
-      newValues.push(value);
-    });
-    setDates(newDates);
-    setValues(newValues);
+    console.log(data.response);
+    if (data.response === "내 포트폴리오가 존재하지 않습니다.") {
+      setRates([]);
+    } else {
+      setRates(data.response);
+      const newDates = [];
+      const newValues = [];
+      if (rates.length > 0) {
+        data.response.forEach((item) => {
+          const date = Object.keys(item)[0];
+          const value = item[date];
+          newDates.push(date?.slice(0, 10));
+          newValues.push(value);
+        });
+        setDates(newDates);
+        setValues(newValues);
+      }
+    }
   };
   useEffect(() => {
     getData();
@@ -77,7 +86,7 @@ export default function ManagePage() {
               />
             </div>
           </div>
-        ) : (
+        ) : rates?.length > 0 ? (
           <>
             <ManageTitleComponent
               stockReturns={(
@@ -87,7 +96,11 @@ export default function ManagePage() {
             />
             <LineChartComponent dates={dates} values={values} />
           </>
-        )}
+        ) : rates?.length === 0 ? (
+          <div className="flex justify-center w-full">
+            <span>아직 수익률 정보가 없어요!</span>
+          </div>
+        ) : null}
 
         <div className="w-full h-[30vh] flex flex-col">
           <span className="text-[23px] font-bold">📌 부가 서비스</span>

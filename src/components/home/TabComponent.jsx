@@ -4,7 +4,7 @@ const TabComponent = ({ type, isSelected, setSelected }) => {
   return (
     <div className="flex items-center justify-center flex-1 h-full">
       <div
-        className={`h-full w-10/12 flex justify-center items-center hover:cursor-pointer ${
+        className={`h-full w-10/12 flex justify-center items-center ${
           isSelected ? "border-b border-main font-bold" : null
         }`}
         onClick={() => setSelected(type)}

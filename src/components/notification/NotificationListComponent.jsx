@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { patchNotification } from "../../lib/apis/notificationApi";
 
 export default function NotificationListComponent({
@@ -8,6 +9,7 @@ export default function NotificationListComponent({
   check,
 }) {
   const [isRead, setIsRead] = useState(check);
+  const navigate = useNavigate();
   const fetchPatchNotification = async (notificationId) => {
     try {
       const response = await patchNotification(notificationId);
@@ -24,11 +26,14 @@ export default function NotificationListComponent({
       onClick={() => {
         setIsRead(true);
         fetchPatchNotification(id);
+        navigate("/rebalancing-report");
       }}
     >
       <p className="text-[15px]">리밸런싱 리포트</p>
       <div className="flex flex-col items-end">
-        <span className="flex justify-center flex-1 text-[12px]">{content}</span>
+        <span className="flex justify-center flex-1 text-[12px]">
+          {content}
+        </span>
         <span className="text-[11px]">{date}</span>
       </div>
     </div>
